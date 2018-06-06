@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/test/test",
+    "pages/apply/apply",
+    "pages/login/login",
+    "pages/me/history",
+    "pages/me/post",
+    "pages/me/edu",
+    "pages/me/resume",
+    "pages/me/skill",
+    "pages/me/selfEvaluation",
+    "pages/me/contact",
+    "pages/me/collection",
+    "pages/me/me",
+    "pages/me/exp",
+    "pages/me/auth",
+    "pages/me/bind",
+    "pages/me/password",
+    "pages/me/profile",
+    "pages/job/jobInfo",
+    "pages/city/city",
+    "pages/position/position",
+    "pages/signin/signin",
+    "pages/signin/phoneCheck",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Scout",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#686868",
+    "selectedColor": "#47a86c",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tab1@2x.png",
+        "selectedIconPath": "images/tab1-1@2x.png",
+        "text": "找兼职"
+      },
+      {
+        "pagePath": "pages/apply/apply",
+        "iconPath": "images/tab3@2x.png",
+        "selectedIconPath": "images/tab3-1@2x.png",
+        "text": "我的报名"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "images/tab4@2x.png",
+        "selectedIconPath": "images/tab4-1@2x.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

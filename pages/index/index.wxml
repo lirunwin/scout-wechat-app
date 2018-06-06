@@ -1,0 +1,129 @@
+<!--pages/index/index.wxml-->
+<import src='../../templates/job/jobList.wxml' />
+<!-- <view id="id" class = "ball" bindtap = "handletap" bindtouchstart = "handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style = "width : 100%px; height : 40px;">
+{{text}}
+</view> -->
+<scroll-view scroll-y style="height:100vh;" bindtouchmove="handletouchmove" bindscrolltolower="handlescrolltolower" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true" bindscroll="scroll">
+  <view class='index-swiper'>
+    <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
+      <block wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode='scaleToFill' />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='search container'>
+      <view class='row mx-0'>
+        <view class='col-auto pl-0 city caret' bindtap='navigateToCity'>{{currentCity.name}}</view>
+        <view class='col pr-0 searchBox'>
+          <input placeholder='请输入要搜索的关键词'></input>
+          <i class='iconfont icon-search'></i>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='index-links'>
+    <view class='container'>
+      <view class='row top'>
+        <view class='col'>
+          <image src='../../images/icon1@2x.png' mode='widthFix'></image>
+          <text>实习</text>
+        </view>
+        <view class='col'>
+          <image src='../../images/icon2@2x.png' mode='widthFix'></image>
+          <text>附近兼职</text>
+        </view>
+        <view class='col'>
+          <image src='../../images/icon3@2x.png' mode='widthFix'></image>
+          <text>长期兼职</text>
+        </view>
+        <view class='col'>
+          <image src='../../images/icon4@2x.png' mode='widthFix'></image>
+          <text>迅速上岗</text>
+        </view>
+        <view class='col'>
+          <image src='../../images/icon5@2x.png' mode='widthFix'></image>
+          <text>行业类别</text>
+        </view>
+      </view>
+      <view class='row bottom sr-only'>
+        <view class='col'>
+          <image src='../../images/index_bg1@2x.png' mode='widthFix'></image>
+          <view>
+            <view>
+              <text>特色测试</text>
+              <text>划属性</text>
+            </view>
+          </view>
+        </view>
+        <view class='col'>
+          <image src='../../images/index_bg2@2x.png' mode='widthFix'></image>
+          <view>
+            <view>
+              <text>定制搭配</text>
+              <text>领服务</text>
+            </view>
+          </view>
+        </view>
+        <view class='col'>
+          <image src='../../images/index_bg3@2x.png' mode='widthFix'></image>
+          <view>
+            <view>
+              <text>组队执行</text>
+              <text>得奖品</text>
+            </view>
+          </view>
+        </view>
+        <view class='col'>
+          <image src='../../images/index_bg4@2x.png' mode='widthFix'></image>
+          <view>
+            <view>
+              <text>大神排行</text>
+              <text>有惊喜</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='index-controls {{scroll.done ? "active" : ""}}' id="main">
+    <view class='container top'>
+      <view class='row'>
+        <view class='col'>
+          <button class='btn btn-secondary btn-block' bindtap='switchJobNature' data-index='-1'>全部职位</button>
+        </view>
+        <view class='col'>
+          <button class='btn btn-secondary btn-block' bindtap='switchJobNature' data-index='0'>只看兼职</button>
+        </view>
+        <view class='col'>
+          <button class='btn btn-secondary btn-block' bindtap='switchJobNature' data-index='1'>只找实习</button>
+        </view>
+      </view>
+    </view>
+    <view class='container bottom'>
+      <view class='row'>
+        <view class='col'>
+          <picker bindchange="bindAreaPicker" value="{{areaIndex}}" range="{{area}}" range-key='name'>
+            <view class="picker caret">
+              {{area[areaIndex].name}}
+            </view>
+          </picker>
+        </view>
+
+        <view class='col caret' bindtap='navigateToPosition'>{{ currentPosition.name }}</view>
+        <view class='col'>
+          <picker bindchange="bindSortPiker" value="{{sortTypeIndex}}" range="{{sortType}}" range-key='name'>
+            <view class="picker caret">
+              {{sortType[sortTypeIndex].name}}
+            </view>
+          </picker>
+        </view>
+        <view class='col caret'>筛选</view>
+      </view>
+    </view>
+  </view>
+
+  <block wx:for="{{jobList}}" wx:for-item="item" wx:key="index">
+    <template is="list-normal" data="{{...item}}"></template>
+  </block>
+</scroll-view>

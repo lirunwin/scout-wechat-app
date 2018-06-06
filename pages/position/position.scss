@@ -1,0 +1,24 @@
+/* pages/position/position.wxss */
+@import '../../scss/common';
+
+.position {
+  @include gutters(30rpx,-10rpx,10rpx);
+  .position-list {
+    @include bordered($border-color, t, 1rpx);
+    padding-bottom: 38rpx;
+    .position-title {
+      padding-top: 30rpx;
+      padding-bottom: 30rpx;
+    }
+    .position-item {
+      padding-bottom: 30rpx;
+      >view {
+        &.active,
+        &:hover {
+          background-color: $primary;
+          border-color: $primary;
+        }
+      }
+    }
+  }
+}

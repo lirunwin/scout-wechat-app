@@ -1,0 +1,288 @@
+// main scss
+@import "scss/common";
+@import "bootstrap/buttons";
+@import "bootstrap/utilities";
+@import "bootstrap/grid";
+@import "iconfont/iconfont.wxss";
+.size-1 {
+  font-size: $size-1;
+}
+
+.size-2 {
+  font-size: $size-2;
+}
+
+.size-3 {
+  font-size: $size-3;
+}
+
+.size-4 {
+  font-size: $size-4;
+}
+
+textarea {
+  vertical-align: top;
+  resize: none;
+  display: block;
+}
+
+a,
+a:active,
+a:focus,
+a:hover,
+a:visited {
+  text-decoration: none;
+  color: $body-color;
+}
+
+.bg-none {
+  background: none;
+}
+
+.bordered {
+  @include bordered($border-color);
+}
+
+.bordered-b-0 {
+  @include bordered($border-color, b);
+}
+
+.bordered-b-1 {
+  @include bordered($blue, b, 2px);
+}
+
+.bordered-r-0 {
+  @include bordered($border-color, r);
+}
+
+.bordered-t-0 {
+  @include bordered($border-color, t);
+}
+
+.bordered-transparent {
+  @include bordered(transparent);
+}
+
+
+.gutter {
+  padding-left: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width/2;
+}
+
+.collapse-borders {
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.checkbox-1 {
+  padding-left: 0;
+  margin: 0 0.25rem;
+  cursor: pointer;
+
+  > input {
+    &[type=checkbox],
+    &[type=radio] {
+      display: none;
+    }
+
+    &[type=checkbox] + i::before {
+      content: "\e6af";
+      color: $gray-600;
+    }
+
+    &[type=checkbox]:checked + i::before {
+      content: "\e63d";
+      color: $yellow;
+    }
+  }
+}
+
+[class*=icon-] {
+  line-height: 1;
+}
+
+[class*=icon-]::before {
+  font-size: $size-1;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.step {
+  padding-top: 3rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    color: $white;
+
+    li {
+      flex: 1;
+      text-align: center;
+      font-size: 0.75rem;
+      position: relative;
+      z-index: 1;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        top: 1rem;
+        display: block;
+        @include bordered($white, b, 2px);
+        z-index: -1;
+      }
+
+      &:first-of-type::before {
+        transform: scaleX(0.5);
+        transform-origin: right;
+      }
+
+      &:last-of-type::before {
+        transform: scaleX(0.5);
+        transform-origin: left;
+      }
+
+      div {
+        padding-top: 0.5rem;
+      }
+
+      span {
+        display: inline-block;
+        font-size: 1rem;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        text-align: center;
+        @include border-radius(50%);
+        background-color: $white;
+        color: $warning;
+      }
+
+      &.active span {
+        background-color: $primary;
+        color: $white;
+      }
+    }
+  }
+}
+
+.container,
+button,
+view,
+view,
+i,
+.iconfont {
+  box-sizing: border-box;
+
+  &::after {
+    box-sizing: border-box;
+  }
+
+  &::before {
+    box-sizing: border-box;
+  }
+}
+button::after {
+  border: none;
+}
+
+
+.login {
+  padding-left: 60rpx;
+  padding-right: 60rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  .login-logo {
+    padding-top: 88rpx;
+
+    image {
+      width: 228rpx;
+    }
+  }
+
+  .login-form {
+    input,
+    picker {
+      padding-top: 40rpx;
+      padding-bottom: 40rpx;
+      @include bordered($border-color, b, 2rpx);
+      margin-bottom: 40rpx;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .login-btn {
+    padding-top: 70rpx;
+    padding-bottom: 70rpx;
+
+    > view {
+      display: flex;
+      padding-top: 50rpx;
+
+      navigator {
+        flex: 1;
+        margin-right: 40rpx;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+.smsBasic {
+  position: relative;
+  >view {
+      position: absolute;
+      bottom: 30rpx;
+      right: 0;
+      z-index: 100;
+    &>button.btn{
+      font-size: 28rpx;
+      width: 270rpx;
+      text-align: center;
+      @include border-radius(5px);
+    }
+  }
+}
+
+.caret {
+  @include caret;
+  &::after {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+.job-link {
+  position: relative;
+  .job-list {
+    .iconfont::before {
+      font-size:32rpx;
+    }
+  }
+  .job-delete {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    .btn {
+      line-height: 1;
+    }
+  }
+}
+
+page {
+    background-color: $light;
+    min-height:100vh;
+}

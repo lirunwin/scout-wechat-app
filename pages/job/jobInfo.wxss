@@ -1,0 +1,30 @@
+/* pages/job/jobInfo.wxss */
+.jobInfo .baseInfo > view {
+  line-height: 2em;
+  color: #adb5bd;
+}
+
+.jobInfo .baseInfo > view text {
+  color: #212529;
+}
+
+.jobInfo .jobInfo-title {
+  position: relative;
+}
+
+.jobInfo .jobInfo-title::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-left: 2px #ff9107 solid;
+  padding-left: 8px;
+  margin-left: -8px;
+}
+
+.jobInfo .description {
+  line-height: 2em;
+  font-size: 28rpx;
+}

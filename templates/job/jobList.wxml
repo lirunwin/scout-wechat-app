@@ -1,0 +1,43 @@
+<!--templates/job/jobList.wxml-->
+<text>templates/job/jobList.wxml</text>
+<template name="list-normal">
+  <view class='job-link'>
+    <navigator url='../job/jobInfo?id={{id}}' class='job-list size-2 container py-3 mt-2 bg-white'>
+      <view class='row align-items-center'>
+        <text class='font-weight-bold size-3 col text-truncate'>{{title}}</text>
+        <text class='col-auto pl-0 text-right text-danger size-1'>{{wageBegin}}-{{wageEnd}}元/天</text>
+      </view>
+      <view class='text-muted pt-2 row size-1 align-items-center'>
+        <text class='bordered-r-0 col-auto'>{{ countyName === '' ? '未知' : countyName }}</text>
+        <text class='col'>{{ jobBeginTime }}</text>
+      </view>
+      <view class='row mt-3'>
+        <view class='col-auto pr-0'>
+          <view class='border border-primary rounded bg-primary px-3'>日结</view>
+        </view>
+        <view class='col-auto'>
+          <view class='border border-success rounded px-2 text-success'>
+            <i class='iconfont icon-safety'></i>
+            <text>工资保障</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <view class='job-delete' wx-if="{{delete}}">
+      <button class='btn btn-outline-primary size-1 py-1' bindtap='delete' data-id="{{id}}">删除</button>
+    </view>
+    <view class='border-top py-2 bg-white container size-1' wx-if='{{apply}}'>
+      <view class='row align-items-center'>
+        <view class='col text-truncate'>
+          评价时间：{{ jobBeginTime }}
+        </view>
+        <view class='col-auto'>
+          <button class='btn btn-primary size-1 rounded py-1 px-3' wx-if='{{status === 0}}' bindtap='navigateToPost' data-id="{{id}}">评价</button>
+          <button class='btn btn-secondary size-1 rounded py-1 px-3' wx:elif='{{status === 2}}'>等待确认</button>
+          <view class='d-inline-block px-3' wx:elif='{{status === 1}}'>被拒绝</view>
+          <view class='d-inline-block px-3' wx:else>已同意</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

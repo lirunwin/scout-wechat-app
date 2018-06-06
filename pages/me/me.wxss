@@ -1,0 +1,84 @@
+/* pages/me/me.wxss */
+.me .top .avatar image {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+
+.me .top .btn image {
+  width: 24rpx;
+}
+
+.me .top .balance .number {
+  font-size: 36rpx;
+}
+
+.me .resumeLink .left {
+  padding-right: 16rpx;
+}
+
+.me .resumeLink .left > view {
+  background: #fece0b;
+  background: linear-gradient(to right, #fece0b 0%, #febf0b 23%, #fe8d0b 80%, #fe810b 100%);
+  border-radius: 10rpx;
+  padding: 24rpx;
+}
+
+.me .resumeLink .left .percentage {
+  position: relative;
+}
+
+.me .resumeLink .left .percentage canvas {
+  width: 50px;
+  height: 50px;
+}
+
+.me .resumeLink .left .percentage .progress_canvas {
+  position: absolute;
+  top: 0;
+}
+
+.me .resumeLink .left .percentage view {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.me .resumeLink .left .percentage view text {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.me .resumeLink .right {
+  padding-left: 16rpx;
+}
+
+.me .resumeLink .right > view {
+  background: #0ac3fc;
+  background: linear-gradient(to right, #0ac3fc 0%, #0abafc 19%, #0a93fc 72%, #0a84fc 100%);
+  border-radius: 10rpx;
+  padding: 24rpx;
+}
+
+.me .resumeLink .right image {
+  width: 85rpx;
+}
+
+.me .me-link {
+  line-height: 1;
+  border-bottom: 1rpx #dee2e6 solid;
+}
+
+.me .me-link:last-child {
+  border-bottom: 0;
+}
+
+.me .me-link .iconfont:before {
+  font-size: 24rpx;
+}
+
+.me .me-link image {
+  width: 32rpx;
+}

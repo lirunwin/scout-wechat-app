@@ -1,0 +1,61 @@
+/* pages/city/city.wxss */
+.city .city-location {
+  border-top: 2px #dee2e6 solid;
+  border-bottom: 1px #dee2e6 solid;
+  line-height: 1;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.city .province {
+  background-color: #e9ecef;
+}
+
+.city .province .province-list {
+  height: calc(100vh - 47px);
+}
+
+.city .province .province-list .province-item {
+  padding: 30rpx 40rpx;
+  max-width: 185rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.city .province .province-list .province-item.active {
+  background-color: #fff;
+}
+
+.city .province .province-list .province-item.active text {
+  position: relative;
+}
+
+.city .province .province-list .province-item.active text::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-left: 2px #ff9107 solid;
+  padding-left: 8px;
+  margin-left: -8px;
+}
+
+.city .county .county-list {
+  height: calc(100vh - 47px);
+}
+
+.city .county .county-list .county-item {
+  padding: 24rpx;
+}
+
+.city .county .county-list .county-item > view {
+  width: 160rpx;
+}
+
+.city .county .county-list .county-item > view.acitve {
+  background-color: #ff9107;
+  border: 1px #ff9107 solid;
+}

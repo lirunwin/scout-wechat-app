@@ -1,0 +1,12 @@
+<!--pages/me/skill.wxml-->
+<!--pages/me/selfEvaluation.wxml-->
+
+<view class='container bg-white size-1'>
+  <textarea placeholder='请填写你的特长，并且简单描述' value='{{ skill }}' bindinput='bindinput'>
+  </textarea>
+</view>
+
+
+<view class='px-3 py-4'>
+  <view class='btn btn-primary btn-block size-2' bindtap='saveSkill'>保存</view>
+</view>

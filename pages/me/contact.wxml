@@ -1,0 +1,36 @@
+<!--pages/me/contact.wxml-->
+<view class='address container size-3 bg-white'>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>联系地址</view>
+    <view class='col text-right text-truncate'>
+      <input confirm-type='next' value='{{ contact.resideAddress }}' confirm-type='next' bindinput='bindinput' data-name="resideAddress" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>备用电话</view>
+    <view class='col text-right text-truncate'>
+      <input confirm-type='next' value='{{ contact.backupTel }}' confirm-type='next' bindinput='bindinput' data-name="backupTel" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>Email</view>
+    <view class='col text-right text-truncate'>
+      <input confirm-type='next' value='{{ contact.email }}' confirm-type='next' bindinput='bindinput' data-name="email" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>QQ</view>
+    <view class='col text-right text-truncate'>
+      <input confirm-type='next' value='{{ contact.qq }}' confirm-type='next' bindinput='bindinput' data-name="qq" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>微信</view>
+    <view class='col text-right text-truncate'>
+      <input confirm-type='next' value='{{ contact.wechat }}' confirm-type='next' bindinput='bindinput' data-name="wechat" />
+    </view>
+  </view>
+</view>
+<view class='px-3 py-5'>
+  <view class='btn btn-primary btn-block size-2' bindtap='saveContact'>保存</view>
+</view>

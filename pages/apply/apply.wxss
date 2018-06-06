@@ -1,0 +1,29 @@
+/* pages/apply/apply.wxss */
+.apply .search {
+  margin: 20rpx -5rpx;
+  position: relative;
+}
+
+.apply .search i.iconfont {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 24rpx;
+}
+
+.apply .filter {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.apply .filter view {
+  border-right: 1px #e4e4e4 solid;
+}
+
+.apply .filter view:last-child {
+  border-right: 0;
+}
+
+.apply .filter view.active {
+  color: #fed10b;
+}

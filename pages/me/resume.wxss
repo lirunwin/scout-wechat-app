@@ -1,0 +1,23 @@
+/* pages/me/resume.wxss */
+.resume .avatar image {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+
+.resume .identify image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.resume .identify .iconfont:before {
+  font-size: 24rpx;
+}
+
+.resume .items > view {
+  border-bottom: 1px #dee2e6 solid;
+}
+
+.resume .items > view:last-child {
+  border-bottom: 0;
+}

@@ -1,0 +1,130 @@
+<!--pages/me/me.wxml-->
+<view class='me bg-light'>
+  <view class='container'>
+    <view class='row align-items-center top bg-white py-3'>
+      <view class='col-auto avatar'>
+        <image src='{{avatar}}'></image>
+      </view>
+      <view class='col pl-0'>
+        <view class='font-weight-bold pb-2 size-3'>{{profile.baseinfo.userName}}</view>
+        <view class='text-muted size-1 balance'>
+          <text>钱包:</text>
+          <text class='text-danger size-4 px-2 font-weight-bold number'>{{profile.balance === '' ? 0 : profile.balance}}</text>
+          <text>元</text>
+        </view>
+      </view>
+      <view class='col-auto'>
+        <view class='btn btn-primary size-1 py-1'>
+          <image src='../../images/wallet.png' mode='widthFix' class='align-middle'></image>
+          邀请赚钱
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='resumeLink bg-light py-2'>
+    <view class='container bg-white'>
+      <view class='row no-gutters py-2 resume'>
+        <view class='col left'>
+          <view class='p-2'>
+            <view class='row no-gutters align-items-center' bindtap='navigateToPage' data-url="resume">
+              <view class='col text-white'>
+                <view class='font-weight-bold size-3'>我的简历</view>
+                <view class='size-1'>完善简历提高您的曝光率</view>
+              </view>
+              <view class='col-auto pl-1 percentage'>
+                <canvas class="progress_bg" canvas-id="canvasProgressbg"> </canvas>
+                <canvas class="progress_canvas" canvas-id="canvasProgress"> </canvas>                     <view class='d-flex justify-content-center align-items-center pl-1'>
+                  <text>{{resumePercentage}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='col right'>
+          <view class='p-2'>
+            <view class='row no-gutters align-items-center'>
+              <view class='col text-white'>
+                <view class='font-weight-bold size-3'>求职意向</view>
+                <view class='size-1'>精准岗位匹配和推荐</view>
+              </view>
+              <view class='col-auto pl-1'>
+                <image src='../../images/me_bg.png' mode='widthFix'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='container bg-light'>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="collection">
+      <view class='col-auto pr-0'>
+        <image src='../../images/star.png' mode='widthFix' class='align-top'></image>
+      </view>
+      <view class='col pl-2'><text>我的收藏</text></view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="history">
+      <view class='col-auto pr-0'>
+        <image src='../../images/view.png' mode='widthFix' class='align-middle'></image>
+      </view>
+      <view class='col pl-2'><text>浏览记录</text></view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="post">
+      <view class='col-auto pr-0'>
+        <image src='../../images/note.png' mode='widthFix' class='align-middle'></image>
+      </view>
+      <view class='col pl-2'><text>我的评价</text></view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="auth">
+      <view class='col-auto pr-0'>
+        <image src='../../images/lock.png' mode='widthFix' class='align-middle'></image>
+      </view>
+      <view class='col pl-2'><text>账户安全</text></view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+  </view>
+  <view class='container bg-light py-2'>
+    <view class='row bg-white py-3 size-2 align-items-center me-link'>
+      <view class='col-auto pr-0'>
+        <image src='../../images/tel.png' mode='widthFix' class='align-top'></image>
+      </view>
+      <view class='col pl-2'><text>联系客服</text></view>
+      <view class='col-auto'>
+        <text class='px-3' bindtap='makeCall' data-tel='028-82674077'>028-82674077</text>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url='charge'>
+      <view class='col-auto pr-0'>
+        <image src='../../images/view.png' mode='widthFix' class='align-middle'></image>
+      </view>
+      <view class='col pl-2'><text>投诉反馈</text></view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url='settings'>
+      <view class='col-auto pr-0'>
+        <image src='../../images/note.png' mode='widthFix' class='align-middle'></image>
+      </view>
+      <view class='col pl-2'><text>设置</text></view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+  </view>
+  <view class='bg-light text-center pb-2 mb-2 size-2'>
+    <view class='bg-white py-3'>退出当前账号</view>
+  </view>
+</view>

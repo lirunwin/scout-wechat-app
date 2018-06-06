@@ -1,0 +1,5 @@
+<!--pages/me/post.wxml-->
+<import src='../../templates/job/jobList.wxml' />
+<block wx:for="{{collection}}" wx:for-item="item" wx:key="index">
+  <template is="list-normal" data="{{...item,delete}}"></template>
+</block>

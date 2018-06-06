@@ -1,0 +1,17 @@
+<!--pages/apply/apply.wxml-->
+<import src='../../templates/job/jobList.wxml' />
+<view class='container apply'>
+  <view class='search bg-white p-2 rounded'>
+    <input placeholder='请输入要搜索的条件' class='size-1 pl-4 pr-2'></input>
+    <i class="iconfont icon-search p-3 align-baseline"/>
+  </view>
+  <view class='row size-1 border-bottom text-center mt-2 bg-white filter'>
+    <view class='col active'>全部</view>
+    <view class='col'>已同意</view>
+    <view class='col'>被拒绝</view>
+    <view class='col'>待评价</view>
+  </view>
+</view>
+<block wx:for="{{jobList}}" wx:for-item="item" wx:key="index">
+  <template is="list-normal" data="{{...item,apply}}"></template>
+</block>

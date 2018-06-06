@@ -1,0 +1,11 @@
+/* pages/me/profile.wxss */
+
+.profile {
+  .avatar {
+    width: 80rpx;
+    height: 80rpx;
+  }
+  >view {
+    border-bottom: 0;
+  }
+}

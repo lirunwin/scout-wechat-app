@@ -1,0 +1,231 @@
+/* pages/index/index.wxss */
+page {
+  background-color: #f8f9fa;
+}
+
+.index-swiper {
+  position: relative;
+}
+
+.index-swiper swiper {
+  width: 750rpx;
+  height: 420rpx;
+}
+
+.index-swiper swiper image {
+  width: 100%;
+  height: 100%;
+}
+
+.index-swiper .search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20rpx;
+}
+
+.index-swiper .search > view {
+  border-radius: 12rpx;
+  background-color: #ffffff;
+  padding: 12rpx 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.index-swiper .search > view .city {
+  border-right: 2rpx #e4e4e4 solid;
+  padding-right: 24rpx;
+  font-size: 28rpx;
+}
+
+.index-swiper .search > view .searchBox {
+  position: relative;
+}
+
+.index-swiper .search > view .searchBox input {
+  padding-left: 24rpx;
+  font-size: 26rpx;
+}
+
+.index-swiper .search > view .searchBox i {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.index-swiper .search > view .searchBox i::before {
+  font-size: 26rpx;
+  color: #999999;
+  line-height: 1.4rem;
+  padding-left: 14rpx;
+}
+
+.index-links {
+  background-color: #fff;
+  padding-top: 20rpx;
+  text-align: center;
+}
+
+.index-links > .container {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.index-links > .container .row {
+  margin-left: -8rpx;
+  margin-right: -8rpx;
+}
+
+.index-links > .container .row > .col-1,
+.index-links > .container .row > .col-10,
+.index-links > .container .row > .col-11,
+.index-links > .container .row > .col-12,
+.index-links > .container .row > .col-2,
+.index-links > .container .row > .col-3,
+.index-links > .container .row > .col-4,
+.index-links > .container .row > .col-5,
+.index-links > .container .row > .col-6,
+.index-links > .container .row > .col-7,
+.index-links > .container .row > .col-8,
+.index-links > .container .row > .col-9,
+.index-links > .container .row > .col {
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+}
+
+.index-links > .container .row.top .col image {
+  width: 80rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.index-links > .container .row.top .col text {
+  font-size: 24rpx;
+}
+
+.index-links > .container .row.bottom {
+  padding-top: 35rpx;
+  padding-bottom: 35rpx;
+}
+
+.index-links > .container .row.bottom .col > view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: table;
+}
+
+.index-links > .container .row.bottom .col > view view {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding-left: 36rpx;
+}
+
+.index-links > .container .row.bottom .col > view view text {
+  font-size: 24rpx;
+  display: block;
+  max-width: 100%;
+  color: #fff;
+  text-align: left;
+}
+
+.index-links > .container .row.bottom .col image {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.index-controls {
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+
+.index-controls > .container.top {
+  padding-left: 94rpx;
+  padding-right: 94rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx #e4e4e4 solid;
+}
+
+.index-controls > .container.top .row {
+  margin-left: -32rpx;
+  margin-right: -32rpx;
+}
+
+.index-controls > .container.top .row > .col-1,
+.index-controls > .container.top .row > .col-10,
+.index-controls > .container.top .row > .col-11,
+.index-controls > .container.top .row > .col-12,
+.index-controls > .container.top .row > .col-2,
+.index-controls > .container.top .row > .col-3,
+.index-controls > .container.top .row > .col-4,
+.index-controls > .container.top .row > .col-5,
+.index-controls > .container.top .row > .col-6,
+.index-controls > .container.top .row > .col-7,
+.index-controls > .container.top .row > .col-8,
+.index-controls > .container.top .row > .col-9,
+.index-controls > .container.top .row > .col {
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+}
+
+.index-controls > .container.top button {
+  font-size: 26rpx;
+  padding: 12rpx 0;
+  border-radius: 22rpx;
+  line-height: 1;
+  margin: 0 auto;
+}
+
+.index-controls > .container.bottom {
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  font-size: 26rpx;
+  padding-top: 25rpx;
+  padding-bottom: 25rpx;
+  border-bottom: 2rpx #e4e4e4 solid;
+  text-align: center;
+}
+
+.index-controls > .container.bottom .row {
+  margin-left: -15rpx;
+  margin-right: -15rpx;
+}
+
+.index-controls > .container.bottom .row > .col-1,
+.index-controls > .container.bottom .row > .col-10,
+.index-controls > .container.bottom .row > .col-11,
+.index-controls > .container.bottom .row > .col-12,
+.index-controls > .container.bottom .row > .col-2,
+.index-controls > .container.bottom .row > .col-3,
+.index-controls > .container.bottom .row > .col-4,
+.index-controls > .container.bottom .row > .col-5,
+.index-controls > .container.bottom .row > .col-6,
+.index-controls > .container.bottom .row > .col-7,
+.index-controls > .container.bottom .row > .col-8,
+.index-controls > .container.bottom .row > .col-9,
+.index-controls > .container.bottom .row > .col {
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+}
+
+.index-controls > .container.bottom .row > .col {
+  border-right: 2rpx #e4e4e4 solid;
+}
+
+.index-controls > .container.bottom .row > .col:last-of-type {
+  border-right: 0;
+}
+
+#main.active {
+  position: fixed;
+  top: -20rpx;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}

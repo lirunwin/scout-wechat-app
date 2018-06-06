@@ -1,0 +1,23 @@
+<!--pages/me/exp.wxml-->
+<view class='exp container size-3 bg-white'>   
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>工作年限</view>    
+    <view class='col text-right'>       
+      十年
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3 sr-only'>
+    <view class='col-auto font-weight-bold'>工作经验</view>    
+    <view class='col text-right'>       
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>  
+</view>
+<view class='px-3 py-4'>
+  <view class='btn btn-primary btn-block size-2'>保存</view>
+</view>

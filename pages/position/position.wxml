@@ -1,0 +1,15 @@
+<!--pages/position/position.wxml-->
+<view class='position size-2'>
+  <view class='container text-center'>
+    <view class='row position-list' 
+      wx:for='{{ positions }}' wx:key='{{ i }}'
+      wx:for-item="items" wx:for-index="i">
+      <view class='col-12 position-title font-weight-bold text-left'>
+        <view data-id="{{ items.title.id }}">{{ items.title.name }}</view>
+      </view>
+      <view class='col-3 position-item' wx:for='{{ items.list }}' wx:key='{{ index }}'>
+        <view class='border rounded' data-id="{{ item.id }}" bindtap='setPosition'>{{ item.name }}</view>
+      </view>
+    </view> 
+  </view>
+</view>

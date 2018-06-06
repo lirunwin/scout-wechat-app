@@ -1,0 +1,17 @@
+.btn {
+  border-radius: $btn-border-radius;
+  padding-top: $btn-padding-top;
+  padding-bottom: $btn-padding-bottom;
+  line-height: 1;
+}
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+}
+
+.btn-outline {
+  background-color: $btn-outline-bg-color;
+  border-color: $btn-outline-border-color;
+  color: $btn-outline-color;
+}

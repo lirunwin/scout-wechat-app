@@ -1,0 +1,46 @@
+/* pages/position/position.wxss */
+.position > .container {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.position > .container .row {
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+}
+
+.position > .container .row > .col-1,
+.position > .container .row > .col-10,
+.position > .container .row > .col-11,
+.position > .container .row > .col-12,
+.position > .container .row > .col-2,
+.position > .container .row > .col-3,
+.position > .container .row > .col-4,
+.position > .container .row > .col-5,
+.position > .container .row > .col-6,
+.position > .container .row > .col-7,
+.position > .container .row > .col-8,
+.position > .container .row > .col-9,
+.position > .container .row > .col {
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.position .position-list {
+  border-top: 1rpx #dee2e6 solid;
+  padding-bottom: 38rpx;
+}
+
+.position .position-list .position-title {
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.position .position-list .position-item {
+  padding-bottom: 30rpx;
+}
+
+.position .position-list .position-item > view.active, .position .position-list .position-item > view:hover {
+  background-color: #ff9107;
+  border-color: #ff9107;
+}

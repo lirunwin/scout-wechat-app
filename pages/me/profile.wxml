@@ -1,0 +1,72 @@
+<!--pages/me/profile.wxml-->
+<view class='profile container size-3 bg-white'>
+  <view class='row mx-0 border-bottom align-items-center py-2'>
+    <view class='col font-weight-bold text-truncate'>头像</view>
+    <view class='col-auto text-right'>
+      <image src='../../images/avatar.png' mode='widthFix' class='avatar rounded-circle'/> 
+    </view>
+    <view class='col-auto pl-0 text-right'>       
+      <i class="iconfont icon-right text-muted" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>真实姓名</view>    
+    <view class='col text-right'>       
+      赵四
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>身份证号</view>    
+    <view class='col text-right'>       
+      5110241990020288888
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>性别</view>    
+    <view class='col text-right'>       
+      女
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>身份</view>    
+    <view class='col text-right'>       
+      学生
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>名族</view>    
+    <view class='col text-right'>       
+      汉
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>出生年月</view>    
+    <view class='col text-right'>       
+      1995-09
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>户口所在地</view>    
+    <view class='col text-right'>       
+      四川 成都
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>支付宝账号</view>    
+    <view class='col pl-0 text-right text-truncate'>       
+      1871123112311 
+    </view>
+  </view>
+</view>
+<view class='px-3 py-4'>
+  <view class='btn btn-primary btn-block size-2'>保存</view>
+</view>

@@ -1,0 +1,83 @@
+<!--pages/me/resume.wxml-->
+<view class='resume'>
+  <view class='container'>
+    <view class='row align-items-center top bg-white py-3'>
+      <view class='col-auto avatar'>
+        <image src='../../images/avatar.png'></image>
+      </view>
+      <view class='col pl-0'>
+        <view class='font-weight-bold size-3'>{{ profile.baseinfo.userName }}</view>
+        <view class='text-muted size-1'>
+          {{ profile.baseinfo.birthday }} | {{ profile.baseinfo.family }} | {{ config.identityType[profile.baseinfo.identityType] }}
+        </view>
+        <view class='size-2'>学历：{{config.education[profile.baseinfo.education]}}</view>
+      </view>
+      <view class='col-auto'>
+        <view class='btn btn-primary size-1 py-1'>
+          邀请赚钱
+        </view>
+      </view>
+    </view>
+
+    <view class='row align-items-center border-top top bg-white py-3 identify'>
+      <view class='col-auto'>
+        <image src='../../images/id.png' class='rounded-circle'></image>
+      </view>
+      <view class='col pl-0'>
+        <view class='font-weight-bold size-3'>实名认证</view>
+        <view class='size-2'>完成实名认证 获取优先录取特权</view>
+      </view>
+      <view class='col-auto text-orange size-3'>去认证</view>
+      <view class='col-auto pl-0 size-1'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+  </view>
+  <view class='container items mt-2'>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="edu">
+      <view class='col'>
+        <text>学历信息</text>
+      </view>
+      <view class='col-auto text-orange pr-0'>未完善</view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="contact">
+      <view class='col'>
+        <text>通讯信息</text>
+      </view>
+      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="selfEvaluation">
+      <view class='col'>
+        <text>自我评价</text>
+      </view>
+      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="skill">
+      <view class='col'>
+        <text>能力及特长</text>
+      </view>
+      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="exp">
+      <view class='col'>
+        <text>工作经验</text>
+      </view>
+      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto'>
+        <i class="iconfont icon-right text-muted"></i>
+      </view>
+    </view>
+  </view>
+</view>

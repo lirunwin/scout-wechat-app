@@ -1,0 +1,51 @@
+<!--pages/me/edu.wxml-->
+<view class='edu container size-3 bg-white'>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>最高学历</view>
+    <view class='col text-right'>
+      <!-- <input value=' {{config.education[highestEdu.educationtype]}}' confirm-type='next' bindinput='bindinput' data-name="educationType"></input> -->
+      <picker bindchange='bindPickerChange' data-name="educationType" value="{{eduListIndex}}" range="{{eduList}}" range-key='name'>
+        <view class="picker">
+            {{eduList[eduListIndex].name}}
+        </view>
+      </picker>
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>学校所在地</view>
+    <view class='col text-right text-truncate'>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{objectMultiArray}}" range-key="name">
+        <view>
+          {{ currentProvince.name }} {{ currentCity.name }}
+        </view>
+      </picker>
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>学校名称</view>
+    <view class='col text-right'>
+      <input confirm-type='next' value='{{highestEdu.schoolname}}' confirm-type='next' bindinput='bindinput' data-name="schoolName"></input>
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>专业</view>
+    <view class='col text-right'>
+      <input confirm-type='next' value='{{ highestEdu.professionname }}' confirm-type='next' bindinput='bindinput' data-name="professionName"></input>
+    </view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+</view>
+<view class='px-3 py-4'>
+  <view class='btn btn-primary btn-block size-2' bindtap='saveEdu'>保存</view>
+</view>

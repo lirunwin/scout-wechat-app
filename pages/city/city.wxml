@@ -1,0 +1,36 @@
+<!--pages/city/city.wxml-->
+<view class='city container size-2'>
+  <view class='row city-location'>
+    <view class='col text-truncate'>
+      <text>当前位置：</text>
+      <text>{{ location }}</text>
+    </view>
+    <view class='col-auto size-1'>
+      刷新
+    </view>
+  </view>
+
+  <view class='row'>
+    <view class='col-auto province px-0'>
+      <scroll-view scroll-y='true' class='province-list'>
+        <view class='province-item {{ activePid === "-1" ? "active" : "" }}' data-id="-1" bindtap='displayCounty'>
+          <text>热门</text>
+        </view>
+        <view class='province-item {{ activePid === item.id ? "active" : "" }}'
+          wx:for='{{provinces}}' 
+          wx:key='{{index}}' 
+          data-id="{{item.id}}" 
+          bindtap='displayCounty'>
+          <text>{{item.name}}</text>
+        </view>
+      </scroll-view>
+    </view>
+    <view class='col county px-0'>
+      <scroll-view scroll-y='true' class='county-list'>
+        <view class='county-item' wx:for='{{currentCounties}}' wx:key='{{index}}'>
+          <view class='py-2' data-id='{{item.id}}' bindtap='setLocation'>{{item.name}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

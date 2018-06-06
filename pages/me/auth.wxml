@@ -1,0 +1,16 @@
+<!--pages/me/auth.wxml-->
+<!--pages/me/exp.wxml-->
+<view class='exp container size-3 bg-white'>   
+  <view class='row mx-0 border-bottom align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>修改手机</view>    
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>
+  <view class='row mx-0 align-items-center py-3'>
+    <view class='col-auto font-weight-bold'>修改密码</view>
+    <view class='col-auto pl-0'>
+      <i class="iconfont icon-right" />
+    </view>
+  </view>  
+</view>

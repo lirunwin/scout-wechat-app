@@ -1,0 +1,24 @@
+<!--pages/login/login.wxml-->
+
+<view class='login'>
+  <view class='login-logo'>
+    <image src='../../images/logo@2x.png' mode='widthFix'></image>
+  </view>
+  <view>
+    <form class='login-form' bindsubmit="formSubmit">
+      <view>
+        <input name="input" placeholder="请输入用户名" bindinput='bindUsernameInput'/>
+        <input name="password" password='true' placeholder="请输入密码" bindinput='bindPasswordInput'/>
+      </view>
+    </form>
+  </view>
+  <view class='login-btn'>
+    <button type='button' class='btn btn-primary btn-block' bindtap='login'>登录</button>
+    <view>
+      <navigator 
+        url="../signin/phoneCheck"
+        class='btn btn-light'>注册账号</navigator>
+      <navigator class='btn btn-light'>短信登录</navigator>
+    </view>
+  </view>
+</view>
