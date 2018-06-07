@@ -3,7 +3,7 @@
 <!-- <view id="id" class = "ball" bindtap = "handletap" bindtouchstart = "handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style = "width : 100%px; height : 40px;">
 {{text}}
 </view> -->
-<scroll-view scroll-y style="height:100vh;" bindtouchmove="handletouchmove" bindscrolltolower="handlescrolltolower" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true" bindscroll="scroll">
+<scroll-view scroll-y style="height:100vh;" bindtouchmove="handletouchmove" bindscrolltolower="handlescrolltolower" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true">
   <view class='index-swiper'>
     <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
       <block wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
@@ -86,7 +86,7 @@
       </view>
     </view>
   </view>
-  <view class='index-controls {{scroll.done ? "active" : ""}}' id="main">
+  <view class='index-controls active {{scroll.done ? "active" : ""}}' id="main">
     <view class='container top'>
       <view class='row'>
         <view class='col'>
@@ -109,7 +109,6 @@
             </view>
           </picker>
         </view>
-
         <view class='col caret' bindtap='navigateToPosition'>{{ currentPosition.name }}</view>
         <view class='col'>
           <picker bindchange="bindSortPiker" value="{{sortTypeIndex}}" range="{{sortType}}" range-key='name'>
@@ -118,7 +117,70 @@
             </view>
           </picker>
         </view>
-        <view class='col caret'>筛选</view>
+        <view class='col caret active filterBtn active'>筛选</view>
+      </view>
+      <view class="filter border px-3 d-flex flex-column justify-content-between">
+        <view class='row align-items-center py-2 sr-only'>
+          <view class='col'>工资保障</view>
+          <view class='col-auto px-0'>
+            <checkbox></checkbox>
+          </view>
+        </view>
+        <view class='row align-items-center py-2'>
+          <view class='col-12 py-3'>兼职周期</view>
+          <view class='col-auto pl-2'>
+            <picker mode="date" value="{{jobDate.startDate}}" start="{{jobDate.startDftDate}}" bindchange="bindJobBeginTimeChange">
+              <view class="picker">
+                <view class='caret border px-2 py-1 rounded'>{{jobDate.startDate}} </view>
+              </view>
+            </picker>
+          </view>
+          <view class='col-atuo'> - </view>
+          <view class='col-auto'>
+            <picker mode="date" value="{{jobDate.endDate}}" start="{{jobDate.startDftDate}}" bindchange="bindJobEndTimeChange">
+              <view class="picker">
+                <view class='caret border px-2 py-1 rounded'>{{jobDate.endDate}} </view>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class='row py-2'>
+          <view class='col-12 py-3'>工资模式</view>
+          <view class='col-3'>
+            <button class='btn {{ filterBtnActivity.wageMode === "-1" ? "btn-primary" : "btn-light" }} rounded border py-1 size-1 btn-block' data-id="-1" data-index='-1' data-property='wageMode' bindtap='changeWageFilter'>不限</button>
+          </view>
+          <view class='col-3' wx:for="{{wageModeConst}}" wx:key="{{index}}">
+            <button class='btn {{filterBtnActivity.wageMode === index ? "btn-primary" : "btn-light"}} rounded border py-1 size-1 btn-block px-0' data-id="{{item[0]}}" data-index='{{ index }}' data-property='wageMode' bindtap='changeWageFilter'>{{item[1]}}</button>
+          </view>
+        </view>
+        <view class='row py-2 align-items-center'>
+          <view class='col-12 py-3'>工资范围</view>
+          <view class='col-4'>
+            <input type="number" class='border rounded px-2' bindinput='changeSalaryRange' data-type='start' value="{{salaryRange.start}}"/>
+          </view>
+          <view class='col-auto'> - </view>
+          <view class='col-4'>
+            <input type="number" class='border rounded px-2' bindinput='changeSalaryRange' data-type='end' value="{{salaryRange.end}}"/>
+          </view>
+        </view>
+        <view class='row py-2'>
+          <view class='col-12 py-3'>工资结算</view>
+          <view class='col-3'>
+            <button class='btn {{ filterBtnActivity.wageClearing === "-1" ? "btn-primary" : "btn-light" }} rounded border py-1 size-1 btn-block' data-id="-1" data-index='-1' data-property='wageClearing' bindtap='changeWageFilter'>不限</button>
+          </view>
+          <view class='col-3' wx:for="{{wageClearingConst}}" wx:key="{{index}}">
+            <button class='btn {{ filterBtnActivity.wageClearing === index ? "btn-primary" : "btn-light" }} rounded border py-1 size-1 btn-block px-0' data-id="{{item[0]}}" data-index='{{index}}' data-property='wageClearing' bindtap='changeWageFilter'>{{item[1][1]}}</button>
+          </view>
+        </view>
+        <view class='row pt-5 pb-4'>
+          <view class='col border-0'></view>
+          <view class='col-auto'>
+            <button class='btn btn-light rounded border py-1 size-1 px-4' bindtap='resetJobFilterTemp'>重置</button>
+          </view>
+          <view class='col-auto'>
+            <button class='btn btn-primary rounded border py-1 size-1 px-5' bindtap='assignJobFilter'>确定</button>
+          </view>
+        </view>
       </view>
     </view>
   </view>

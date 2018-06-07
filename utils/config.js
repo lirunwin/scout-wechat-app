@@ -10,7 +10,8 @@ export default {
   constant: { // 常量配置
     job: {
       wageClearing: {
-        DAY: '元/天',
+        DAY: ['元/天', '日结'],
+        WEEK: ['元/周', '周结'],
         MONTH: ['元/月', '月结'],
       },
       wageMode: {

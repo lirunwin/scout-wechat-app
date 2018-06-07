@@ -77,7 +77,7 @@ page {
   margin-right: -8rpx;
 }
 
-.index-links > .container .row > .col-1,
+.index-links > .container .row > .col,
 .index-links > .container .row > .col-10,
 .index-links > .container .row > .col-11,
 .index-links > .container .row > .col-12,
@@ -89,7 +89,8 @@ page {
 .index-links > .container .row > .col-7,
 .index-links > .container .row > .col-8,
 .index-links > .container .row > .col-9,
-.index-links > .container .row > .col {
+.index-links > .container .row > .col-auto,
+.index-links > .container .row > .col-1 {
   padding-left: 8rpx;
   padding-right: 8rpx;
 }
@@ -157,7 +158,7 @@ page {
   margin-right: -32rpx;
 }
 
-.index-controls > .container.top .row > .col-1,
+.index-controls > .container.top .row > .col,
 .index-controls > .container.top .row > .col-10,
 .index-controls > .container.top .row > .col-11,
 .index-controls > .container.top .row > .col-12,
@@ -169,7 +170,7 @@ page {
 .index-controls > .container.top .row > .col-7,
 .index-controls > .container.top .row > .col-8,
 .index-controls > .container.top .row > .col-9,
-.index-controls > .container.top .row > .col {
+.index-controls > .container.top .row > .col-1 {
   padding-left: 32rpx;
   padding-right: 32rpx;
 }
@@ -190,6 +191,7 @@ page {
   padding-bottom: 25rpx;
   border-bottom: 2rpx #e4e4e4 solid;
   text-align: center;
+  position: relative;
 }
 
 .index-controls > .container.bottom .row {
@@ -197,7 +199,7 @@ page {
   margin-right: -15rpx;
 }
 
-.index-controls > .container.bottom .row > .col-1,
+.index-controls > .container.bottom .row > .col,
 .index-controls > .container.bottom .row > .col-10,
 .index-controls > .container.bottom .row > .col-11,
 .index-controls > .container.bottom .row > .col-12,
@@ -209,7 +211,7 @@ page {
 .index-controls > .container.bottom .row > .col-7,
 .index-controls > .container.bottom .row > .col-8,
 .index-controls > .container.bottom .row > .col-9,
-.index-controls > .container.bottom .row > .col {
+.index-controls > .container.bottom .row > .col-1 {
   padding-left: 15rpx;
   padding-right: 15rpx;
 }
@@ -220,6 +222,17 @@ page {
 
 .index-controls > .container.bottom .row > .col:last-of-type {
   border-right: 0;
+}
+
+.index-controls > .container.bottom .filter {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  text-align: left;
+  height: calc( 100vh - 90px);
+  width: 100%;
+  transition: 0.5s all;
 }
 
 #main.active {

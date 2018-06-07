@@ -137,7 +137,7 @@
         margin-left: $row-margin-x;
         margin-right: $row-margin-x;
 
-        > .col-1,
+        > .col,
          > .col-10,
          > .col-11,
          > .col-12,
@@ -149,7 +149,8 @@
          > .col-7,
          > .col-8,
          > .col-9,
-        > .col {
+         > .col-auto,
+        > .col-1 {
           padding-left: $col-padding-x;
           padding-right: $col-padding-x;
         }
@@ -164,7 +165,7 @@
           margin-left: $row-margin-x;
           margin-right: $row-margin-x;
 
-          > .col-1,
+          > .col,
            > .col-10,
            > .col-11,
            > .col-12,
@@ -176,7 +177,7 @@
            > .col-7,
            > .col-8,
            > .col-9,
-          > .col {
+          > .col-1 {
             padding-left: $col-padding-x;
             padding-right: $col-padding-x;
           }

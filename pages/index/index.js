@@ -3,11 +3,8 @@ import jobService from '../../service/job.js';
 import locationService from '../../service/location.js';
 import commonService from '../../service/common.js';
 const Promise = require('../../utils/es6-promise.js');
+import { formatTime } from '../../utils/util.js';
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     swiper: {
       imgUrls: [
@@ -23,7 +20,7 @@ Page({
       duration: 1000
 
     },
-    constant: null,
+    constant: jobService.constant,
     jobList: [],
     currentCity: '',
     cityInfo:'',
@@ -32,6 +29,7 @@ Page({
       'pageSize': 10,
       'filter': 'RECOMMEND'
     },
+    jobFilterTemp: {},
     jobEnd: false,
     currentPosition:{
       name:'职位类型'
@@ -43,21 +41,34 @@ Page({
     toView: '',
     scroll: {
       done: false
+    },
+    jobDate: {
+      start: '',
+      end: ''
+    },
+    wageModeConst: null,
+    filterBtnActivity: {
+      wageMode: '-1',
+      wageClearing: '-1'
+    },
+    salaryRange: {
+      start: '',
+      end:''
     }
   },
-  scroll(e) {    
-    if (!this.data.scroll.done) {
-      this.setData({
-        toView: 'main',
-        scroll: {
-          done: true,
-          active: true
-        }
-      })      
-    } else {
+  // scroll(e) {    
+  //   if (!this.data.scroll.done) {
+  //     this.setData({
+  //       toView: 'main',
+  //       scroll: {
+  //         done: true,
+  //         active: true
+  //       }
+  //     })      
+  //   } else {
      
-    }
-  },
+  //   }
+  // },
   handlescrolltoupper(e){
     
   },
@@ -203,6 +214,106 @@ Page({
       return cities;
     });
   },
+  setDftDate() {
+    let startDate = formatTime(new Date(), 'yyyy-MM-dd');
+    let endDate = new Date();
+    endDate.setDate(endDate.getDate() + 2);
+    endDate = formatTime(endDate, 'yyyy-MM-dd');
+    this.data.jobFilterTemp.jobBeginTime = startDate;
+    this.data.jobFilterTemp.jobEndTime = endDate;
+    this.setData({
+      jobDate: {
+        startDftDate: startDate,
+        endDftDate: endDate,
+        startDate,
+        endDate
+      }
+    });
+  },
+  bindJobBeginTimeChange(e) {
+    let date = e.detail.value;    
+    let jobDate = this.data.jobDate;
+    jobDate.startDate = date;
+    this.setData({
+      jobDate
+    });
+    this.data.jobFilterTemp.jobBeginTime = date;
+
+    console.log(this.data.jobFilterTemp);
+  },
+  bindJobEndTimeChange(e) {
+    let date = e.detail.value;
+    // if (date.replace(/\D/g, '') < this.data.jobDate.startDate.replace(/\D/g, '')) {
+    //   wx.showToast({
+    //     title: '结束时间不能小于开始时间',
+    //     icon: 'none'
+    //   });
+    //   return;
+    // }
+    let jobDate = this.data.jobDate;
+    jobDate.endDate = e.detail.value
+    this.setData({
+      jobDate
+    });
+    this.data.jobFilterTemp.jobEndTime = date;
+    console.log(this.data.jobFilterTemp);
+  },
+  setConstant() {
+    this.setData({
+      wageModeConst: Object.entries(jobService.constant.wageMode),
+      wageClearingConst: Object.entries(jobService.constant.wageClearing),
+    });
+  },
+  changeWageFilter(e) {    
+    let data = e.target.dataset;
+    let property = data.property;
+    data.id === '-1' ? delete this.data.jobFilterTemp[property] : this.data.jobFilterTemp[property] = data.id;    
+    let filterBtnActivity = this.data.filterBtnActivity;    
+    filterBtnActivity[property] = data.index
+    this.setData({
+      filterBtnActivity
+    });
+    console.log(this.data.jobFilterTemp);
+  },
+  changeSalaryRange(e) {
+    let val = e.detail.value;
+    let rangeType = e.target.dataset.type;
+    const constant = {
+      start: 'wageBegin',
+      end: 'wageEnd'
+    }
+    this.data.jobFilterTemp[constant[rangeType]] = val;
+
+    console.log(this.data.jobFilterTemp);
+  },
+  resetJobFilterTemp() {
+    this.data.jobFilterTemp = {};
+    this.setData({
+      filterBtnActivity: {
+        wageMode: '-1',
+        wageClearing: '-1'
+      },
+      salaryRange: {
+        start: '',
+        end: ''
+      }
+    });
+    this.setDftDate();
+    let filter = this.data.jobFilter;
+    delete filter.jobBeginTime;
+    delete filter.jobEndTime;
+    delete filter.wageBegin;
+    delete filter.wageEnd;
+    delete filter.wageMode;
+    delete filter.wageClearing;
+    console.log(this.data.jobFilter);
+  },
+  assignJobFilter() {
+    Object.assign(this.data.jobFilter, this.data.jobFilterTemp);
+    console.log(this.data.jobFilter);
+    this.changeFilter();
+    this.getJobList();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -213,6 +324,8 @@ Page({
       // console.log({res})
       this.setDftArea(res[1])
     });
+    this.setDftDate();
+    this.setConstant();
   },
 
   /**

@@ -151,11 +151,19 @@ page {
         border-right: 0;
       }
     }
-
-    button {}
+    position: relative;
+    .filter {
+      position: absolute;
+      top:100%;
+      left: 0;
+      background: #fff;
+      text-align: left;
+      height: calc( 100vh - 90px);
+      width: 100%;
+      transition: 0.5s all;
+    }
   }
 }
-
 #main.active {
   position: fixed;
   top: -20rpx;
