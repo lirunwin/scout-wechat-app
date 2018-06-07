@@ -56,7 +56,8 @@ Page({
     },
     moreFilter: false,
     moreFilterFixed: false,
-    hideTop: false
+    hideTop: false,
+    hotKeywords: null
   },
   handlescrolltoupper(e){
     this.data.moreFilterFixed ? this.setData({
@@ -181,7 +182,15 @@ Page({
         });
     });
   },
-
+  getSearchHistory() {
+  },
+  getHotKeywords() {
+    commonService.getHotKeywords().then(res => {
+      this.setData({
+        hotKeywords: res.data
+      });
+    });
+  },
   // getApp().api.post('job/query', filter)
   getJobListNextPage() {
     if (this.data.jobEnd) return;
@@ -344,6 +353,8 @@ Page({
   onLoad: function (options) {
     getApp().api.checkLogin();
     this.getJobList();
+    this.getSearchHistory();
+    this.getHotKeywords();
     Promise.all([this.getCity(), this.getCities()]).then(res => {
       // console.log({res})
       this.setDftArea(res[1])

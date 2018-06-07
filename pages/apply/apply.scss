@@ -1,26 +1,25 @@
 /* pages/apply/apply.wxss */
-
 @import "../../scss/common";
+
 .apply {
   .search {
     margin: 20rpx -5rpx;
     position: relative;
+
     i.iconfont {
       position: absolute;
       left: 0;
-      top:0;
-      font-size:$size-1
+      top: 0;
+      font-size: $size-1;
     }
   }
+
   .filter {
-    padding-top: 20rpx;
-    padding-bottom: 20rpx;
-    view {
-      @include bordered($border-color, r, 1px);
-      &:last-child {
-        border-right: 0;
-      }
-      &.active{
+    > view {
+      padding-top: 20rpx;
+      padding-bottom: 20rpx;
+      @include divider;
+      &.active {
         color: $primary;
       }
     }

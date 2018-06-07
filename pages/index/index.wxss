@@ -7,6 +7,8 @@ page {
   transition: .5s all;
   transform: scaleY(1);
   transform-origin: top;
+  position: relative;
+  z-index: 5;
 }
 
 .index-top.active {
@@ -27,48 +29,93 @@ page {
   height: 100%;
 }
 
-.index-swiper .search {
+.search {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   padding: 20rpx;
+  z-index: 1;
 }
 
-.index-swiper .search > view {
+.search > view:first-of-type > view {
   border-radius: 12rpx;
   background-color: #ffffff;
   padding: 12rpx 24rpx;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
-.index-swiper .search > view .city {
+.search > view:first-of-type > view .city {
   border-right: 2rpx #e4e4e4 solid;
   padding-right: 24rpx;
   font-size: 28rpx;
 }
 
-.index-swiper .search > view .searchBox {
+.search > view:first-of-type > view .searchBox {
   position: relative;
 }
 
-.index-swiper .search > view .searchBox input {
+.search > view:first-of-type > view .searchBox input {
   padding-left: 24rpx;
   font-size: 26rpx;
 }
 
-.index-swiper .search > view .searchBox i {
+.search > view:first-of-type > view .searchBox i {
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.index-swiper .search > view .searchBox i::before {
+.search > view:first-of-type > view .searchBox i::before {
   font-size: 26rpx;
   color: #999999;
   line-height: 1.4rem;
   padding-left: 14rpx;
+}
+
+.search .detail {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 58rpx);
+}
+
+.search .detail > .container {
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+}
+
+.search .detail > .container .row {
+  margin-left: -15repx;
+  margin-right: -15repx;
+}
+
+.search .detail > .container .row > .col,
+.search .detail > .container .row > .col-10,
+.search .detail > .container .row > .col-11,
+.search .detail > .container .row > .col-12,
+.search .detail > .container .row > .col-2,
+.search .detail > .container .row > .col-3,
+.search .detail > .container .row > .col-4,
+.search .detail > .container .row > .col-5,
+.search .detail > .container .row > .col-6,
+.search .detail > .container .row > .col-7,
+.search .detail > .container .row > .col-8,
+.search .detail > .container .row > .col-9,
+.search .detail > .container .row > .col-auto,
+.search .detail > .container .row > .col-1 {
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+}
+
+.search .detail > .container .divider {
+  border-bottom: 2rpx #e4e4e4 solid;
+  margin-left: -50rpx;
+  margin-right: -50rpx;
+  padding-top: 36rpx;
 }
 
 .index-links {
@@ -236,19 +283,24 @@ page {
 }
 
 .index-controls > .container.bottom > view:first-child > view {
-  padding-top: 25rpx;
-  padding-bottom: 25rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
 }
 
 .index-controls > .container.bottom > view:first-child > view::before {
   content: '';
   display: block;
   border-left: 2rpx #e4e4e4 solid;
-  height: 1.25em;
+  height: 100%;
   width: 2rpx;
   position: absolute;
-  top: 26rpx;
+  top: 0;
   left: 0;
+  transform: scaleY(0.45);
+}
+
+.index-controls > .container.bottom > view:first-child > view:first-of-type::before {
+  border-left-color: transparent;
 }
 
 .index-controls > .container.bottom .filterBtn::after {

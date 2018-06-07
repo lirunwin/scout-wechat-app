@@ -3,12 +3,11 @@
 
 .me {
   .top {
-    .avatar {
-      image {
-        width: 130rpx;
-        height: 130rpx;
-        @include border-radius(50%);
-      }
+    .avatar{
+      width: 130rpx;
+      height: 130rpx;
+      @include border-radius(50%);
+      overflow:hidden;
     }
 
     .btn {
@@ -32,6 +31,7 @@
         background: linear-gradient(to right, rgba(254,206,11,1) 0%,rgba(254,191,11,1) 23%,rgba(254,141,11,1) 80%,rgba(254,129,11,1) 100%);
         @include border-radius(10rpx);
         padding: 24rpx;
+        height: 100%;
       }
       .percentage {
         position: relative;
@@ -64,6 +64,7 @@
         background: linear-gradient(to right, rgba(10,195,252,1) 0%,rgba(10,186,252,1) 19%,rgba(10,147,252,1) 72%,rgba(10,132,252,1) 100%);
         @include border-radius(10rpx);
         padding: 24rpx;
+        height: 100%;
       }
       image {
         width: 85rpx;

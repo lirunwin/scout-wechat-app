@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/test/test",
     "pages/apply/apply",
+    "pages/posts/posts",
+    "pages/test/test",
     "pages/login/login",
     "pages/me/history",
-    "pages/me/post",
+    "pages/me/posts",
     "pages/me/edu",
     "pages/me/resume",
     "pages/me/skill",

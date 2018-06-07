@@ -6,12 +6,12 @@
     <i class="iconfont icon-search p-3 align-baseline"/>
   </view>
   <view class='row size-1 border-bottom text-center mt-2 bg-white filter'>
-    <view class='col active'>全部</view>
-    <view class='col'>已同意</view>
-    <view class='col'>被拒绝</view>
-    <view class='col'>待评价</view>
+    <view class='col {{ activeStatus === -1 ? "active" : "aa" }}' bindtap='filter' data-status="-1">全部</view>
+    <view class='col {{ activeStatus === 0 ? "active" : "" }}' bindtap='filter' data-status="0">已同意</view>
+    <view class='col {{ activeStatus === 1 ? "active" : "" }}' bindtap='filter' data-status="1">被拒绝</view>
+    <view class='col {{ activeStatus === 3 ? "active" : "" }}' bindtap='filter' data-status="3">待评价</view>
   </view>
 </view>
-<block wx:for="{{jobList}}" wx:for-item="item" wx:key="index">
+<block wx:for="{{filtedJobList}}" wx:for-item="item" wx:key="index">
   <template is="list-normal" data="{{...item,apply}}"></template>
 </block>

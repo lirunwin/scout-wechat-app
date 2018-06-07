@@ -8,4 +8,6 @@ export default {
 
   getArea: () => Api.get(common.getArea), // 行业职位
 
+  getHotKeywords: () => Api.get(common.getHotKeywords), // 热门关键字
+
 };

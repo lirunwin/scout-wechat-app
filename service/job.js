@@ -7,7 +7,7 @@ export default {
 
   query: (data) => Api.post(job.query, data), // 招聘信息查询（搜索、已投递、收藏列表）
 
-  history: (data) => Api.post(job.history, data), // 招聘信息查看历史记录
+  history: (data) => Api.post("job/history", data), // 招聘信息查看历史记录
 
   getRecruitmentInfo: (data) => Api.get(job.recruitmentInfo, { rid: data }), // 查看招聘信息详细
 

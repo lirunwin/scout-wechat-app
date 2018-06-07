@@ -29,13 +29,13 @@
     <view class='border-top py-2 bg-white container size-1' wx-if='{{apply}}'>
       <view class='row align-items-center'>
         <view class='col text-truncate'>
-          评价时间：{{ jobBeginTime }}
+          投递时间：{{ jobBeginTime }}
         </view>
         <view class='col-auto'>
-          <button class='btn btn-primary size-1 rounded py-1 px-3' wx-if='{{status === 0}}' bindtap='navigateToPost' data-id="{{id}}">评价</button>
+          <button class='btn btn-primary size-1 rounded py-1 px-3' wx-if='{{status === 3}}' bindtap='newPost' data-id="{{id}}">评价</button>
           <button class='btn btn-secondary size-1 rounded py-1 px-3' wx:elif='{{status === 2}}'>等待确认</button>
           <view class='d-inline-block px-3' wx:elif='{{status === 1}}'>被拒绝</view>
-          <view class='d-inline-block px-3' wx:else>已同意</view>
+          <view class='d-inline-block px-3' wx:elif='{{status === 0}}'>已同意</view>
         </view>
       </view>
     </view>

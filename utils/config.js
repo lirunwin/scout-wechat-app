@@ -70,6 +70,7 @@ export default {
     common: {
       getPosition: 'common/getPosition', // 获取职位信息
       getArea: 'common/getArea', // 获取区域信息
+      getHotKeywords: 'common/getHotKeyword', //热门关键字
     },
     user: {
       getProfile: 'user/detaild', // 获取用户信息

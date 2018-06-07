@@ -11,19 +11,27 @@
   font-size: 24rpx;
 }
 
-.apply .filter {
+.apply .filter > view {
   padding-top: 20rpx;
   padding-bottom: 20rpx;
 }
 
-.apply .filter view {
-  border-right: 1px #e4e4e4 solid;
+.apply .filter > view::before {
+  content: '';
+  display: block;
+  border-left: 2rpx #e4e4e4 solid;
+  height: 100%;
+  width: 2rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleY(0.45);
 }
 
-.apply .filter view:last-child {
-  border-right: 0;
+.apply .filter > view:first-of-type::before {
+  border-left-color: transparent;
 }
 
-.apply .filter view.active {
+.apply .filter > view.active {
   color: #fed10b;
 }

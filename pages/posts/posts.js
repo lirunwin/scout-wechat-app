@@ -1,24 +1,18 @@
-// pages/me/history.js
-
-import jobService from '../../service/job.js'
+// pages/posts/posts.js
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    history: null
+  
   },
-  getHistory() {
-    jobService.history({
-      "pageIndex": "1",
-      "pageSize": "10"
-    }).then(res => this.setData({ history: res.data }));
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getHistory();
+  
   },
 
   /**

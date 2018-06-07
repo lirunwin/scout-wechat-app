@@ -187,3 +187,20 @@
     }
   }
 }
+
+@mixin divider() {
+  &::before {
+    content: '';
+    display: block;
+    @include bordered($border-color, l, 2rpx);
+    height: 100%;
+    width: 2rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleY(0.45);
+  }
+  &:first-of-type::before {
+    border-left-color: transparent;
+  }
+}

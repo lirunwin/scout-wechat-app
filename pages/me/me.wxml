@@ -2,8 +2,10 @@
 <view class='me bg-light'>
   <view class='container'>
     <view class='row align-items-center top bg-white py-3'>
-      <view class='col-auto avatar'>
-        <image src='{{avatar}}'></image>
+      <view class='col-auto'>
+        <view class='avatar'>
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
       </view>
       <view class='col pl-0'>
         <view class='font-weight-bold pb-2 size-3'>{{profile.baseinfo.userName}}</view>
@@ -14,10 +16,10 @@
         </view>
       </view>
       <view class='col-auto'>
-        <view class='btn btn-primary size-1 py-1'>
-          <image src='../../images/wallet.png' mode='widthFix' class='align-middle'></image>
-          邀请赚钱
-        </view>
+        <button open-type="share" class='btn btn-primary size-1 py-1' bindtap='share'>
+           <image src='../../images/wallet.png' mode='widthFix' class='align-middle'></image> 
+          分享
+        </button>
       </view>
     </view>
   </view>
@@ -33,7 +35,8 @@
               </view>
               <view class='col-auto pl-1 percentage'>
                 <canvas class="progress_bg" canvas-id="canvasProgressbg"> </canvas>
-                <canvas class="progress_canvas" canvas-id="canvasProgress"> </canvas>                     <view class='d-flex justify-content-center align-items-center pl-1'>
+                <canvas class="progress_canvas" canvas-id="canvasProgress"> </canvas>
+                <view class='d-flex justify-content-center align-items-center pl-1'>
                   <text>{{resumePercentage}}</text>
                 </view>
               </view>
@@ -75,7 +78,7 @@
         <i class="iconfont icon-right text-muted"></i>
       </view>
     </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="post">
+    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="posts">
       <view class='col-auto pr-0'>
         <image src='../../images/note.png' mode='widthFix' class='align-middle'></image>
       </view>

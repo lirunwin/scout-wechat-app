@@ -13,6 +13,11 @@ Page({
     constent: utils.profile,
     avatar: ''
   },
+  share(){
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+  },
   getProfile() {
     userService.getProfile().then( res => {
       this.setData({
@@ -111,6 +116,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    return {
+      title: '侦察兵兼职招聘',
+      desc: '一个最方便兼职招聘的平台',
+      path: '/page/user?id=123'
+    }
   }
 })
