@@ -3,6 +3,16 @@ page {
   background-color: #f8f9fa;
 }
 
+.index-top {
+  transition: .5s all;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.index-top.active {
+  transform: scaleY(0);
+}
+
 .index-swiper {
   position: relative;
 }
@@ -143,6 +153,9 @@ page {
 .index-controls {
   margin-top: 20rpx;
   background-color: #fff;
+  position: relative;
+  background: white;
+  overflow: hidden;
 }
 
 .index-controls > .container.top {
@@ -151,6 +164,8 @@ page {
   padding-top: 20rpx;
   padding-bottom: 20rpx;
   border-bottom: 2rpx #e4e4e4 solid;
+  position: relative;
+  z-index: 3;
 }
 
 .index-controls > .container.top .row {
@@ -187,11 +202,10 @@ page {
   padding-left: 15rpx;
   padding-right: 15rpx;
   font-size: 26rpx;
-  padding-top: 25rpx;
-  padding-bottom: 25rpx;
-  border-bottom: 2rpx #e4e4e4 solid;
-  text-align: center;
   position: relative;
+  z-index: 2;
+  background: white;
+  text-align: center;
 }
 
 .index-controls > .container.bottom .row {
@@ -216,23 +230,52 @@ page {
   padding-right: 15rpx;
 }
 
-.index-controls > .container.bottom .row > .col {
-  border-right: 2rpx #e4e4e4 solid;
+.index-controls > .container.bottom > view:first-child {
+  position: relative;
+  z-index: 2;
 }
 
-.index-controls > .container.bottom .row > .col:last-of-type {
-  border-right: 0;
+.index-controls > .container.bottom > view:first-child > view {
+  padding-top: 25rpx;
+  padding-bottom: 25rpx;
+}
+
+.index-controls > .container.bottom > view:first-child > view::before {
+  content: '';
+  display: block;
+  border-left: 2rpx #e4e4e4 solid;
+  height: 1.25em;
+  width: 2rpx;
+  position: absolute;
+  top: 26rpx;
+  left: 0;
+}
+
+.index-controls > .container.bottom .filterBtn::after {
+  transition: .3s all;
+  transform: rotateX(0);
+  transform-origin: 50% 50%;
+}
+
+.index-controls > .container.bottom .filterBtn.active::after {
+  transform: rotateZ(180deg);
 }
 
 .index-controls > .container.bottom .filter {
+  z-index: 1;
   position: absolute;
   top: 100%;
   left: 0;
-  background: #fff;
+  background: white;
   text-align: left;
   height: calc( 100vh - 90px);
   width: 100%;
-  transition: 0.5s all;
+  transition: .5s all;
+  transform: translateY(-100%);
+}
+
+.index-controls > .container.bottom .filter.active {
+  transform: translateY(0);
 }
 
 #main.active {
@@ -241,4 +284,5 @@ page {
   left: 0;
   width: 100%;
   z-index: 999;
+  overflow: visible;
 }

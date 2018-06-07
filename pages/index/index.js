@@ -18,7 +18,6 @@ Page({
       autoplay: true,
       interval: 5000,
       duration: 1000
-
     },
     constant: jobService.constant,
     jobList: [],
@@ -54,26 +53,23 @@ Page({
     salaryRange: {
       start: '',
       end:''
-    }
+    },
+    moreFilter: false,
+    moreFilterFixed: false,
+    hideTop: false
   },
-  // scroll(e) {    
-  //   if (!this.data.scroll.done) {
-  //     this.setData({
-  //       toView: 'main',
-  //       scroll: {
-  //         done: true,
-  //         active: true
-  //       }
-  //     })      
-  //   } else {
-     
-  //   }
-  // },
   handlescrolltoupper(e){
-    
+    this.data.moreFilterFixed ? this.setData({
+      moreFilterFixed: false
+    }): '';
   },
-  handletouchmove(e){
-    console.log(e)
+  handlescroll(e){
+    // console.log(e.detail.scrollTop)
+    if (!this.data.moreFilterFixed && e.detail.scrollTop >= 295) {
+      this.setData({
+        moreFilterFixed: true
+      })
+    }
   },
   switchJobNature(e) {
     let index = e.target.dataset.index
@@ -313,6 +309,34 @@ Page({
     console.log(this.data.jobFilter);
     this.changeFilter();
     this.getJobList();
+  },
+  activeMoreFilter() {
+    if (!this.data.moreFilter && !this.data.moreFilterFixed) {
+      console.log('up');
+      this.setData({
+        toView: 'main'
+      });
+      setTimeout(() => {
+        this.setData({
+          moreFilter: !this.data.moreFilter,
+          moreFilterFixed: true
+        });
+      },500);
+    } else {
+      this.setData({
+        moreFilter: !this.data.moreFilter
+      }); 
+      console.log('down');
+    }
+  },
+  handelFilterTouchend(e){
+    console.log("end:",e);
+  },
+  handelFilterTouchStart(e) {
+    console.log("start:",e);
+  },
+  handelFilterTouchMove(e) {
+    console.log("moving",e);
   },
   /**
    * 生命周期函数--监听页面加载

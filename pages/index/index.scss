@@ -4,7 +4,14 @@
 page {
   background-color: $light;
 }
-
+.index-top{
+  transition: .5s all;
+  transform: scaleY(1);
+  transform-origin: top;
+  &.active {
+    transform: scaleY(0);
+  }
+}
 .index-swiper {
   position: relative;
 
@@ -124,11 +131,15 @@ page {
 .index-controls {
   margin-top: 20rpx;
   background-color: $white;
+  position: relative;
+  background: rgba(255,255,255,1);
+  overflow: hidden;
   @include gutters(94rpx,-32rpx,32rpx,top) {
     padding-top: 20rpx;
     padding-bottom: 20rpx;
     @include bordered($border-color, b, 2rpx);
-
+    position: relative;
+    z-index: 3;
     button {
       font-size: 26rpx;
       padding: 12rpx 0;
@@ -139,28 +150,58 @@ page {
   }
   @include gutters(15rpx,-15rpx,15rpx,bottom) {
     font-size: 26rpx;
-    padding-top: 25rpx;
-    padding-bottom: 25rpx;
-    @include bordered($border-color, b, 2rpx);
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,1);
     text-align: center;
-
-    .row > .col {
-      @include bordered($border-color, r, 2rpx);
-
-      &:last-of-type {
-        border-right: 0;
+    >view:first-child {
+      position: relative;
+      z-index: 2;
+      > view {
+        padding-top: 25rpx;
+        padding-bottom: 25rpx;
+        &::before {
+          content: '';
+          display: block;
+          @include bordered($border-color, l, 2rpx);
+          height: 1.25em;
+          width: 2rpx;
+          position: absolute;
+          top: 26rpx;
+          left: 0;
+        }
+          // @include bordered($border-color, r, 2rpx);
+          // &:last-of-type {
+          //   border-right: 0;
+          // }
       }
     }
-    position: relative;
+    .filterBtn{
+      &::after {
+        transition: .3s all;
+        transform: rotateX(0);
+        transform-origin: 50% 50%;
+      }
+      &.active{
+        &::after {
+          transform: rotateZ(180deg);
+        }
+      }
+    }
     .filter {
+      z-index: 1;
       position: absolute;
       top:100%;
       left: 0;
-      background: #fff;
+      background: rgba(255,255,255,1);
       text-align: left;
       height: calc( 100vh - 90px);
       width: 100%;
-      transition: 0.5s all;
+      transition: .5s all;
+      transform: translateY(-100%);
+      &.active {
+        transform: translateY(0);
+      }
     }
   }
 }
@@ -170,4 +211,5 @@ page {
   left: 0;
   width: 100%;
   z-index: 999;
+  overflow: visible;
 }
