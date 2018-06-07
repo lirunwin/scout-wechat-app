@@ -57,7 +57,8 @@ Page({
     moreFilter: false,
     moreFilterFixed: false,
     hideTop: false,
-    hotKeywords: null
+    hotKeywords: null,
+    searchHistory: null
   },
   handlescrolltoupper(e){
     this.data.moreFilterFixed ? this.setData({
@@ -183,6 +184,10 @@ Page({
     });
   },
   getSearchHistory() {
+    wx.setStorageSync('searchHistoryArray', ['小三','little three','hoker','hore'])
+    this.setData({
+      searchHistory: wx.getStorageSync('searchHistoryArray')
+    });
   },
   getHotKeywords() {
     commonService.getHotKeywords().then(res => {
