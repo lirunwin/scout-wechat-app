@@ -15,6 +15,10 @@ page {
   transform: scaleY(0);
 }
 
+.index-top.activeSearchBox {
+  position: fixed;
+}
+
 .index-swiper {
   position: relative;
 }
@@ -51,10 +55,13 @@ page {
   border-right: 2rpx #e4e4e4 solid;
   padding-right: 24rpx;
   font-size: 28rpx;
+  position: relative;
+  z-index: 2;
 }
 
 .search > view:first-of-type > view .searchBox {
   position: relative;
+  z-index: 2;
 }
 
 .search > view:first-of-type > view .searchBox input {
@@ -75,12 +82,27 @@ page {
   padding-left: 14rpx;
 }
 
+.search.active {
+  overflow: visible;
+  background: #f8f9fa;
+  transition: background 0.5s ease;
+}
+
+.search.active .detail {
+  transform: translateY(0);
+  background: #f8f9fa;
+  opacity: 1;
+}
+
 .search .detail {
+  transition: all 0.5s ease;
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
   height: calc(100vh - 58rpx);
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 .search .detail > .container {

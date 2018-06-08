@@ -1,5 +1,5 @@
 <!--pages/me/collection.wxml-->
 <import src='../../templates/job/jobList.wxml' />
 <block wx:for="{{collection}}" wx:for-item="item" wx:key="index">
-  <template is="list-normal" data="{{...item,delete}}"></template>
+  <template is="list-normal" data="{{...item,delete,constant}}"></template>
 </block>

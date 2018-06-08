@@ -1,5 +1,6 @@
 export default {
-  baseUrl: 'https://sapi.s-cout.com/zcb-api/',
+  // baseUrl: 'https://sapi.s-cout.com/zcb-api/',
+  baseUrl: 'http://tapi.free.ngrok.cc/',
   imageBaseUrl: '',
   telRegExp: /^1[34578]\d{9}$/,
   smsLength: 5,
@@ -25,19 +26,44 @@ export default {
         FULLTIME: '全职'
       },
       noEndTime: '长期', // 无结束时间
-      sort: [ 
+      sort: [ // 排序方式
         {
           label: 'RECOMMEND',
           name: '推荐排序'
         },
-        { 
+        {
           label: 'NEWRELEASE',
           name: '最新发布'
         },
-        { label: 'WAGEHIGH',
-          name :'工资最高'
+        {
+          label: 'WAGEHIGH',
+          name: '工资最高'
         }
-      ]
+      ],
+      filterShortcut: [ //首页中间 图标
+        {
+          label: 'LONGTIME',
+          name: '长期兼职',
+          icon: '../../images/icon3@2x.png'
+        },
+        {
+          label: 'IMMEDIATELY',
+          name: '立即上岗',
+          icon: '../../images/icon4@2x.png'
+        },
+        {
+          label: 'ALLLOCATIOS',
+          name: '在家可做',
+          icon: '../../images/icon2@2x.png'
+        }
+      ],
+      apply: { // 我的报名
+        DELIVERY: { label: '全部', color: 'dark' },
+        AGREE: { label: '同意', color: 'success' },
+        REFUSE: { label: '拒绝', color: 'danger' },
+        WAIT_CONFIRM: { label: '待确认', color: 'muted' }
+        // WAIT_EVALUATION: '待评价'
+      }
     },
     profile: {
       identityType: {
@@ -65,7 +91,7 @@ export default {
       addDelivery: 'job/addDelivery', // 投递简历申请
       addEvaluation: 'job/addEvaluation', // 添加评价
       resume: 'job/detaild', // 获取用户简历信息
-      saveBaseInfo: 'job/saveBaseInfo', // 保存简历基本信息
+      saveBaseInfo: 'job/saveBaseInfo', // 保存简历基本信息      
     },
     common: {
       getPosition: 'common/getPosition', // 获取职位信息

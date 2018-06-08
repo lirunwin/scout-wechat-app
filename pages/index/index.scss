@@ -11,6 +11,9 @@ page {
   &.active {
     transform: scaleY(0);
   }
+  &.activeSearchBox{    
+    position: fixed;
+  }
   position: relative;
   z-index: 5;
 }
@@ -34,6 +37,7 @@ page {
   width: 100%;
   padding: 20rpx;
   z-index: 1;
+  // overflow: hidden;
   > view:first-of-type > view {
     @include border-radius(12rpx);
     background-color: #ffffff;
@@ -45,10 +49,12 @@ page {
       @include bordered($border-color, r ,2rpx);
       padding-right: 24rpx;
       font-size: 28rpx;
+      position: relative;
+      z-index: 2;
     }
     .searchBox {
       position: relative;
-
+      z-index: 2;
       input {
         padding-left: 24rpx;
         font-size: 26rpx;
@@ -66,13 +72,27 @@ page {
         }
       }
     }
+
+  }
+  &.active {
+    overflow: visible;
+    background: $light;
+    transition: background 0.5s ease;
+    .detail {
+      transform: translateY(0);
+      background: $light;
+      opacity: 1;
+    }
   }
   .detail {
+    transition: all 0.5s ease;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     height: calc(100vh - 58rpx);
+    transform: translateY(-100%);
+    opacity: 0;
     @include gutters(50rpx,-15repx,15rpx) {
       .divider {
         @include bordered($border-color, b, 2rpx);

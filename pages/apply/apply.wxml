@@ -1,17 +1,17 @@
 <!--pages/apply/apply.wxml-->
 <import src='../../templates/job/jobList.wxml' />
 <view class='container apply'>
-  <view class='search bg-white p-2 rounded'>
+  <view class='search bg-white p-2 mb-2 rounded d-none'>
     <input placeholder='请输入要搜索的条件' class='size-1 pl-4 pr-2'></input>
     <i class="iconfont icon-search p-3 align-baseline"/>
   </view>
-  <view class='row size-1 border-bottom text-center mt-2 bg-white filter'>
-    <view class='col {{ activeStatus === -1 ? "active" : "aa" }}' bindtap='filter' data-status="-1">全部</view>
-    <view class='col {{ activeStatus === 0 ? "active" : "" }}' bindtap='filter' data-status="0">已同意</view>
-    <view class='col {{ activeStatus === 1 ? "active" : "" }}' bindtap='filter' data-status="1">被拒绝</view>
-    <view class='col {{ activeStatus === 3 ? "active" : "" }}' bindtap='filter' data-status="3">待评价</view>
+  <view class='row size-1 border-bottom text-center bg-white  filter'>  
+    <view class='col {{ activeStatus === "DELIVERY" ? "active" : "" }}' bindtap='filter' data-status="DELIVERY">全部</view>
+    <view class='col {{ activeStatus === "AGREE" ? "active" : "" }}' bindtap='filter' data-status="AGREE">已同意</view>
+    <view class='col {{ activeStatus === "WAIT_CONFIRM" ? "active" : "" }}' bindtap='filter' data-status="WAIT_CONFIRM">待确认</view>
+    <view class='col {{ activeStatus === "REFUSE" ? "active" : "" }}' bindtap='filter' data-status="REFUSE">被拒绝</view>
   </view>
 </view>
 <block wx:for="{{filtedJobList}}" wx:for-item="item" wx:key="index">
-  <template is="list-normal" data="{{...item,apply}}"></template>
+  <template is="list-normal" data="{{...item,apply,constant}}"></template>
 </block>

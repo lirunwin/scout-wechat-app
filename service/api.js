@@ -13,7 +13,7 @@ const wxPromisify = (fn) => (obj = {}) => {
           let modal = wxPromisify(wx.showModal);
           modal({
             title: '温馨提示',
-            content: '您的登录状态已变更，请重新登录'
+            content: '登陆已超时，请重新登陆'
           }).then(() => {
             wx.redirectTo({
               url: '../login/login',

@@ -56,9 +56,46 @@ Page({
     },
     moreFilter: false,
     moreFilterFixed: false,
-    hideTop: false,
+    hideTop: false, //暂时没用
+    searchBoxFocusing: false,
     hotKeywords: null,
-    searchHistory: null
+    searchHistory: null,
+    keyword:''
+  },
+  searchInput(e) {
+    let keyword = e.detail.value;
+    this.setData({
+      keyword
+    });
+  },
+  searchInputComfirm(e) {
+    let keyword = e.detail.value;
+    this.setData({
+      searchBoxFocusing: false,
+      keyword
+    });
+    this.search(keyword);
+  },
+  searchShortcut(e) {
+    let keyword = e.target.dataset.keyword;
+    this.setData({
+      searchBoxFocusing: false,
+      keyword
+    })
+    this.search(keyword);
+  },
+  filterShortcut(e) {
+    console.log(e)
+    this.getJobList({
+      'pageIndex': 1,
+      'pageSize': 10,
+      'filter': e.target.dataset.shortcut || e.currentTarget.dataset.shortcut
+    });
+  },
+  search(keyword) {
+    this.data.jobFilter.keyword = keyword;
+    this.changeFilter();
+    this.getJobList();
   },
   handlescrolltoupper(e){
     this.data.moreFilterFixed ? this.setData({
@@ -72,6 +109,11 @@ Page({
         moreFilterFixed: true
       })
     }
+  },
+  searchBoxFocusing(){
+    this.setData({
+      searchBoxFocusing: true
+    })
   },
   switchJobNature(e) {
     let index = e.target.dataset.index
@@ -103,8 +145,10 @@ Page({
     this.data.jobFilter.cityId = cityId;
     let area = cities.filter(city => city.pid === cityId);
     let noArea = area.pop();
-    noArea.id = '-1';
-    area.unshift(noArea);
+    if(noArea) {
+      noArea.id = '-1';
+      area.unshift(noArea);
+    }    
     this.setData({
       area
     })
@@ -165,18 +209,30 @@ Page({
   navigateToPosition() {
     wx.showNavigationBarLoading();
     wx.navigateTo({
-      url: '../position/position',
+      url: '../position/position'
     })
   },
   navigateToCity() {
     wx.showNavigationBarLoading();
     wx.navigateTo({
-      url: '../city/city',
+      url: '../city/city'
+    })
+  },
+  switchToApply() {
+    wx.showNavigationBarLoading();
+    getApp().globalData.switchTabParams.apply = {
+      // tab: 
+    };
+    wx.switchTab({
+      url: '../apply/apply'
     })
   },
   getJobList(filter = this.data.jobFilter) {
-    console.log({filter})
+
+    console.log("asdsad", { filter })
     jobService.query(filter).then(res => {
+
+      console.log("asdsad", { res })
       res.data.length === 0 ? this.data.jobEnd = true :
         this.setData({
           jobList: this.data.jobList.concat(res.data)
@@ -184,7 +240,7 @@ Page({
     });
   },
   getSearchHistory() {
-    wx.setStorageSync('searchHistoryArray', ['小三','little three','hoker','hore'])
+    wx.setStorageSync('searchHistoryArray', ['泡面','吃饭','睡觉','上学'])
     this.setData({
       searchHistory: wx.getStorageSync('searchHistoryArray')
     });
@@ -213,6 +269,7 @@ Page({
   },
   getCities() {
     return commonService.getArea().then(res => {
+      console.log('怎么会没数据', res)
       let cities = res.data.map(city => {
         return {
           id: city.id,
@@ -321,6 +378,9 @@ Page({
   assignJobFilter() {
     Object.assign(this.data.jobFilter, this.data.jobFilterTemp);
     console.log(this.data.jobFilter);
+    this.setData({
+      moreFilter: false
+    })
     this.changeFilter();
     this.getJobList();
   },
@@ -361,7 +421,8 @@ Page({
     this.getSearchHistory();
     this.getHotKeywords();
     Promise.all([this.getCity(), this.getCities()]).then(res => {
-      // console.log({res})
+      console.log({res})
+
       this.setDftArea(res[1])
     });
     this.setDftDate();

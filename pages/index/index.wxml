@@ -2,7 +2,7 @@
 <import src='../../templates/job/jobList.wxml' />
 <scroll-view scroll-y style="height:100vh;" bindtouchmove="handletouchmove" bindscrolltoupper="handlescrolltoupper" bindscrolltolower="handlescrolltolower" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true" bindscroll="handlescroll"
   upper-threshold="300">
-  <view class='index-top {{hideTop?"active":""}}'>
+  <view class='index-top {{hideTop?"active":""}} {{searchBoxFocusing?"activeSearchBox":""}}'>
     <view class='index-swiper'>
       <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
         <block wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
@@ -12,23 +12,23 @@
         </block>
       </swiper>
     </view>
-    <view class='search'>
+    <view class='search {{searchBoxFocusing?"active":""}}'>
       <view class='container'>
         <view class='row'>
           <view class='col-auto pl-0 city caret' bindtap='navigateToCity'>{{currentCity.name}}</view>
           <view class='col pr-0 searchBox'>
-            <input placeholder='请输入要搜索的关键词'></input>
+            <input placeholder='请输入要搜索的关键词' bindfocus='searchBoxFocusing' value='{{keyword}}' confirm-type="search" bindconfirm="searchInputComfirm" bindinput='searchInput'></input>
             <i class='iconfont icon-search'></i>
           </view>
         </view>
       </view>
-      <view class='detail bg-light size-2'>
+      <view class='detail size-2'>
         <view class='container'>
           <view class='row'>
             <view class='col-6 py-3'>历史搜索</view>
             <view class='col-6 py-3 text-right'>清空</view>
             <view class='col-auto text-center mb-2'  wx:for="{{searchHistory}}" wx:key="{{index}}">
-              <view class='btn btn-secondary rounded size-2 py-0'>{{item}}</view>
+              <view class='btn btn-secondary rounded size-2 py-0' bindtap='searchShortcut' data-keyword="{{item}}">{{item}}</view>
             </view>
           </view>
           <view class='divider'></view>
@@ -36,7 +36,7 @@
             <view class='col-6 py-3'>热门搜索</view>
             <view class='col-6 py-3 text-right'></view>
             <view class='col-auto text-center mb-2' wx:for="{{hotKeywords}}" wx:key="{{index}}">
-              <view class='btn btn-secondary rounded size-2 py-0 '>{{item.name}}</view>
+              <view class='btn btn-secondary rounded size-2 py-0' bindtap='searchShortcut' data-keyword="{{item.name}}">{{item.name}}</view>
             </view>
           </view>
         </view>
@@ -45,23 +45,15 @@
     <view class='index-links'>
       <view class='container'>
         <view class='row top'>
-          <view class='col'>
+          <view class='col' bindtap='switchToApply'>
             <image src='../../images/icon1@2x.png' mode='widthFix'></image>
-            <text>实习</text>
+            <text>我的任务</text>
           </view>
-          <view class='col'>
-            <image src='../../images/icon2@2x.png' mode='widthFix'></image>
-            <text>附近兼职</text>
+          <view class='col' bindtap='filterShortcut' data-shortcut="{{item.label}}" wx:for="{{constant.filterShortcut}}" wx:key="{{index}}">
+            <image src='{{item.icon}}' mode='widthFix'></image>
+            <text>{{item.name}}</text>
           </view>
-          <view class='col'>
-            <image src='../../images/icon3@2x.png' mode='widthFix'></image>
-            <text>长期兼职</text>
-          </view>
-          <view class='col'>
-            <image src='../../images/icon4@2x.png' mode='widthFix'></image>
-            <text>迅速上岗</text>
-          </view>
-          <view class='col'>
+          <view class='col' bindtap='navigateToPosition'>
             <image src='../../images/icon5@2x.png' mode='widthFix'></image>
             <text>行业类别</text>
           </view>
@@ -196,17 +188,16 @@
         <view class='row pt-5 pb-4'>
           <view class='col border-0'></view>
           <view class='col-auto'>
-            <button class='btn btn-light rounded border py-1 size-1 px-4' bindtap='resetJobFilterTemp'>重置</button>
+            <button class='btn btn-light rounded border py-2 size-1 px-4' bindtap='resetJobFilterTemp'>重置</button>
           </view>
           <view class='col-auto'>
-            <button class='btn btn-primary rounded border py-1 size-1 px-5' bindtap='assignJobFilter'>确定</button>
+            <button class='btn btn-primary rounded border py-2 size-1 px-5' bindtap='assignJobFilter'>确定</button>
           </view>
         </view>
       </view>
     </view>
   </view>
-
   <block wx:for="{{jobList}}" wx:for-item="item" wx:key="index">
-    <template is="list-normal" data="{{...item}}"></template>
+      <template is="list-normal" data="{{...item,constant}}"></template>
   </block>
 </scroll-view>

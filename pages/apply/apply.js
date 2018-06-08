@@ -6,24 +6,21 @@ Page({
     jobList: [],
     jobFilter: {
       'pageIndex': 1,
-      'pageSize': 10,
-      'filter': 'RECOMMEND'
+      'pageSize': 20,
+      'filter': 'DELIVERY'
     },
     jobEnd: false,
-    apply: true,
+    apply: jobService.constant.apply,
+    constant: jobService.constant,
     filtedJobList: [],
-    activeStatus: -1
+    activeStatus: 'DELIVERY'
   },
   getJobList(filter = this.data.jobFilter) {
     jobService.query(filter).then(res => {
-      let jobList = this.data.jobList.concat(res.data.map(job => {
-        job.status = job.id % 4; // 暂无状态 造了一个
-        return job;
-      }));
-
+      let jobList = this.data.jobList.concat(res.data);
       let status = this.data.activeStatus;
 
-      let filtedJobList = status === -1 ?
+      let filtedJobList = status === 'DELIVERY' ?
         jobList :
         jobList.filter(job => job.status === status);
 
@@ -36,12 +33,12 @@ Page({
   },
   filter(e) {
     let status = e.target.dataset.status;
-    let filtedJobList = Number(status) === -1 ?
+    let filtedJobList = status === 'DELIVERY' ?
       this.data.jobList :
-      this.data.jobList.filter(job => job.status === Number(status));
+      this.data.jobList.filter(job => job.deliveryStatus === status);
     this.setData({
       filtedJobList,
-      activeStatus: Number(status)
+      activeStatus: status
     });
     console.log(filtedJobList.length)
   },

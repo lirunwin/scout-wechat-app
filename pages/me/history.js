@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    history: null
+    history: null,
+    constant: jobService.constant
   },
   getHistory() {
     jobService.history({

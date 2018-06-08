@@ -45,6 +45,7 @@ App({
     cities:'',
     token:'',
     currentPosition:'',
+    switchTabParams: {}
   },
   getSystemInfo() {
     wx.getSystemInfo({

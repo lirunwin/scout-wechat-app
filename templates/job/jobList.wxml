@@ -5,17 +5,25 @@
     <navigator url='../job/jobInfo?id={{id}}' class='job-list size-2 container py-3 mt-2 bg-white'>
       <view class='row align-items-center'>
         <text class='font-weight-bold size-3 col text-truncate'>{{title}}</text>
-        <text class='col-auto pl-0 text-right text-danger size-1'>{{wageBegin}}-{{wageEnd}}元/天</text>
+        <text class='col-auto pl-0 text-right text-danger size-1'>{{wageBegin}}-{{wageEnd}}{{constant.wageClearing[wageClearing][0]}}</text>
       </view>
       <view class='text-muted pt-2 row size-1 align-items-center'>
         <text class='bordered-r-0 col-auto'>{{ countyName === '' ? '未知' : countyName }}</text>
         <text class='col'>{{ jobBeginTime }}</text>
       </view>
-      <view class='row mt-3'>
-        <view class='col-auto pr-0'>
-          <view class='border border-primary rounded bg-primary px-3'>日结</view>
+      <view class='row size-1'>
+        <view class='col pt-2 text-muted'>
+          <i class="iconfont icon-location"></i> {{ address ? address : '不限地点' }}
         </view>
-        <view class='col-auto'>
+      </view>
+      <view class='row mt-3 size-1'>
+        <view class='col-auto pr-0'>
+          <view class='border border-primary rounded bg-primary px-3'>{{constant.wageClearing[wageClearing][1]}}</view>
+        </view>
+        <view class='col-auto pr-0'>
+          <view class='border border-success rounded bg-success text-white px-3'>{{constant.wageMode[wageMode]}}</view>
+        </view>
+        <view class='col-auto sr-only'>
           <view class='border border-success rounded px-2 text-success'>
             <i class='iconfont icon-safety'></i>
             <text>工资保障</text>
@@ -26,17 +34,14 @@
     <view class='job-delete' wx-if="{{delete}}">
       <button class='btn btn-outline-primary size-1 py-1' bindtap='delete' data-id="{{id}}">删除</button>
     </view>
-    <view class='border-top py-2 bg-white container size-1' wx-if='{{apply}}'>
+    <view class='job-apply border-top py-2 bg-white container size-1' wx-if='{{apply}}'>
       <view class='row align-items-center'>
         <view class='col text-truncate'>
           投递时间：{{ jobBeginTime }}
-        </view>
-        <view class='col-auto'>
-          <button class='btn btn-primary size-1 rounded py-1 px-3' wx-if='{{status === 3}}' bindtap='newPost' data-id="{{id}}">评价</button>
-          <button class='btn btn-secondary size-1 rounded py-1 px-3' wx:elif='{{status === 2}}'>等待确认</button>
-          <view class='d-inline-block px-3' wx:elif='{{status === 1}}'>被拒绝</view>
-          <view class='d-inline-block px-3' wx:elif='{{status === 0}}'>已同意</view>
-        </view>
+        </view>        
+      </view>
+      <view class='status size-2'>
+        <text class='text-{{apply[deliveryStatus].color}}'>{{ apply[deliveryStatus].label }}</text>
       </view>
     </view>
   </view>

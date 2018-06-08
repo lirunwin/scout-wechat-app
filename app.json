@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/apply/apply",
+    "pages/index/index",
     "pages/posts/posts",
     "pages/test/test",
     "pages/login/login",
@@ -59,7 +59,7 @@
     ]
   },
   "networkTimeout": {
-    "request": 10000,
+    "request": 100000,
     "downloadFile": 10000
   },
   "debug": true

@@ -8,7 +8,8 @@ Page({
    */
   data: {
     collection:[],
-    delete: true
+    delete: true,
+    constant: jobService.constant
   },
 
   /**
