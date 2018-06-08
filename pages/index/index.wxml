@@ -17,7 +17,7 @@
         <view class='row'>
           <view class='col-auto pl-0 city caret' bindtap='navigateToCity'>{{currentCity.name}}</view>
           <view class='col pr-0 searchBox'>
-            <input placeholder='请输入要搜索的关键词' bindfocus='searchBoxFocusing' value='{{keyword}}' confirm-type="search" bindconfirm="searchInputComfirm" bindinput='searchInput'></input>
+            <input placeholder='请输入要搜索的关键词' bindfocus='searchBoxFocusing' value='{{keyword}}' confirm-type="search" bindconfirm="searchInputComfirm" bindinput='searchInput' maxlength='10'></input>
             <i class='iconfont icon-search'></i>
           </view>
         </view>
@@ -25,8 +25,12 @@
       <view class='detail size-2'>
         <view class='container'>
           <view class='row'>
-            <view class='col-6 py-3'>历史搜索</view>
-            <view class='col-6 py-3 text-right'>清空</view>
+            <view class='col-12'>
+              <view class='row'>
+                <view class='col py-3'>历史搜索</view>
+                <view class='col-auto py-3 text-right' bindtap='clearSearchHistroy'>清空</view>
+              </view>
+            </view>
             <view class='col-auto text-center mb-2'  wx:for="{{searchHistory}}" wx:key="{{index}}">
               <view class='btn btn-secondary rounded size-2 py-0' bindtap='searchShortcut' data-keyword="{{item}}">{{item}}</view>
             </view>

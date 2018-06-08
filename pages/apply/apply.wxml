@@ -6,10 +6,10 @@
     <i class="iconfont icon-search p-3 align-baseline"/>
   </view>
   <view class='row size-1 border-bottom text-center bg-white  filter'>  
-    <view class='col {{ activeStatus === "DELIVERY" ? "active" : "" }}' bindtap='filter' data-status="DELIVERY">全部</view>
-    <view class='col {{ activeStatus === "AGREE" ? "active" : "" }}' bindtap='filter' data-status="AGREE">已同意</view>
-    <view class='col {{ activeStatus === "WAIT_CONFIRM" ? "active" : "" }}' bindtap='filter' data-status="WAIT_CONFIRM">待确认</view>
-    <view class='col {{ activeStatus === "REFUSE" ? "active" : "" }}' bindtap='filter' data-status="REFUSE">被拒绝</view>
+    <view class='col {{ activeStatus === "DELIVERY" ? "active" : "" }}' bindtap='filterTypeChange' data-status="DELIVERY">全部</view>
+    <view class='col {{ activeStatus === "AGREE" ? "active" : "" }}' bindtap='filterTypeChange' data-status="AGREE">已同意</view>
+    <view class='col {{ activeStatus === "WAIT_CONFIRM" ? "active" : "" }}' bindtap='filterTypeChange' data-status="WAIT_CONFIRM">待确认</view>
+    <view class='col {{ activeStatus === "REFUSE" ? "active" : "" }}' bindtap='filterTypeChange' data-status="REFUSE">被拒绝</view>
   </view>
 </view>
 <block wx:for="{{filtedJobList}}" wx:for-item="item" wx:key="index">

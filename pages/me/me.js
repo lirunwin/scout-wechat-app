@@ -64,9 +64,9 @@ Page({
    */
   onLoad: function (options) {
     this.getProfile();
-    this.setData({
-      avatar: getApp().globalData.wechatInfo.avatarUrl
-    })
+    // this.setData({
+    //   avatar: getApp().globalData.wechatInfo.avatarUrl
+    // })
   },
 
   /**

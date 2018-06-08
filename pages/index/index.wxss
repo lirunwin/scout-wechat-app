@@ -17,6 +17,8 @@ page {
 
 .index-top.activeSearchBox {
   position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .index-swiper {

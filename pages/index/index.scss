@@ -11,8 +11,10 @@ page {
   &.active {
     transform: scaleY(0);
   }
-  &.activeSearchBox{    
+  &.activeSearchBox{
     position: fixed;
+    top:0;
+    width: 100%
   }
   position: relative;
   z-index: 5;

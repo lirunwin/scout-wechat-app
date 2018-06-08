@@ -22,7 +22,7 @@ Page({
 
       let filtedJobList = status === 'DELIVERY' ?
         jobList :
-        jobList.filter(job => job.status === status);
+        jobList.filter(job => job.deliveryStatus === status);
 
       res.data.length === 0 ? this.data.jobEnd = true :
         this.setData({
@@ -31,8 +31,10 @@ Page({
         });
     });
   },
-  filter(e) {
-    let status = e.target.dataset.status;
+  filterTypeChange(e) {
+    this.filter(e.target.dataset.status)
+  },
+  filter(status) {
     let filtedJobList = status === 'DELIVERY' ?
       this.data.jobList :
       this.data.jobList.filter(job => job.deliveryStatus === status);
@@ -55,10 +57,18 @@ Page({
   newPost(e) {
     console.log(e)
   },
+  showAgree(tab) {
+    this.getJobList({
+      'pageIndex': 1,
+      'pageSize': 20,
+      'filter': tab
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideNavigationBarLoading();
     this.getJobList();
   },
 
@@ -73,7 +83,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.hideNavigationBarLoading();
+    let indexToApplyDftTap = getApp().globalData.switchTabParams.apply;
+    if (indexToApplyDftTap && indexToApplyDftTap.tab) {
+      let tab = indexToApplyDftTap.tab;
+      this.setData({
+        activeStatus: tab
+      });
+      this.filter(tab)
+      getApp().globalData.switchTabParams.apply = null;
+    }
   },
 
   /**
@@ -101,7 +119,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getJobListNextPage();
+    // this.getJobListNextPage();
   },
 
   /**

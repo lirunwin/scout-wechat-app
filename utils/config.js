@@ -10,6 +10,7 @@ export default {
   mapKey: 'CQFBZ-ZK2W5-2OEIE-QZUWK-DB2U7-U5FEI', // 腾讯地图key
   constant: { // 常量配置
     job: {
+      wechatStorageName: 'searchHistoryArray',
       wageClearing: {
         DAY: ['元/天', '日结'],
         WEEK: ['元/周', '周结'],

@@ -76,6 +76,28 @@ Page({
     });
     this.search(keyword);
   },
+  saveSearchHistory(keyword) {
+    let keywords = wx.getStorageSync(jobService.constant.wechatStorageName);
+    if(!keywords) {
+      keywords = []
+    }
+    let exist = keywords.find(word => word === keyword);
+    if(!exist) {
+      if(keywords.length >= 10) {
+        keywords.shift();
+      }
+      keywords.push(keyword);
+      wx.setStorageSync(jobService.constant.wechatStorageName, keywords)
+    } else {
+
+    }
+  },
+  clearSearchHistroy() {
+    wx.setStorageSync(jobService.constant.wechatStorageName, []);
+    this.setData({
+      searchHistory: []
+    })
+  },
   searchShortcut(e) {
     let keyword = e.target.dataset.keyword;
     this.setData({
@@ -93,6 +115,7 @@ Page({
     });
   },
   search(keyword) {
+    this.saveSearchHistory(keyword);
     this.data.jobFilter.keyword = keyword;
     this.changeFilter();
     this.getJobList();
@@ -114,6 +137,7 @@ Page({
     this.setData({
       searchBoxFocusing: true
     })
+    this.getSearchHistory();
   },
   switchJobNature(e) {
     let index = e.target.dataset.index
@@ -221,7 +245,7 @@ Page({
   switchToApply() {
     wx.showNavigationBarLoading();
     getApp().globalData.switchTabParams.apply = {
-      // tab: 
+      tab: 'AGREE' 
     };
     wx.switchTab({
       url: '../apply/apply'
@@ -231,18 +255,19 @@ Page({
 
     console.log("asdsad", { filter })
     jobService.query(filter).then(res => {
-
-      console.log("asdsad", { res })
-      res.data.length === 0 ? this.data.jobEnd = true :
+      res.data.length === 0 ? this.setData({
+        jobEnd: true,
+        moreFilterFixed: false
+      }) :
         this.setData({
           jobList: this.data.jobList.concat(res.data)
         });
     });
   },
   getSearchHistory() {
-    wx.setStorageSync('searchHistoryArray', ['泡面','吃饭','睡觉','上学'])
+    let histroy = wx.getStorageSync(jobService.constant.wechatStorageName);
     this.setData({
-      searchHistory: wx.getStorageSync('searchHistoryArray')
+      searchHistory: histroy
     });
   },
   getHotKeywords() {
@@ -418,7 +443,6 @@ Page({
   onLoad: function (options) {
     getApp().api.checkLogin();
     this.getJobList();
-    this.getSearchHistory();
     this.getHotKeywords();
     Promise.all([this.getCity(), this.getCities()]).then(res => {
       console.log({res})
@@ -449,7 +473,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      searchBoxFocusing: false
+    })
   },
 
   /**
