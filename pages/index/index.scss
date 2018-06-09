@@ -4,21 +4,25 @@
 page {
   background-color: $light;
 }
-.index-top{
-  transition: .5s all;
+
+.index-top {
+  transition: 0.5s all;
   transform: scaleY(1);
   transform-origin: top;
+
   &.active {
     transform: scaleY(0);
   }
-  &.activeSearchBox{
+
+  &.activeSearchBox {
     position: fixed;
-    top:0;
-    width: 100%
+    top: 0;
+    width: 100%;
   }
   position: relative;
   z-index: 5;
 }
+
 .index-swiper {
   position: relative;
 
@@ -32,6 +36,7 @@ page {
     }
   }
 }
+
 .search {
   position: absolute;
   top: 0;
@@ -47,6 +52,7 @@ page {
     display: flex;
     align-items: center;
     position: relative;
+
     .city {
       @include bordered($border-color, r ,2rpx);
       padding-right: 24rpx;
@@ -54,13 +60,16 @@ page {
       position: relative;
       z-index: 2;
     }
+
     .searchBox {
       position: relative;
       z-index: 2;
+
       input {
         padding-left: 24rpx;
         font-size: 26rpx;
       }
+
       i {
         position: absolute;
         left: 0;
@@ -74,18 +83,20 @@ page {
         }
       }
     }
-
   }
+
   &.active {
     overflow: visible;
     background: $light;
     transition: background 0.5s ease;
+
     .detail {
       transform: translateY(0);
       background: $light;
       opacity: 1;
     }
   }
+
   .detail {
     transition: all 0.5s ease;
     position: absolute;
@@ -105,6 +116,7 @@ page {
     };
   }
 }
+
 .index-links {
   background-color: $white;
   padding-top: 20rpx;
@@ -117,6 +129,7 @@ page {
           display: block;
           margin: 0 auto;
         }
+
         text {
           font-size: 24rpx;
         }
@@ -161,11 +174,15 @@ page {
     }
   }
 }
-
+.index-controls-wrapper {
+  position: relative;
+  height:172rpx;
+}
 .index-controls {
   margin-top: 20rpx;
   background-color: $white;
   position: relative;
+  min-height: 106rpx;
   background: rgba(255,255,255,1);
   overflow: hidden;
   @include gutters(94rpx,-32rpx,32rpx,top) {
@@ -174,6 +191,7 @@ page {
     @include bordered($border-color, b, 2rpx);
     position: relative;
     z-index: 3;
+
     button {
       font-size: 26rpx;
       padding: 12rpx 0;
@@ -188,50 +206,107 @@ page {
     z-index: 2;
     background: rgba(255,255,255,1);
     text-align: center;
-    >view:first-child {
+
+    > view:first-child {
       position: relative;
       z-index: 2;
+
       > view {
         padding-top: 20rpx;
         padding-bottom: 20rpx;
         @include divider;
       }
     }
-    .filterBtn{
+
+    .filterBtn {
       &::after {
-        transition: .3s all;
+        transition: 0.3s all;
         transform: rotateX(0);
         transform-origin: 50% 50%;
       }
-      &.active{
+
+      &.active {
         &::after {
           transform: rotateZ(180deg);
         }
       }
     }
+
     .filter {
+      // opacity: 0.2;
       z-index: 1;
       position: absolute;
-      top:100%;
+      top: 100%;
       left: 0;
       background: rgba(255,255,255,1);
       text-align: left;
-      height: calc( 100vh - 90px);
+      height: calc(100vh - 90rpx);
       width: 100%;
-      transition: .5s all;
+      transition: 0.5s all;
       transform: translateY(-100%);
+
       &.active {
         transform: translateY(0);
       }
+
+      checkbox .wx-checkbox-input {
+        height: 32rpx;
+        width: 32rpx;
+        vertical-align: middle;
+        &.wx-checkbox-input-checked::before {
+          color:$primary;
+        }
+      }
     }
   }
+  &.active ~ .index-jobList{
+    padding-top: 200rpx;
+    transition: 0.3s 0.3s all ease;
+  }
 }
+
 #main.active {
   position: fixed;
   top: -20rpx;
   left: 0;
   width: 100%;
   z-index: 999;
-
   overflow: visible;
 }
+
+.index-loading {
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  opacity: 1;
+  &.deactive {
+    opacity: 0;
+    z-index:-1;
+  }
+  .loading-dot {
+      border-radius:100%;
+      height:10px;
+      width:10px;
+      background-color: #ffffff;
+      position:absolute;
+      // left:0;
+      // right:0;
+      // margin:auto;
+      // top:0;
+      // bottom:0;
+      box-shadow: 0px 40px 0px 0px #ffffff,0px -40px 0px 0px #ffffff,40px 0px 0px 0px #ffffff,-40px 0px 0px 0px #ffffff,
+      40px 40px 0px 0px #ffffff,-40px -40px 0px 0px #ffffff,40px -40px 0px 0px #ffffff,-40px 40px 0px 0px #ffffff;
+      -webkit-animation: load 3s infinite linear;
+      -moz-animation: load 3s infinite linear;
+      -o-animation: load 3s infinite linear;
+      animation:load 3s infinite linear;
+  }
+}
+@import '../../scss/loadingSpinner';

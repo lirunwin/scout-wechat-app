@@ -1,4 +1,8 @@
 // pages/login/login.js
+
+import config from '../../utils/config';
+import userService from '../../service/user.js';
+import commonService from '../../service/common.js';
 Page({
 
   /**
@@ -6,14 +10,82 @@ Page({
    */
   data: {
     username:'',
-    password:''
+    password:'',
+    loginBySMS: false,
+    tel:'',
+    sms:''
   },
-
+  comfirmInput() {
+    this.login();
+  },
+  loginBySMS() {
+    let sms = !this.data.loginBySMS;
+    wx.setNavigationBarTitle({
+      title: sms ? '短信登录' : '账号登录'
+    });
+    this.setData({
+      loginBySMS: sms 
+    });
+  },
+  bindTelInput(e) {
+    let tel = e.detail.value;
+    this.setData({
+      tel,
+      disableSmsBtn: !this.valiTel(tel)
+    });
+  },
+  bindSmsInput(e) {
+    let sms = e.detail.value;
+    this.setData({
+      sms,
+      disableSubmit: !(sms.length === config.smsLength)
+    })
+  },
+  getSmsCode() {
+    if (!this.valiTel()) {
+      console.log('电话格式有误！');
+      return;
+    }
+    commonService.getTelCode({
+      tel: this.data.tel,
+      codeType: 'USER_LOGIN'
+    }).then(res => {
+      console.log(res);
+      this.smsCounting();
+    });
+  },
+  valiTel(tel = this.data.tel) {
+    return config.telRegExp.test(tel);
+  },  
+  smsCounting() {
+    let msg = 90;
+    this.setData({
+      disableSmsBtn: true,
+      smsMsg: '（' + msg + '）'
+    });
+    let timer = setInterval(() => {
+      this.setData({
+        smsMsg: '（' + msg-- + '）'
+      });
+      if (msg === 0) {
+        this.setData({
+          disableSmsBtn: false,
+          smsMsg: ''
+        });
+        clearInterval(timer)
+      }
+    }, 1000)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function (options) {    
+    if (options.type && options.type.toUpperCase() === 'SMS') {
+      console.log(options.type.toUpperCase())
+      this.setData({
+        loginBySMS: true
+      });
+    }
   },
 
   /**
@@ -75,14 +147,23 @@ Page({
     })
   }, 
   login() {
-    getApp().api.post('user/login',{
-      account: this.data.username,
-      password: this.data.password,
-      loginType: 'PASSWORD'
-    }).then(res =>{
-      let data = res.data;
-      if (data.code === 1) {
-        getApp().api.saveToken(data.data);
+    let params = {};
+    if (!this.data.loginBySMS) {
+      params = {
+        account: this.data.username,
+        password: this.data.password,
+        loginType: 'PASSWORD'
+      }
+    } else {
+      params = {
+        account: this.data.tel,
+        password: this.data.sms,
+        loginType: 'TELCODE'
+      }      
+    }
+    userService.login(params).then(res =>{
+      if (res.code === 1) {
+        userService.saveToken(res.data);
         wx.switchTab({
           url: '../index/index'
         })

@@ -1,5 +1,7 @@
 // pages/signin/phoneCheck.js
 import config from '../../utils/config';
+import commonService from '../../service/common.js'
+
 Page({
 
   /**
@@ -92,7 +94,7 @@ Page({
       console.log('电话格式有误！');
       return;
     }
-    getApp().api.get('common/getTelCode', {
+    commonService.getTelCode({
       tel: this.data.tel,
       codeType: 'USER_REGISTER'
     }).then(res => {
@@ -104,13 +106,14 @@ Page({
     return config.telRegExp.test(tel);
   },
   formSubmit() {
-    getApp().api.get('common/checkTelCode', {
+    commonService.checkTelCode({
       tel: this.data.tel,
       codeType: 'USER_REGISTER',
       code: this.data.sms
     }).then(res => {
+      console.log()
       wx.navigateTo({
-        url: `signin?checkSign=${res.data.data}&recommendUserId=${this.data.recommendUserId}&tel=${this.data.tel}&sms=${this.data.sms}`
+        url: `signin?checkSign=${res.data}&recommendUserId=${this.data.recommendUserId}&tel=${this.data.tel}&sms=${this.data.sms}`
       })
     });
   },

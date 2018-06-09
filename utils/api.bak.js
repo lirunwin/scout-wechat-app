@@ -10,10 +10,11 @@ function wxPromisify(fn) {
         if (data) {
           console.log({ data })
           if (data.code === 4000004 || data.code === 100002) {
+
             let modal = wxPromisify(wx.showModal);
             modal({
               title: '温馨提示',
-              content: '您的登录状态已变更，请重新登录'
+              content: data.code === 100002 ? '登录超时请重新登录，请重新登录' : '用户名或密码错误'
             }).then(() => {
               wx.redirectTo({
                 url: '../login/login',

@@ -78,7 +78,7 @@
         <i class="iconfont icon-right text-muted"></i>
       </view>
     </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="posts">
+    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url="posts">
       <view class='col-auto pr-0'>
         <image src='../../images/note.png' mode='widthFix' class='align-middle'></image>
       </view>
@@ -87,7 +87,7 @@
         <i class="iconfont icon-right text-muted"></i>
       </view>
     </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="auth">
+    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url="auth">
       <view class='col-auto pr-0'>
         <image src='../../images/lock.png' mode='widthFix' class='align-middle'></image>
       </view>
@@ -108,7 +108,7 @@
         <i class="iconfont icon-right text-muted"></i>
       </view>
     </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url='charge'>
+    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url='charge'>
       <view class='col-auto pr-0'>
         <image src='../../images/view.png' mode='widthFix' class='align-middle'></image>
       </view>
@@ -117,7 +117,7 @@
         <i class="iconfont icon-right text-muted"></i>
       </view>
     </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url='settings'>
+    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url='settings'>
       <view class='col-auto pr-0'>
         <image src='../../images/note.png' mode='widthFix' class='align-middle'></image>
       </view>
@@ -127,7 +127,7 @@
       </view>
     </view>
   </view>
-  <view class='bg-light text-center pb-2 mb-2 size-2'>
+  <view class='bg-light text-center pb-2 mb-2 size-2' bindtap='logout'>
     <view class='bg-white py-3'>退出当前账号</view>
   </view>
 </view>

@@ -13,7 +13,7 @@ const wxPromisify = (fn) => (obj = {}) => {
           let modal = wxPromisify(wx.showModal);
           modal({
             title: '温馨提示',
-            content: '登陆已超时，请重新登陆'
+            content: data.code === 100002 ? '用户名或密码错误' : '登录超时请重新登录，请重新登录'
           }).then(() => {
             wx.redirectTo({
               url: '../login/login',
@@ -63,7 +63,7 @@ const get = (url, data, text = '加载中...') => {
     data: data,
     header: {
       'Content-Type': 'application/json;charset=UTF-8',
-      // 'user_author': 'GN+02d3+xUUvt3kX4OWA73EvE2r+Hf0cDqy4ad1uiZs2sk6II3wHNp/C+gRXkxtsKHkGDCSca3VWwB6OB2A+qw==',
+      // 'user_author': 'ZImaTkKDBj+2z06JA9MGba6s/QwoOQgkv0B9npN++lwHCAgJH2HPrvJm+79UmUAaO00HuloK5mjCbfh3RDX5Jg==',
       'user_author': getToken(),
       'X-Requested-With': 'WX_APPLETS'
     }
@@ -87,6 +87,7 @@ const post = (url, data, text = '加载中...') => {
     data: data,
     header: {
       'Content-Type': 'application/json;charset=UTF-8',
+      // 'user_author': 'ZImaTkKDBj+2z06JA9MGba6s/QwoOQgkv0B9npN++lwHCAgJH2HPrvJm+79UmUAaO00HuloK5mjCbfh3RDX5Jg==',
       'user_author': getToken(),
       'X-Requested-With': 'WX_APPLETS'
     },
@@ -105,12 +106,12 @@ const getLocation = () => wxPromisify(wx.getLocation)({ type: 'wgs84' });
 
 const getCityInfoByLocation = (lat, lng) => wxPromisify(wx.request)({ url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lng}&key=${config.mapKey}` });
 
-const saveToken = (token) => wx.setStorageSync('token', token);
+const saveToken = (token) => wx.setStorageSync(config.tokenName, token);
 
-const getToken = () => wx.getStorageSync('token');
+const getToken = () => wx.getStorageSync(config.tokenName);
 
 const checkLogin = () => {
-  let token = wx.getStorageSync('token');
+  let token = wx.getStorageSync(config.tokenName);
   if (!token.length) {
     wx.redirectTo({
       url: '../login/login',

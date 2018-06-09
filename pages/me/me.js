@@ -59,6 +59,9 @@ Page({
     ctx.stroke();//对当前路径进行描边
     ctx.draw();
   },
+  logout() {
+    userService.logout();
+  },
   /**
    * 生命周期函数--监听页面加载
    */

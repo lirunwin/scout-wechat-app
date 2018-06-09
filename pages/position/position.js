@@ -9,7 +9,8 @@ Page({
    */
   data: {
     positions:[],
-    positionsOrigin:[]
+    positionsOrigin:[],
+    choosedPosition:{}
   },
 
   getPosition() {
@@ -30,8 +31,14 @@ Page({
   
   setPosition(e) {
     let id = e.currentTarget.dataset.id;
+    console.log({id})
     let position = this.data.positionsOrigin.find(pos => pos.id === id);
-    getApp().globalData.currentPosition = position;
+    let choosedPosition = this.data.choosedPosition;
+    if (choosedPosition && position.id === choosedPosition.id) {
+      getApp().globalData.currentPosition = null;
+    } else {
+      getApp().globalData.currentPosition = position;      
+    }
     // wx.switchTab({
     //   url: '../index/index'
     // })
@@ -43,6 +50,9 @@ Page({
    */
   onLoad: function (options) {
     this.getPosition();
+    this.setData({
+      choosedPosition: getApp().globalData.currentPosition
+    })
   },
 
   /**

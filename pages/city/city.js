@@ -16,17 +16,15 @@ Page({
   },
 
   getArea() {
-    // console.log('acs', getApp().globalData.cities || '根本没有')
-    commonService.getArea().then(res => {
-      let cities = res.data.map(city => {
-        return {
-          id: city.id,
-          name: city.areaName,
-          pid: city.pid,
-          open: city.openStatus.toUpperCase().indexOf("OPEN") > -1,
-          hot: city.openStatus.toUpperCase().indexOf("HOT") > -1,
-        };
-      });
+    let processCities = (cities) => {
+      console.log(cities)
+      cities = cities.map(city => ({
+        id: city.id,
+        name: city.areaName,
+        pid: city.pid,
+        open: city.openStatus.toUpperCase().indexOf("OPEN") > -1,
+        hot: city.openStatus.toUpperCase().indexOf("HOT") > -1,
+      }));
       let hotCities = cities.filter(city => city.hot);
       let provinces = cities.filter(city => city.pid === '0');
       this.setData({
@@ -34,15 +32,17 @@ Page({
         provinces,
         hotCities,
         currentCounties: hotCities
-      });
-      getApp().globalData.cities = res.data.map(city => {
-        return {
-          id: city.id,
-          name: city.areaName,
-          pid: city.pid,
-        }
+      });      
+    }
+
+    let cities = getApp().globalData.cities || '';
+    if(cities === '') {
+      commonService.getArea().then(res => {
+        processCities(res.data)
       })
-    })
+    } else {
+      processCities(cities);
+    }    
   },
   displayCounty(e) {
     let pid = e.currentTarget.dataset.id;
@@ -66,10 +66,6 @@ Page({
     let city = this.data.cities.find(city => city.id === id);
     city.counties = this.data.cities.filter(city => city.pid === id);
     getApp().globalData.currentCity = city;
-    console.log(city)
-    // wx.switchTab({
-    //   url: '../index/index'
-    // })
     wx.navigateBack();
   },
   /**

@@ -1,24 +1,31 @@
 <!--pages/login/login.wxml-->
 
+<import src='../../templates/sms/sms.wxml' />
 <view class='login'>
   <view class='login-logo'>
     <image src='../../images/logo@2x.png' mode='widthFix'></image>
   </view>
   <view>
-    <form class='login-form' bindsubmit="formSubmit">
+    <form class='login-form' wx:if="{{!loginBySMS}}">
       <view>
-        <input name="input" placeholder="请输入用户名" bindinput='bindUsernameInput'/>
-        <input name="password" password='true' placeholder="请输入密码" bindinput='bindPasswordInput'/>
+        <input name="input" confirm-type="next" placeholder="请输入用户名" bindinput='bindUsernameInput'/>
+        <input name="password" password='true' confirm-type="done" bindconfirm="login" placeholder="请输入密码" bindinput='bindPasswordInput'/>
       </view>
     </form>
-  </view>
+    <form class='login-form' wx:if="{{loginBySMS}}">      
+      <template is='smsBasic' data='{{disableSmsBtn, smsMsg}}' />
+    </form>
+  </view> 
   <view class='login-btn'>
     <button type='button' class='btn btn-primary btn-block' bindtap='login'>登录</button>
     <view>
       <navigator 
         url="../signin/phoneCheck"
-        class='btn btn-light'>注册账号</navigator>
-      <navigator class='btn btn-light'>短信登录</navigator>
+        class='btn btn-light border'>注册账号</navigator>
+      <button class='btn btn-light border' bindtap='loginBySMS'>
+        <text wx:if="{{loginBySMS}}">账号登录</text>
+        <text wx:if="{{!loginBySMS}}">短信登录</text>
+      </button>
     </view>
   </view>
 </view>

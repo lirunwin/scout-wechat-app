@@ -4461,12 +4461,14 @@ button::after {
   padding-top: 50rpx;
 }
 
-.login .login-btn > view navigator {
+.login .login-btn > view navigator,
+.login .login-btn > view button {
   flex: 1;
   margin-right: 40rpx;
 }
 
-.login .login-btn > view navigator:last-of-type {
+.login .login-btn > view navigator:last-child,
+.login .login-btn > view button:last-child {
   margin-right: 0;
 }
 
@@ -4534,6 +4536,28 @@ button::after {
   right: 30rpx;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.avatar.avatar-sm {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.avatar.avatar-md {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.avatar.avatar-lg {
+  width: 160rpx;
+  height: 160rpx;
 }
 
 page {

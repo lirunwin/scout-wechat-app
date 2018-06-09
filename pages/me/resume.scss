@@ -1,29 +1,25 @@
 /* pages/me/resume.wxss */
-
 @import '../../scss/common';
+
 .resume {
-    .avatar {
-      image {
-        width: 130rpx;
-        height: 130rpx;
-        @include border-radius(50%);
+  .identify {
+    image {
+      width: 100rpx;
+      height: 100rpx;
+    }
+
+    .iconfont:before {
+      font-size: $size-1;
+    }
+  }
+
+  .items {
+    > view {
+      @include bordered($border-color, b);
+
+      &:last-child {
+        border-bottom: 0;
       }
     }
-    .identify {
-      image {
-        width: 100rpx;
-        height: 100rpx;
-      }
-      .iconfont:before {
-        font-size: $size-1;
-      }
-    }
-    .items{
-      >view {
-        @include bordered($border-color, b);
-        &:last-child {
-          border-bottom: 0;
-        }
-      }
-    }
+  }
 }

@@ -69,7 +69,7 @@ Page({
     let cities = getApp().globalData.cities;
     if (!cities) {
       commonService.getArea().then(res => {
-        getApp().globalData.cities = cities = res.data.filter(city => city.id.length <= 4).map(city => {
+        cities = res.data.filter(city => city.id.length <= 4).map(city => {
           return {
             id: city.id,
             name: city.areaName,

@@ -230,11 +230,12 @@ button::after {
       display: flex;
       padding-top: 50rpx;
 
-      navigator {
+      navigator,
+      button {
         flex: 1;
         margin-right: 40rpx;
 
-        &:last-of-type {
+        &:last-child {
           margin-right: 0;
         }
       }
@@ -289,7 +290,24 @@ button::after {
     }
   }
 }
-
+.avatar {
+  @include border-radius(50%);
+  overflow: hidden;
+  width: 120rpx;
+  height: 120rpx;
+  &.avatar-sm {
+      width: 80rpx;
+      height: 80rpx;
+  }
+  &.avatar-md {
+      width: 120rpx;
+      height: 120rpx;
+  }
+  &.avatar-lg {
+      width: 160rpx;
+      height: 160rpx;
+  }
+}
 page {
     background-color: $light;
     min-height:100vh;

@@ -1,6 +1,7 @@
 // pages/signin/signin.js
 
 import config from '../../utils/config';
+import userService from '../../service/user.js'
 Page({
 
   /**
@@ -145,7 +146,8 @@ Page({
   },
   formSubmit() {
     if(this.vali()){
-      getApp().api.post('user/register?checkSign=' + this.data.checkSign, {
+      userService.register({
+        checkSign: this.data.checkSign,
         tel: this.data.tel,
         password: this.data.password,
         veryCode: this.data.sms,
@@ -153,17 +155,26 @@ Page({
         identityType: this.data.identityType[this.data.identityIndex].name,
         recommendUserId: this.data.recommendUserId
       }).then(res => {
-        getApp().api.showToast({
-          title:'注册成功',
-          icon:'success'
-        }).then(() => {
-          wx.redirectTo({
-            url: '../login/login'
+        if(res.code === 1) {
+          userService.saveToken(res.data);
+          wx.showToast({
+            title: '注册成功',
+            icon: 'success'
           })
-        });
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../index/index'
+            })
+          }, 1000);
+        } else {
+          wx.showToast({
+            title: '注册失败,请重新注册',
+            icon: 'none'
+          })
+        }
       });
     } else {
-      getApp().api.showToast({
+      wx.showToast({
         title:'输入信息有误',
         icon:'none'
       });

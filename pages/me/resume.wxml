@@ -2,8 +2,10 @@
 <view class='resume'>
   <view class='container'>
     <view class='row align-items-center top bg-white py-3'>
-      <view class='col-auto avatar'>
-        <image src='../../images/avatar.png'></image>
+      <view class='col-auto'>        
+          <view class='avatar'>
+            <open-data type="userAvatarUrl"></open-data>
+          </view>
       </view>
       <view class='col pl-0'>
         <view class='font-weight-bold size-3'>{{ profile.baseinfo.userName }}</view>
@@ -12,14 +14,14 @@
         </view>
         <view class='size-2'>学历：{{config.education[profile.baseinfo.education]}}</view>
       </view>
-      <view class='col-auto'>
+      <view class='col-auto sr-only'>
         <view class='btn btn-primary size-1 py-1'>
           邀请赚钱
         </view>
       </view>
     </view>
 
-    <view class='row align-items-center border-top top bg-white py-3 identify'>
+    <view class='row align-items-center border-top top bg-white py-3 identify sr-only'>
       <view class='col-auto'>
         <image src='../../images/id.png' class='rounded-circle'></image>
       </view>
@@ -38,7 +40,7 @@
       <view class='col'>
         <text>学历信息</text>
       </view>
-      <view class='col-auto text-orange pr-0'>未完善</view>
+      <view class='col-auto text-orange pr-0 sr-only'>未完善</view>
       <view class='col-auto'>
         <i class="iconfont icon-right text-muted"></i>
       </view>
@@ -47,7 +49,7 @@
       <view class='col'>
         <text>通讯信息</text>
       </view>
-      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto pr-0 sr-only'>已完善</view>
       <view class='col-auto'>
         <i class="iconfont icon-right text-muted"></i>
       </view>
@@ -56,7 +58,7 @@
       <view class='col'>
         <text>自我评价</text>
       </view>
-      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto pr-0 sr-only'>已完善</view>
       <view class='col-auto'>
         <i class="iconfont icon-right text-muted"></i>
       </view>
@@ -65,12 +67,12 @@
       <view class='col'>
         <text>能力及特长</text>
       </view>
-      <view class='col-auto pr-0'>已完善</view>
+      <view class='col-auto pr-0 sr-only'>已完善</view>
       <view class='col-auto'>
         <i class="iconfont icon-right text-muted"></i>
       </view>
     </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="exp">
+    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url="exp">
       <view class='col'>
         <text>工作经验</text>
       </view>

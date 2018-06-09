@@ -1,6 +1,6 @@
 export default {
-  // baseUrl: 'https://sapi.s-cout.com/zcb-api/',
-  baseUrl: 'http://tapi.free.ngrok.cc/',
+  baseUrl: 'https://sapi.s-cout.com/zcb-api/',
+  // baseUrl: 'http://tapi.free.ngrok.cc/',
   imageBaseUrl: '',
   telRegExp: /^1[34578]\d{9}$/,
   smsLength: 5,
@@ -8,6 +8,8 @@ export default {
   birthDayStartDate: '1970-01-01',
   birthDayEndDate: '2018-05-10',
   mapKey: 'CQFBZ-ZK2W5-2OEIE-QZUWK-DB2U7-U5FEI', // 腾讯地图key
+  tokenName:'authToken',
+  citiesStorageName:'cities',
   constant: { // 常量配置
     job: {
       wechatStorageName: 'searchHistoryArray',
@@ -77,8 +79,7 @@ export default {
         LEVEL_4: '大学专科',
         LEVEL_3: '高中/高职',
         LEVEL_2: '初中/中专',
-        LEVEL_1: '小学及小学以下',
-        LEVEL_0: '未受过教育'
+        LEVEL_1: '小学及小学以下'
       }
     }
   },
@@ -97,7 +98,9 @@ export default {
     common: {
       getPosition: 'common/getPosition', // 获取职位信息
       getArea: 'common/getArea', // 获取区域信息
-      getHotKeywords: 'common/getHotKeyword', //热门关键字
+      getHotKeywords: 'common/getHotKeyword', // 热门关键字
+      getTelCode: 'common/getTelCode', // 获取手机验证码
+      checkTelCode: 'common/checkTelCode', // 验证手机验证码
     },
     user: {
       getProfile: 'user/detaild', // 获取用户信息
@@ -105,6 +108,8 @@ export default {
       saveContact: 'user/saveContact', // 保存联系信息
       saveSelfEvaluation: 'user/saveSelfEvaluation', // 保存自我评价
       saveAbilityPpecialty: 'user/saveAbilityPpecialty', // 保存能力及特长
+      login: 'user/login', // 登录
+      register: 'user/register' //注册
     }
   }
 };

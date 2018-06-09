@@ -10,4 +10,20 @@ export default {
 
   getHotKeywords: () => Api.get(common.getHotKeywords), // 热门关键字
 
+  getTelCode: (data) => Api.get(common.getTelCode, data), // 获取验证码
+
+  checkTelCode: (data) => Api.get(common.checkTelCode, data), //验证手机验证码
+
+  checkLogin: () => {
+    let token = wx.getStorageSync(config.tokenName) || '';
+    if (token === '') {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 };

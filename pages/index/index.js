@@ -20,9 +20,9 @@ Page({
       duration: 1000
     },
     constant: jobService.constant,
-    jobList: [],
+    jobList: null,
     currentCity: '',
-    cityInfo:'',
+    cityInfo: '',
     jobFilter: {
       'pageIndex': 1,
       'pageSize': 10,
@@ -30,8 +30,8 @@ Page({
     },
     jobFilterTemp: {},
     jobEnd: false,
-    currentPosition:{
-      name:'职位类型'
+    currentPosition: {
+      name: '职位类型'
     },
     areaIndex: 0,
     area: null,
@@ -52,7 +52,7 @@ Page({
     },
     salaryRange: {
       start: '',
-      end:''
+      end: ''
     },
     moreFilter: false,
     moreFilterFixed: false,
@@ -60,7 +60,9 @@ Page({
     searchBoxFocusing: false,
     hotKeywords: null,
     searchHistory: null,
-    keyword:''
+    keyword: '',
+    enableDataLimit: true,
+    isFirstTimeLoading: true
   },
   searchInput(e) {
     let keyword = e.detail.value;
@@ -78,12 +80,12 @@ Page({
   },
   saveSearchHistory(keyword) {
     let keywords = wx.getStorageSync(jobService.constant.wechatStorageName);
-    if(!keywords) {
+    if (!keywords) {
       keywords = []
     }
     let exist = keywords.find(word => word === keyword);
-    if(!exist) {
-      if(keywords.length >= 10) {
+    if (!exist) {
+      if (keywords.length >= 10) {
         keywords.shift();
       }
       keywords.push(keyword);
@@ -107,25 +109,34 @@ Page({
     this.search(keyword);
   },
   filterShortcut(e) {
-    console.log(e)
-    this.getJobList({
+    this.setData({
+      toView: 'main'
+    })
+    this.data.jobFilter = {
       'pageIndex': 1,
       'pageSize': 10,
       'filter': e.target.dataset.shortcut || e.currentTarget.dataset.shortcut
-    });
-  },
-  search(keyword) {
-    this.saveSearchHistory(keyword);
-    this.data.jobFilter.keyword = keyword;
+    };
     this.changeFilter();
     this.getJobList();
   },
-  handlescrolltoupper(e){
+  search(keyword) {
+    this.saveSearchHistory(keyword);
+    this.data.jobFilter = {
+      'pageIndex': 1,
+      'pageSize': 10,
+      'keyword': keyword
+    };
+    
+    this.changeFilter();
+    this.getJobList();
+  },
+  handlescrolltoupper(e) {
     this.data.moreFilterFixed ? this.setData({
       moreFilterFixed: false
-    }): '';
+    }) : '';
   },
-  handlescroll(e){
+  handlescroll(e) {
     // console.log(e.detail.scrollTop)
     if (!this.data.moreFilterFixed && e.detail.scrollTop >= 295) {
       this.setData({
@@ -133,7 +144,7 @@ Page({
       })
     }
   },
-  searchBoxFocusing(){
+  searchBoxFocusing() {
     this.setData({
       searchBoxFocusing: true
     })
@@ -142,7 +153,7 @@ Page({
   switchJobNature(e) {
     let index = e.target.dataset.index
     let constant = Object.keys(jobService.constant.jobNature);
-    if(index < 0) {
+    if (index < 0) {
       delete this.data.jobFilter.nature;
     } else {
       this.data.jobFilter.nature = constant[index];
@@ -152,7 +163,8 @@ Page({
   },
   setArea() {
     let currentCity = getApp().globalData.currentCity;
-    if(currentCity) {
+    console.log('global', getApp().globalData)
+    if (currentCity) {
       this.data.jobFilter.cityId = currentCity.id;
       let area = currentCity.counties
       let noArea = area.pop();
@@ -169,20 +181,25 @@ Page({
     this.data.jobFilter.cityId = cityId;
     let area = cities.filter(city => city.pid === cityId);
     let noArea = area.pop();
-    if(noArea) {
+    if (noArea) {
       noArea.id = '-1';
       area.unshift(noArea);
-    }    
-    this.setData({
-      area
-    })
+      this.setData({
+        area
+      })
+    } else {
+      this.setData({
+        area
+      });
+    }
   },
-  bindAreaPicker(e){
+  bindAreaPicker(e) {
     let index = e.detail.value;
     this.setData({
-      areaIndex: index
+      areaIndex: index,
+      toView: 'main'
     })
-    if(index < 0) {
+    if (index < 0) {
       delete this.data.jobFilter.countyId
     } else {
       this.data.jobFilter.countyId = this.data.area[index].id
@@ -193,7 +210,8 @@ Page({
   bindSortPiker(e) {
     let index = e.detail.value;
     this.setData({
-      sortTypeIndex: index
+      sortTypeIndex: index,
+      toView: 'main'
     });
     this.data.jobFilter.sort = this.data.sortType[index].label;
     this.changeFilter();
@@ -214,21 +232,28 @@ Page({
     currentCity.id ? this.setData({
       currentCity
     }) : this.setData({
-        currentCity: {
-          name: this.data.cityInfo.city
-        }
+      currentCity: {
+        name: this.data.cityInfo.city
+      }
     });
   },
   setCurrentPosition() {
-    let currentPosition = getApp().globalData.currentPosition;
-    if (currentPosition.id) {
+    let currentPosition = getApp().globalData.currentPosition || null;
+    if (currentPosition !== null) {
       this.setData({
         currentPosition
       });
       this.data.jobFilter.positionId = currentPosition.id;
       this.changeFilter();
       this.getJobList();
-    } 
+    } else {
+      delete this.data.jobFilter.positionId;
+      let curr
+      this.setData({
+        currentPosition: { name: '职位类型' }
+      });
+      console.log(this.data.jobFilter)
+    }
   },
   navigateToPosition() {
     wx.showNavigationBarLoading();
@@ -245,22 +270,31 @@ Page({
   switchToApply() {
     wx.showNavigationBarLoading();
     getApp().globalData.switchTabParams.apply = {
-      tab: 'AGREE' 
+      tab: 'AGREE'
     };
     wx.switchTab({
       url: '../apply/apply'
     })
   },
   getJobList(filter = this.data.jobFilter) {
-
-    console.log("asdsad", { filter })
+    console.log("filter", filter);
     jobService.query(filter).then(res => {
+      let jobList = () => {
+        let lastJobList = this.data.jobList || [];
+        if (this.data.needRestJobList) {
+          this.data.needRestJobList = false;
+          return res.data;
+        } else {
+          return lastJobList.concat(res.data)
+        }
+      }
       res.data.length === 0 ? this.setData({
         jobEnd: true,
-        moreFilterFixed: false
+        moreFilterFixed: false,
+        jobList: jobList()
       }) :
         this.setData({
-          jobList: this.data.jobList.concat(res.data)
+          jobList: jobList()
         });
     });
   },
@@ -286,23 +320,16 @@ Page({
   },
   changeFilter() {
     // 当改变查询条件必须调用此方法（翻页不算改变）,方便追踪是否翻到了最后一页。
-    this.setData({
-      jobList: []
-    });
+    this.data.needRestJobList = true;
     this.data.jobFilter.pageIndex = 1
     this.data.jobEnd = false;
   },
   getCities() {
     return commonService.getArea().then(res => {
-      console.log('怎么会没数据', res)
-      let cities = res.data.map(city => {
-        return {
-          id: city.id,
-          name: city.areaName,
-          pid: city.pid,
-        }
-      });
+      let cities = res.data;
+      // console.log('怎么会没数据', getApp().config.citiesStorageName);
       getApp().globalData.cities = cities;
+      wx.setStorage(getApp().config.citiesStorageName, cities);
       return cities;
     });
   },
@@ -311,8 +338,8 @@ Page({
     let endDate = new Date();
     endDate.setDate(endDate.getDate() + 2);
     endDate = formatTime(endDate, 'yyyy-MM-dd');
-    this.data.jobFilterTemp.jobBeginTime = startDate;
-    this.data.jobFilterTemp.jobEndTime = endDate;
+    // this.data.jobFilterTemp.jobBeginTime = startDate;
+    // this.data.jobFilterTemp.jobEndTime = endDate;
     this.setData({
       jobDate: {
         startDftDate: startDate,
@@ -323,14 +350,14 @@ Page({
     });
   },
   bindJobBeginTimeChange(e) {
-    let date = e.detail.value;    
+    let date = e.detail.value;
     let jobDate = this.data.jobDate;
     jobDate.startDate = date;
     this.setData({
       jobDate
     });
-    this.data.jobFilterTemp.jobBeginTime = date;
-
+    // this.data.jobFilterTemp.jobBeginTime = date;
+    this.enableDataLimit();
     console.log(this.data.jobFilterTemp);
   },
   bindJobEndTimeChange(e) {
@@ -347,7 +374,8 @@ Page({
     this.setData({
       jobDate
     });
-    this.data.jobFilterTemp.jobEndTime = date;
+    // this.data.jobFilterTemp.jobEndTime = date;
+    this.enableDataLimit();
     console.log(this.data.jobFilterTemp);
   },
   setConstant() {
@@ -356,11 +384,11 @@ Page({
       wageClearingConst: Object.entries(jobService.constant.wageClearing),
     });
   },
-  changeWageFilter(e) {    
+  changeWageFilter(e) {
     let data = e.target.dataset;
     let property = data.property;
-    data.id === '-1' ? delete this.data.jobFilterTemp[property] : this.data.jobFilterTemp[property] = data.id;    
-    let filterBtnActivity = this.data.filterBtnActivity;    
+    data.id === '-1' ? delete this.data.jobFilterTemp[property] : this.data.jobFilterTemp[property] = data.id;
+    let filterBtnActivity = this.data.filterBtnActivity;
     filterBtnActivity[property] = data.index
     this.setData({
       filterBtnActivity
@@ -420,37 +448,66 @@ Page({
           moreFilter: !this.data.moreFilter,
           moreFilterFixed: true
         });
-      },500);
+      }, 500);
     } else {
       this.setData({
         moreFilter: !this.data.moreFilter
-      }); 
+      });
       console.log('down');
     }
   },
-  handelFilterTouchend(e){
-    console.log("end:",e);
+  // handelFilterTouchend(e){
+  //   console.log("end:",e);
+  // },
+  // handelFilterTouchStart(e) {
+  //   console.log("start:",e);
+  // },
+  // handelFilterTouchMove(e) {
+  //   console.log("moving",e);
+  // },
+  handelDataLimitChange(e) {
+    this.enableDataLimit(!!e.detail.value[0]);
   },
-  handelFilterTouchStart(e) {
-    console.log("start:",e);
-  },
-  handelFilterTouchMove(e) {
-    console.log("moving",e);
+  enableDataLimit(isDisable = false) {
+    if (isDisable) {
+      delete this.data.jobFilterTemp.jobBeginTime;
+      delete this.data.jobFilterTemp.jobEndTime;
+      this.setData({
+        enableDataLimit: true
+      })
+    } else {
+      this.data.jobFilterTemp.jobBeginTime = this.data.jobDate.startDate;
+      this.data.jobFilterTemp.jobEndTime = this.data.jobDate.endDate;
+      this.setData({
+        enableDataLimit: false
+      })
+    }
+    console.log(this.data.jobFilterTemp)
   },
   /**
    * 生命周期函数--监听页面加载
    */
+  doneLoading() {
+    wx.showTabBar();
+    this.setData({ isFirstTimeLoading: false });
+  },
   onLoad: function (options) {
-    getApp().api.checkLogin();
-    this.getJobList();
-    this.getHotKeywords();
-    Promise.all([this.getCity(), this.getCities()]).then(res => {
-      console.log({res})
-
-      this.setDftArea(res[1])
-    });
-    this.setDftDate();
-    this.setConstant();
+    wx.hideTabBar();
+    let isLogedIn = commonService.checkLogin();
+    if (isLogedIn) {
+      let cities = () => Promise.resolve(wx.getStorageSync(getApp().config.citiesStorageName) || this.getCities());
+      Promise.all([
+        cities(),
+        this.getCity(),
+        this.getHotKeywords()
+      ]).then(res => {
+        this.setDftArea(res[0]);
+        this.getJobList()
+        this.doneLoading();
+      });
+      this.setDftDate();
+      this.setConstant();
+    }
   },
 
   /**
@@ -505,5 +562,5 @@ Page({
   onShareAppMessage: function () {
 
   }
-  
+
 });

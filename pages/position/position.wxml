@@ -8,7 +8,7 @@
         <view data-id="{{ items.title.id }}">{{ items.title.name }}</view>
       </view>
       <view class='col-3 position-item' wx:for='{{ items.list }}' wx:key='{{ index }}'>
-        <view class='border rounded' data-id="{{ item.id }}" bindtap='setPosition'>{{ item.name }}</view>
+        <view class='rounded size-1 py-1 {{ choosedPosition.id === item.id ? "bg-primary" : "border"}}' data-id="{{ item.id }}" bindtap='setPosition'>{{ item.name }}</view>
       </view>
     </view> 
   </view>

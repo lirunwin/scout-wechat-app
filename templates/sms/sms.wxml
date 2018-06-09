@@ -1,9 +1,9 @@
 <!--template/sms/sms.wxml-->
 <template name="smsBasic">
   <view>
-    <input name="tel" type='digit' placeholder="请输入手机号码" bindinput='bindTelInput' />
+    <input name="tel" type='digit' confirm-type="next" placeholder="请输入手机号码" bindinput='bindTelInput' />
     <view class='smsBasic'>
-      <input name="sms" type='digit' placeholder="请输入验证码" bindinput='bindSmsInput'/>
+      <input name="sms" type='digit' confirm-type="done" bindconfirm='comfirmInput' placeholder="请输入验证码" bindinput='bindSmsInput' class='mb-0'/>
       <view>
         <button class='btn btn-outline-primary {disableSmsBtn? "disabled": ""}}' 
           disabled='{{disableSmsBtn}}'
