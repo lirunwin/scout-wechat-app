@@ -106,8 +106,10 @@
       </view>
     </view>
     <view class='row text-center size-2'>
-      <view class='col bg-white py-3' data-id='{{jobInfo.id}}' bindtap='follow'>关注</view>
-      <view class='col bg-primary py-3' data-id='{{jobInfo.id}}' bindtap='join'>报名参加</view>
+      <view class='col btn btn-light size-2  bg-white py-3' data-id='{{jobInfo.id}}' bindtap='follow'>关注</view>
+      <view class='col size-2 btn rounded-0 btn-{{config.apply[jobInfo.deliveryStatus].color || "primary"}} py-3' data-id='{{jobInfo.id}}' bindtap='join'>
+        <text>{{config.apply[jobInfo.deliveryStatus].name || '报名参加'}}</text>
+      </view>
     </view>
   </view>
 </view>

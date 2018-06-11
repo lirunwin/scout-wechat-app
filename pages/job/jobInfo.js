@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jobInfo: '',
+    jobInfo: null,
     config: jobService.constant,
     markers: []
   },
@@ -28,9 +28,12 @@ Page({
     }));
   },
   join(e) {
-    jobService.addDelivery(e.currentTarget.dataset.id).then(res => wx.showToast({
-      title: res.msg
-    }));
+    let status = this.data.jobInfo.deliveryStatus || '';
+    if (status==='') {
+      jobService.addDelivery(e.currentTarget.dataset.id).then(res => wx.showToast({
+        title: res.msg
+      }));
+    }
   },
 
   /**

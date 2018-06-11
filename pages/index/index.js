@@ -127,7 +127,7 @@ Page({
       'pageSize': 10,
       'keyword': keyword
     };
-    
+
     this.changeFilter();
     this.getJobList();
   },
@@ -329,7 +329,10 @@ Page({
       let cities = res.data;
       // console.log('怎么会没数据', getApp().config.citiesStorageName);
       getApp().globalData.cities = cities;
-      wx.setStorage(getApp().config.citiesStorageName, cities);
+      wx.setStorage({
+        key: getApp().config.citiesStorageName,
+        data: cities
+      });
       return cities;
     });
   },
