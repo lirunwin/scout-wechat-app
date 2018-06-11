@@ -68,8 +68,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.hideNavigationBarLoading();
-    this.getJobList();
+    
   },
 
   /**
@@ -83,6 +82,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.hideNavigationBarLoading();
+    this.getJobList();
     let indexToApplyDftTap = getApp().globalData.switchTabParams.apply;
     if (indexToApplyDftTap && indexToApplyDftTap.tab) {
       let tab = indexToApplyDftTap.tab;

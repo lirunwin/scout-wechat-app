@@ -9,30 +9,67 @@ Page({
   data: {
     jobInfo: null,
     config: jobService.constant,
-    markers: []
+    markers: [],
+    city: '',
+    collectionId: ''
   },
   getJobInfo(id) {
-    jobService.getRecruitmentInfo(id).then(res => this.setData({
-      jobInfo: res.data,
-      markers: [{
-        id: 0,
-        latitude: res.data.latitude,
-        longitude: res.data.longitude,
-        title: res.data.address
-      }]
-    }));
+    jobService.getRecruitmentInfo(id).then(res => {
+      this.setData({
+        jobInfo: res.data,
+        markers: [{
+          id: 0,
+          latitude: res.data.latitude,
+          longitude: res.data.longitude,
+          title: res.data.address
+        }]
+      });
+      this.setCity();
+    });
+  },
+  setCity(){
+    let cities = 1
   },
   follow(e) {
-    jobService.addCollection(e.currentTarget.dataset.id).then(res => wx.showToast({
-      title: res.msg
-    }));
+    if(this.data.jobInfo.collectionId === '') {
+      jobService.addCollection(e.currentTarget.dataset.id).then(res => {
+        wx.showToast({
+          title: res.msg
+        });
+        this.changeCollection(res.data);
+      });
+    } else {
+      jobService.removeCollection(e.currentTarget.dataset.id).then(res => {
+        wx.showToast({
+          title: res.msg
+        });
+        this.changeCollection(res.data);
+      });
+    }    
+  },
+  changeCollection(id) {
+    let jobInfo = this.data.jobInfo;
+    jobInfo.collectionId = id
+    this.setData({
+      jobInfo
+    });
+    wx.hideLoading();
   },
   join(e) {
     let status = this.data.jobInfo.deliveryStatus || '';
     if (status==='') {
-      jobService.addDelivery(e.currentTarget.dataset.id).then(res => wx.showToast({
-        title: res.msg
-      }));
+      jobService.addDelivery(e.currentTarget.dataset.id).then(res => {
+        if(res.code === 1) {
+          let jobInfo = this.data.jobInfo;
+          jobInfo.deliveryStatus = Object.keys(jobService.constant.apply)[0];
+          this.setData({
+            jobInfo
+          })
+        }
+        wx.showToast({
+          title: res.msg
+        })
+      });
     }
   },
 

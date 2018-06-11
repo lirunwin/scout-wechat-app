@@ -4247,6 +4247,7 @@ textarea {
   vertical-align: top;
   resize: none;
   display: block;
+  max-width: 100%;
 }
 
 a,
@@ -4558,6 +4559,11 @@ button::after {
 .avatar.avatar-lg {
   width: 160rpx;
   height: 160rpx;
+}
+
+.img-icon image {
+  width: 32rpx;
+  margin-right: 12rpx;
 }
 
 page {

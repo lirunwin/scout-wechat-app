@@ -103,7 +103,7 @@
     </view>
   </view>
   <view class='index-controls-wrapper'>
-    <view bindtap='test' class='index-controls {{moreFilterFixed ? "active" : ""}}' id="main">
+    <view class='index-controls {{moreFilterFixed ? "active" : ""}}' id="main">
       <view class='container top bg-white'>
         <view class='row'>
           <view class='col'>

@@ -9,7 +9,7 @@
   <view class='row mx-0 border-bottom align-items-center py-3'>
     <view class='col-auto font-weight-bold'>备用电话</view>
     <view class='col text-right text-truncate'>
-      <input confirm-type='next' value='{{ contact.backupTel }}' confirm-type='next' bindinput='bindinput' data-name="backupTel" />
+      <input confirm-type='next' value='{{ contact.backupTel }}' type="number" maxlength='12' confirm-type='next' bindinput='bindinput' data-name="backupTel" />
     </view>
   </view>
   <view class='row mx-0 border-bottom align-items-center py-3'>
@@ -21,7 +21,7 @@
   <view class='row mx-0 border-bottom align-items-center py-3'>
     <view class='col-auto font-weight-bold'>QQ</view>
     <view class='col text-right text-truncate'>
-      <input confirm-type='next' value='{{ contact.qq }}' confirm-type='next' bindinput='bindinput' data-name="qq" />
+      <input confirm-type='next' value='{{ contact.qq }}' type="number" maxlength='11' confirm-type='next' bindinput='bindinput' data-name="qq" />
     </view>
   </view>
   <view class='row mx-0 border-bottom align-items-center py-3'>

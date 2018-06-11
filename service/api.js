@@ -35,6 +35,7 @@ const wxPromisify = (fn) => (obj = {}) => {
       
     };
     obj.fail = res => {
+      console.log('fail:', res)
       wx.hideLoading();
       reject(res);
     };

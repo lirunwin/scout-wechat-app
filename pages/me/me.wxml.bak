@@ -1,5 +1,4 @@
 <!--pages/me/me.wxml-->
-<view class='d-flex flex-column justify-content-between' style='min-height:100vh;'>
 <view class='me bg-light'>
   <view class='container'>
     <view class='row align-items-center top bg-white py-3'>
@@ -11,10 +10,9 @@
       <view class='col pl-0'>
         <view class='font-weight-bold pb-2 size-3'>{{profile.baseinfo.userName}}</view>
         <view class='text-muted size-1 balance'>
-          <!-- <text>钱包:</text>
+          <text>钱包:</text>
           <text class='text-danger size-4 px-2 font-weight-bold number'>{{profile.balance === '' ? 0 : profile.balance}}</text>
-          <text>元</text> -->
-          <text>{{profile.userTel}}</text>
+          <text>元</text>
         </view>
       </view>
       <view class='col-auto'>
@@ -25,7 +23,7 @@
       </view>
     </view>
   </view>
-  <view class='resumeLink bg-light py-2 sr-only'>
+  <view class='resumeLink bg-light py-2'>
     <view class='container bg-white'>
       <view class='row no-gutters py-2 resume'>
         <view class='col left'>
@@ -61,63 +59,6 @@
       </view>
     </view>
   </view>
-  
-<view class='resume'>
-  <view class='container items mt-2'>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="edu">
-      <view class='col-auto pr-0 img-icon'>
-        <image src='../../images/note.png' mode='widthFix' class='align-middle'></image>
-      </view>
-      <view class='col pl-0'>
-        <text>学历信息</text>
-      </view>
-      <view class='col-auto text-orange pr-0 sr-only'>未完善</view>
-      <view class='col-auto'>
-        <i class="iconfont icon-right text-muted"></i>
-      </view>
-    </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="contact">
-      <view class='col-auto pr-0 img-icon'>
-        <image src='../../images/tel.png' mode='widthFix' class='align-middle'></image>
-      </view>
-      <view class='col pl-0'>
-      
-        <text>通讯信息</text>
-      </view>
-      <view class='col-auto pr-0 sr-only'>已完善</view>
-      <view class='col-auto'>
-        <i class="iconfont icon-right text-muted"></i>
-      </view>
-    </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url="selfEvaluation">
-      <view class='col'>
-        <text>自我评价</text>
-      </view>
-      <view class='col-auto pr-0 sr-only'>已完善</view>
-      <view class='col-auto'>
-        <i class="iconfont icon-right text-muted"></i>
-      </view>
-    </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url="skill">
-      <view class='col'>
-        <text>能力及特长</text>
-      </view>
-      <view class='col-auto pr-0 sr-only'>已完善</view>
-      <view class='col-auto'>
-        <i class="iconfont icon-right text-muted"></i>
-      </view>
-    </view>
-    <view class='row bg-white py-3 size-2 align-items-center me-link sr-only' bindtap='navigateToPage' data-url="exp">
-      <view class='col'>
-        <text>工作经验</text>
-      </view>
-      <view class='col-auto pr-0'>已完善</view>
-      <view class='col-auto'>
-        <i class="iconfont icon-right text-muted"></i>
-      </view>
-    </view>
-  </view>
-</view>
   <view class='container bg-light'>
     <view class='row bg-white py-3 size-2 align-items-center me-link' bindtap='navigateToPage' data-url="collection">
       <view class='col-auto pr-0'>
@@ -186,9 +127,7 @@
       </view>
     </view>
   </view>
-</view>
-
-  <view class='bg-light text-center pb-2 my-2 size-2' bindtap='logout'>
+  <view class='bg-light text-center pb-2 mb-2 size-2' bindtap='logout'>
     <view class='bg-white py-3'>退出当前账号</view>
   </view>
-  </view>
+</view>

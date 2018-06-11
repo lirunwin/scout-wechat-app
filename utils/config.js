@@ -61,10 +61,10 @@ export default {
         }
       ],
       apply: { // 我的报名
-        DELIVERY: { label: '全部', color: 'dark', name: '已投递' },
-        AGREE: { label: '同意', color: 'success', name: '申请成功' },
-        REFUSE: { label: '拒绝', color: 'danger', name: '被拒绝' },
-        WAIT_CONFIRM: { label: '待确认', color: 'muted', name: '等待确认' }
+        DELIVERY: { label: '全部', color: 'dark', name: '已投递', bgColor: 'secondary' }, // 必须放在第一个
+        AGREE: { label: '同意', color: 'success', name: '申请成功', bgColor: 'success' },
+        REFUSE: { label: '拒绝', color: 'danger', name: '被拒绝', bgColor: 'danger' },
+        WAIT_CONFIRM: { label: '待确认', color: 'muted', name: '等待确认', bgColor: 'warning' }
         // WAIT_EVALUATION: '待评价'
       }
     },

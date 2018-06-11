@@ -3,28 +3,28 @@
   <view class='container'>
     <view class='row border-top pt-3 align-items-center'>
       <view class='col text-truncate font-weight-bold'>{{jobInfo.title}}</view>
-      <view class='col-auto size-1 text-danger'>{{jobInfo.wageBegin}} - {{ jonInfo.wageEnd }}{{ config.wageClearing[jobInfo.wageClearing][0] }}</view>
+      <view class='col-auto size-1 text-danger'>{{jobInfo.wagebegin}} - {{jobInfo.wageend}}{{ config.wageClearing[jobInfo.wageclearing][0] }}</view>
     </view>
     <view class='row no-gutters pt-3 pb-2 border-bottom size-1'>
       <view class='col-auto mb-2'>
-        <text class='bg-primary px-2 mr-2 rounded'>{{ config.wageMode[jobInfo.wageMode] }}</text>
+        <text class='bg-primary px-2 mr-2 rounded'>{{ config.wageMode[jobInfo.wagemode] }}</text>
       </view>
       <view class='col-auto mb-2'>
-        <text class='bg-primary px-2 rounded'>{{ config.jobNature[jobInfo.jobNature] }}</text>
+        <text class='bg-primary px-2 rounded'>{{ config.jobNature[jobInfo.jobnature] }}</text>
       </view>
     </view>
     <view class='py-3 border-bottom size-2 baseInfo'>
       <view>
-        工作时间：
-        <text class='bg-light rounded px-2'>{{jobInfo.jobBeginTime}} - {{jobInfo.jobEndTime}}</text>
+        工作周期：
+        <text class='bg-light rounded px-2'>{{jobInfo.jobCycle}}</text>
       </view>
       <view>
         工作时段：
-        <text class='bg-light rounded px-2'>{{jobInfo.jobBeginTime}} - {{jobInfo.jobEndTime}}</text>
+        <text class='bg-light rounded px-2'>{{jobInfo.jobPeriod}}</text>
       </view>
       <view>
         招聘时间：
-        <text class='bg-light rounded px-2'>{{jobInfo.createTime}} - {{jobInfo.endTime === '' ? config.noEndTime : jobInfo.endTime}}</text>
+        <text class='bg-light rounded px-2'>{{jobInfo.createtime}} - {{jobInfo.endtime === '' ? config.noEndTime : jobInfo.endtime}}</text>
       </view>
     </view>
     <view class='py-3 size-2 baseInfo'>
@@ -34,34 +34,34 @@
       </view>
       <view>
         招聘人数：
-        <text class='px-2'>{{jobInfo.peopleNumber}} 人</text>
+        <text class='px-2'>{{jobInfo.peoplenumber}} 人</text>
       </view>
-      <view>
+      <view class='sr-only'>
         性别要求：
         <text class='px-2'>不限性别</text>
       </view>
       <view>
         最低学历：
-        <text class='px-2'>不限学历</text>
+        <text class='px-2'>{{jobInfo.mineducation}}</text>
       </view>
     </view>
     <view class='row py-2 bg-light size-2'>
       <view class='col bg-white baseInfo py-3'>
         <view>
           工资模式：
-          <text class='px-2'>{{jobInfo.positionParentName}} > {{jobInfo.positionName}}</text>
+          <text class='px-2'>{{config.wageMode[jobInfo.wagemode]}}</text>
         </view>
         <view>
           基本底薪：
-          <text class='px-2'>{{jobInfo.wageBase}} 元</text>
+          <text class='px-2'>{{jobInfo.wagebase}} 元</text>
         </view>
         <view>
           提成工资：
-          <text class='px-2'>{{jobInfo.wageCommission}} </text>
+          <text class='px-2'>{{jobInfo.wagecommission}} </text>
         </view>
         <view>
           工资结算：
-          <text class='px-2'>{{config.wageClearing[jobInfo.wageClearing][1]}}</text>
+          <text class='px-2'>{{config.wageClearing[jobInfo.wageclearing][1]}}</text>
         </view>
       </view>
     </view>
@@ -78,7 +78,7 @@
       </view>
       <view class='col-12'>
         <text class='font-weight-bold'>详细地址：</text>
-        <text>{{jobInfo.address}}</text>
+        <text>{{jobInfo.provinceName}}{{jobInfo.cityName}}{{jobInfo.address}}</text>
       </view>
     </view>
     <view class='row pt-2 bg-light size-2'>
@@ -86,7 +86,7 @@
         <view class='jobInfo-title jobInfo-title'>工作介绍：</view>
       </view>
       <view class='col-12 py-3 bg-white'>
-        <text class='description'>{{jobInfo.workDescription}}</text>
+        <text class='description'>{{jobInfo.workdescription}}</text>
       </view>
     </view>
     <view class='row pt-2 bg-light size-2'>
@@ -94,10 +94,10 @@
         <view class='jobInfo-title jobInfo-title'>任职要求：</view>
       </view>
       <view class='col-12 py-3 bg-white'>
-        <text class='description'>{{jobInfo.jobRequirements}}</text>
+        <text class='description'>{{jobInfo.jobrequirements}}</text>
       </view>
     </view>
-    <view class='row py-2 bg-light size-2'>
+    <view class='row pt-2 bg-light size-2'>
       <view class='col-12 py-2 bg-white border-bottom'>
         <view class='jobInfo-title jobInfo-title'>公司介绍：</view>
       </view>
@@ -106,8 +106,16 @@
       </view>
     </view>
     <view class='row text-center size-2'>
-      <view class='col btn btn-light size-2  bg-white py-3' data-id='{{jobInfo.id}}' bindtap='follow'>关注</view>
-      <view class='col size-2 btn rounded-0 btn-{{config.apply[jobInfo.deliveryStatus].color || "primary"}} py-3' data-id='{{jobInfo.id}}' bindtap='join'>
+      <view class='col border-right btn rounded-0 btn-{{jobInfo.collectionId.length > 0 ? "success" : "light"}} size-2 py-3 img-icon d-flex align-items-center justify-content-center' data-id='{{jobInfo.id}}' bindtap='follow'>
+        <image src='../../images/star.png' mode='widthFix' class='align-top' wx:if="{{jobInfo.collectionId.length > 0}}"/>
+      {{jobInfo.collectionId.length > 0 ? '已' : '' }}收藏</view>
+      
+      <view wx:if="{{jobInfo.jonbstatus === 'COMPLETE'}}">
+        <view class='col disable size-2 btn rounded-0 btn-success py-3'>
+        <text>已完成</text>
+      </view>
+      </view>
+      <view wx:else class='col size-2 btn rounded-0 btn-{{config.apply[jobInfo.deliveryStatus].color || "primary"}} py-3' data-id='{{jobInfo.id}}' bindtap='join'>
         <text>{{config.apply[jobInfo.deliveryStatus].name || '报名参加'}}</text>
       </view>
     </view>

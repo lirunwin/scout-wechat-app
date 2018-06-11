@@ -31,7 +31,6 @@ Page({
   
   setPosition(e) {
     let id = e.currentTarget.dataset.id;
-    console.log({id})
     let position = this.data.positionsOrigin.find(pos => pos.id === id);
     let choosedPosition = this.data.choosedPosition;
     if (choosedPosition && position.id === choosedPosition.id) {

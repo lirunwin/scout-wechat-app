@@ -24,6 +24,7 @@ textarea {
   vertical-align: top;
   resize: none;
   display: block;
+  max-width: 100%;
 }
 
 a,
@@ -308,7 +309,15 @@ button::after {
       height: 160rpx;
   }
 }
+.img-icon {
+  image {
+    width: 32rpx;
+    margin-right: 12rpx;
+  }
+}
 page {
     background-color: $light;
     min-height:100vh;
+    // max-width: 100vw;
+    // overflow-x:hidden;
 }
