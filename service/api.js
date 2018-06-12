@@ -13,7 +13,8 @@ const wxPromisify = (fn) => (obj = {}) => {
           let modal = wxPromisify(wx.showModal);
           modal({
             title: '温馨提示',
-            content: data.code === 100002 ? '用户名或密码错误' : '登录超时请重新登录，请重新登录'
+            // content: data.code === 100002 ? '用户名或密码错误' : '登录超时请重新登录，请重新登录'
+            content: data.msg || '网络错误 code:' + data.code
           }).then(() => {
             wx.redirectTo({
               url: '../login/login',
@@ -64,7 +65,7 @@ const get = (url, data, text = '加载中...') => {
     data: data,
     header: {
       'Content-Type': 'application/json;charset=UTF-8',
-      // 'user_author': 'ZImaTkKDBj+2z06JA9MGba6s/QwoOQgkv0B9npN++lwHCAgJH2HPrvJm+79UmUAaO00HuloK5mjCbfh3RDX5Jg==',
+      // 'user_author': 'HtG0HiiYVoaRiW5cQsjriK6s/QwoOQgkv0B9npN++lwHCAgJH2HPrvJm+79UmUAadDPjI3r6+vbooaPq9oMv0A==',
       'user_author': getToken(),
       'X-Requested-With': 'WX_APPLETS'
     }
@@ -88,7 +89,7 @@ const post = (url, data, text = '加载中...') => {
     data: data,
     header: {
       'Content-Type': 'application/json;charset=UTF-8',
-      // 'user_author': 'ZImaTkKDBj+2z06JA9MGba6s/QwoOQgkv0B9npN++lwHCAgJH2HPrvJm+79UmUAaO00HuloK5mjCbfh3RDX5Jg==',
+      // 'user_author': 'HtG0HiiYVoaRiW5cQsjriK6s/QwoOQgkv0B9npN++lwHCAgJH2HPrvJm+79UmUAadDPjI3r6+vbooaPq9oMv0A==',
       'user_author': getToken(),
       'X-Requested-With': 'WX_APPLETS'
     },

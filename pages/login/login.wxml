@@ -8,7 +8,7 @@
   <view>
     <form class='login-form' wx:if="{{!loginBySMS}}">
       <view>
-        <input name="input" confirm-type="next" placeholder="请输入用户名" bindinput='bindUsernameInput'/>
+        <input name="input" maxlength='11' type='number' confirm-type="next" placeholder="请输入用户名" bindinput='bindUsernameInput'/>
         <input name="password" password='true' confirm-type="done" bindconfirm="login" placeholder="请输入密码" bindinput='bindPasswordInput'/>
       </view>
     </form>

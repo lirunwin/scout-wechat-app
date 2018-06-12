@@ -135,10 +135,9 @@ Page({
     this.getJobList();
   },
   handlescrolltoupper(e) {
-    this.hideTop(false);
-    this.setData({
+    this.data.moreFilterFixed ? this.setData({
       moreFilterFixed: false
-    });
+    }) : '';
   },
   handlescroll(e) {
     // console.log(e.detail.scrollTop)
@@ -310,7 +309,7 @@ Page({
       }
 
       let list = jobList();
-      // console.log(list.length,'length')
+      console.log(list.length,'length')
       if(list.length < 5) {
         this.setData({
           jobListToShort: !this.data.jobListToShort
@@ -476,14 +475,11 @@ Page({
     this.changeFilter();
     this.getJobList();
   },
-  hideTop(state = true) {
-      this.setData({
-        hideTop: state
-      })
-  },
   activeMoreFilter() {
-    this.hideTop();
-    if (!this.data.moreFilter && !this.data.moreFilterFixed) { 
+    if (!this.data.moreFilter && !this.data.moreFilterFixed) {
+      this.setData({
+        toView: 'main'
+      });      
       setTimeout(() => {
         this.setData({
           moreFilter: !this.data.moreFilter,
@@ -540,7 +536,7 @@ Page({
       Promise.all([
         cities(),
         this.getCity(),
-        // this.getHotKeywords()
+        this.getHotKeywords()
       ]).then(res => {
         this.setDftArea(res[0]);
         this.getJobList()

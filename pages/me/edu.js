@@ -32,10 +32,13 @@ Page({
       this.getProfile()
     ]).then(res => {
       let nowEduType = this.data.eduList.find(edu => edu.label === this.data.highestEdu.educationtype);
-      let nowIndex = this.data.eduList.indexOf(nowEduType);
-      this.setData({
-        eduListIndex: nowIndex
-      });
+
+      if (nowEduType) {
+        let nowIndex = this.data.eduList.indexOf(nowEduType);
+        this.setData({
+          eduListIndex: nowIndex
+        });
+      }
     });
   },
   setEduList() {
@@ -79,6 +82,7 @@ Page({
   },
   getCity() {
     let cities = getApp().globalData.cities;
+    console.log({ cities })
     if (!cities) {
       commonService.getArea().then(res => {
         cities = res.data.filter(city => city.id.length <= 4).map(city => {
@@ -167,12 +171,19 @@ Page({
       if (res.code === 1) {
         let educations = this.data.educations;
         let he = educations[0];
-        he.educationtype = edu.educationType;
-        he.provinceid = edu.provinceId;
-        he.cityid = edu.cityId;
-        he.schoolname = edu.schoolName;
-        he.professionname = edu.professionName;
-        let profile = getApp().globalData.profile
+        let profile = {};
+        if (!he) {
+          he = {};
+          he.educationtype = edu.educationType;
+          he.provinceid = edu.provinceId;
+          he.cityid = edu.cityId;
+          he.schoolname = edu.schoolName;
+          he.professionname = edu.professionName;
+          profile = getApp().globalData.profile
+          this.data.form.id = res.data;
+          he.id = res.data;
+          educations[0] = he
+        }
         profile.educations = educations;
         getApp().globalData.profile = profile;
       }
@@ -189,7 +200,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('global_edu', getApp().globalData.profile.educations)
+    console.log('global_edu', getApp().globalData)
   },
 
   /**

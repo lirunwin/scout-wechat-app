@@ -1,6 +1,6 @@
 // pages/apply/apply.js
 import jobService from '../../service/job.js';
-
+import Promise from '../../utils/es6-promise.js'
 Page({
   data: {
     jobList: [],
@@ -16,7 +16,7 @@ Page({
     activeStatus: 'DELIVERY'
   },
   getJobList(isNeedReset,filter = this.data.jobFilter ) {
-    jobService.query(filter).then(res => {
+    return jobService.query(filter).then(res => {
       let jobList = {};
       if (isNeedReset) {
         jobList = res.data;
@@ -35,6 +35,7 @@ Page({
           jobList,
           filtedJobList
         });
+      return jobList;
     });
   },
   filterTypeChange(e) {
@@ -89,7 +90,9 @@ Page({
    */
   onShow: function () {
     wx.hideNavigationBarLoading();
-    this.getJobList(true);
+    Promise.resolve(this.getJobList(true)).then(res => {
+      wx.stopPullDownRefresh();
+    });    
     let indexToApplyDftTap = getApp().globalData.switchTabParams.apply;
     if (indexToApplyDftTap && indexToApplyDftTap.tab) {
       let tab = indexToApplyDftTap.tab;
@@ -119,7 +122,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.hideNavigationBarLoading();
+    this.getJobList(true);
+    let indexToApplyDftTap = getApp().globalData.switchTabParams.apply;
+    if (indexToApplyDftTap && indexToApplyDftTap.tab) {
+      let tab = indexToApplyDftTap.tab;
+      this.setData({
+        activeStatus: tab
+      });
+      this.filter(tab)
+      getApp().globalData.switchTabParams.apply = null;
+    }
   },
 
   /**

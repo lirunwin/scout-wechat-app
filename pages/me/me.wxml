@@ -80,9 +80,8 @@
       <view class='col-auto pr-0 img-icon'>
         <image src='../../images/tel.png' mode='widthFix' class='align-middle'></image>
       </view>
-      <view class='col pl-0'>
-      
-        <text>通讯信息</text>
+      <view class='col pl-0'>      
+        <text>联系方式</text>
       </view>
       <view class='col-auto pr-0 sr-only'>已完善</view>
       <view class='col-auto'>
@@ -159,7 +158,7 @@
   <view class='container bg-light py-2'>
     <view class='row bg-white py-3 size-2 align-items-center me-link'>
       <view class='col-auto pr-0'>
-        <image src='../../images/tel.png' mode='widthFix' class='align-top'></image>
+        <image src='../../images/tab2-1@2x.png' mode='widthFix' class='align-top'></image>
       </view>
       <view class='col pl-2'><text>联系客服</text></view>
       <view class='col-auto'>

@@ -25,8 +25,8 @@
   <view class='login-btn'>
     <button type='submit' class='btn btn-primary btn-block' bindtap='formSubmit'>提交</button>
     <view>
-      <navigator url="../login/login" class='btn btn-light border'>短信登录</navigator>
-      <navigator class='btn btn-light border'>账号登录</navigator>
+      <navigator url="../login/login?type=SMS" class='btn btn-light border'>短信登录</navigator>
+      <navigator url="../login/login" class='btn btn-light border'>账号登录</navigator>
     </view>
   </view>
 </view>

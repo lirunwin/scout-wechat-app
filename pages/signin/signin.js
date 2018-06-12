@@ -161,7 +161,7 @@ Page({
             title: '注册成功',
             icon: 'success'
           });
-          wx.redirectTo({
+          wx.switchTab({
             url: '../index/index'
           });
         } else {

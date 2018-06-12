@@ -1,7 +1,7 @@
 <!--pages/index/index.wxml-->
 <import src='../../templates/job/jobList.wxml' />
 <scroll-view scroll-y style="height:100vh;" bindscrolltoupper="handlescrolltoupper" bindscrolltolower="handlescrolltolower" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true" bindscroll="handlescroll" upper-threshold="300">
-  <view class='index-top {{searchBoxFocusing?"activeSearchBox":""}} {{hideTop ? "active":""}}'>
+  <view class='index-top {{searchBoxFocusing?"activeSearchBox":""}}'>
     <view class='index-swiper'>
       <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
         <block wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
@@ -34,8 +34,8 @@
               <view class='btn btn-secondary rounded size-2 py-0' bindtap='searchShortcut' data-keyword="{{item}}">{{item}}</view>
             </view>
           </view>
-          <view class='divider sr-only'></view>
-          <view class='row sr-only'>
+          <view class='divider'></view>
+          <view class='row'>
             <view class='col-6 py-3'>热门搜索</view>
             <view class='col-6 py-3 text-right'></view>
             <view class='col-auto text-center mb-2' wx:for="{{hotKeywords}}" wx:key="{{index}}">
@@ -102,7 +102,7 @@
       </view>
     </view>
   </view>
-  <view class='index-controls-wrapper'>
+  <view class='index-controls-wrapper' id="main">
     <view class='index-controls {{moreFilterFixed ? "active" : ""}}'>
       <view class='container top bg-white'>
         <view class='row'>
