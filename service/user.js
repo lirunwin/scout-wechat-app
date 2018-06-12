@@ -19,7 +19,7 @@ export default {
 
   saveToken: (token) => wx.setStorageSync(config.tokenName, token),
 
-  getToken: (token) => wx.getStorageSync(config.tokenName),
+  getToken: () => wx.getStorageSync(config.tokenName),
 
   register: (data) => {
     let checkSign = data.checkSign;
@@ -27,8 +27,12 @@ export default {
     return Api.post(user.register + '?checkSign=' + checkSign, data);
   },
 
-  logout: () => { wx.setStorageSync(config.tokenName,''); wx.redirectTo({
-    url: '../login/login',
-  })}
-  
+  logout: () => {
+    Api.get(user.logout);
+    wx.setStorageSync(config.tokenName, '');
+    wx.redirectTo({
+      url: '../login/login',
+    })
+  }
+
 }

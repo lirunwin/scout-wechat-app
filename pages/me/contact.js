@@ -9,7 +9,6 @@ Page({
     contact: '',
     form: ''
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -33,9 +32,14 @@ Page({
     console.log(this.data.form)
   },
   saveContact() {
-    userService.saveContact(this.data.form).then(res => wx.showToast({
-      title: res.msg
-    }));
+    userService.saveContact(this.data.form).then(res => {
+      wx.showToast({
+        title: res.msg
+      })
+      if(res.code === 1) {
+        getApp().globalData.profile.contactinfo = this.data.form;
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

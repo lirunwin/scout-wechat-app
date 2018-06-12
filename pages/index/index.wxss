@@ -373,9 +373,10 @@ page {
 .index-controls.active ~ .index-jobList {
   padding-top: 200rpx;
   transition: 0.3s 0.3s all ease;
+  min-height: calc(100vh - 90rpx);
 }
 
-#main.active {
+.index-controls.active {
   position: fixed;
   top: -20rpx;
   left: 0;

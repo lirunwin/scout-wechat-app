@@ -189,6 +189,6 @@
 </view>
 
   <view class='bg-light text-center pb-2 my-2 size-2' bindtap='logout'>
-    <view class='bg-white py-3'>退出当前账号</view>
+    <view class='bg-white py-3 text-danger'>退出当前账号</view>
   </view>
   </view>

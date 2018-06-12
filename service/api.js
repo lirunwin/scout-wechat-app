@@ -8,7 +8,7 @@ const wxPromisify = (fn) => (obj = {}) => {
       wx.hideLoading();
       let data = res.data;
       if (data) {
-        console.log({ data })
+        // console.log({ data })
         if (data.code === 4000004 || data.code === 100002) {
           let modal = wxPromisify(wx.showModal);
           modal({

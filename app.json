@@ -48,7 +48,7 @@
         "pagePath": "pages/apply/apply",
         "iconPath": "images/tab3@2x.png",
         "selectedIconPath": "images/tab3-1@2x.png",
-        "text": "我的报名"
+        "text": "我的任务"
       },
       {
         "pagePath": "pages/me/me",

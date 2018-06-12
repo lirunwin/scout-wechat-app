@@ -15,9 +15,15 @@ Page({
     filtedJobList: [],
     activeStatus: 'DELIVERY'
   },
-  getJobList(filter = this.data.jobFilter) {
+  getJobList(isNeedReset,filter = this.data.jobFilter ) {
     jobService.query(filter).then(res => {
-      let jobList = this.data.jobList.concat(res.data);
+      let jobList = {};
+      if (isNeedReset) {
+        jobList = res.data;
+      } else {
+        jobList = this.data.jobList.concat(res.data);
+      }
+
       let status = this.data.activeStatus;
 
       let filtedJobList = status === 'DELIVERY' ?
@@ -68,7 +74,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -83,7 +89,7 @@ Page({
    */
   onShow: function () {
     wx.hideNavigationBarLoading();
-    this.getJobList();
+    this.getJobList(true);
     let indexToApplyDftTap = getApp().globalData.switchTabParams.apply;
     if (indexToApplyDftTap && indexToApplyDftTap.tab) {
       let tab = indexToApplyDftTap.tab;

@@ -45,18 +45,18 @@ export default {
       ],
       filterShortcut: [ //首页中间 图标
         {
-          label: 'LONGTIME',
           name: '长期兼职',
+          label: 'LONGTIME',
           icon: '../../images/icon3@2x.png'
         },
         {
-          label: 'IMMEDIATELY',
           name: '立即上岗',
+          label: 'IMMEDIATELY',
           icon: '../../images/icon4@2x.png'
         },
         {
-          label: 'ALLLOCATIOS',
           name: '在家可做',
+          label: 'ALLLOCATIOS',
           icon: '../../images/icon2@2x.png'
         }
       ],
@@ -109,6 +109,7 @@ export default {
       saveSelfEvaluation: 'user/saveSelfEvaluation', // 保存自我评价
       saveAbilityPpecialty: 'user/saveAbilityPpecialty', // 保存能力及特长
       login: 'user/login', // 登录
+      logout:'user/exitOut',
       register: 'user/register' //注册
     }
   }

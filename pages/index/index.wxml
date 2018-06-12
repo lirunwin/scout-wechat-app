@@ -1,7 +1,7 @@
 <!--pages/index/index.wxml-->
 <import src='../../templates/job/jobList.wxml' />
 <scroll-view scroll-y style="height:100vh;" bindscrolltoupper="handlescrolltoupper" bindscrolltolower="handlescrolltolower" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true" bindscroll="handlescroll" upper-threshold="300">
-  <view class='index-top {{hideTop?"active":""}} {{searchBoxFocusing?"activeSearchBox":""}}'>
+  <view class='index-top {{searchBoxFocusing?"activeSearchBox":""}}'>
     <view class='index-swiper'>
       <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
         <block wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
@@ -102,8 +102,8 @@
       </view>
     </view>
   </view>
-  <view class='index-controls-wrapper'>
-    <view class='index-controls {{moreFilterFixed ? "active" : ""}}' id="main">
+  <view class='index-controls-wrapper' id="main">
+    <view class='index-controls {{moreFilterFixed ? "active" : ""}}'>
       <view class='container top bg-white'>
         <view class='row'>
           <view class='col'>
@@ -119,14 +119,14 @@
       </view>
       <view class='container bottom'>
         <view class='row bg-white border-bottom'>
-          <view class='col'>
+          <view class='col text-truncate'>
             <picker bindchange="bindAreaPicker" value="{{areaIndex}}" range="{{area}}" range-key='areaName'>
-              <view class="picker caret">
+              <view class="picker text-truncate caret">
                 {{area[areaIndex].areaName}}
               </view>
             </picker>
           </view>
-          <view class='col caret' bindtap='navigateToPosition'>{{ currentPosition.name }}</view>
+          <view class='col text-truncate caret' bindtap='navigateToPosition'>{{ currentPosition.name }}</view>
           <view class='col'>
             <picker bindchange="bindSortPiker" value="{{sortTypeIndex}}" range="{{sortType}}" range-key='name'>
               <view class="picker caret">
@@ -134,7 +134,7 @@
               </view>
             </picker>
           </view>
-          <view class='col caret filterBtn {{ moreFilter ? "active" : ""}}' bindtap='activeMoreFilter'>筛选</view>
+          <view class='col text-truncate caret filterBtn {{ moreFilter ? "active" : ""}}' bindtap='activeMoreFilter'>筛选</view>
         </view>
         <view class='filter px-3 flex-column justify-content-between {{ moreFilter ? "active" : ""}}'>
           <view class='row align-items-center py-2 sr-only'>
@@ -209,14 +209,14 @@
       </view>
     </view>
   </view>
-  <view class='index-jobList'>
+  <view class='index-jobList' id="jobList">
     <block wx:for="{{jobList}}" wx:for-item="item" wx:key="index">
       <template is="list-normal" data="{{...item,constant}}"></template>
     </block>
     <view wx:if="{{jobList === null}}" class='text-muted size-1 p-3'>
       加载中...
     </view>
-    <view wx:if="{{jobList.length === 0}}" class='text-muted size-1 p-3 text-center'>未查询到结果</view>
+    <view wx:if="{{jobList.length === 0}}" class='text-muted size-1 p-3 text-center jobList-none'>未查询到结果</view>
   </view>
 </scroll-view>
 <view class="index-loading bg-primary {{isFirstTimeLoading?'':'deactive'}}">

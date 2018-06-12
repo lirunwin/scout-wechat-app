@@ -160,17 +160,15 @@ Page({
           wx.showToast({
             title: '注册成功',
             icon: 'success'
-          })
-          setTimeout(() => {
-            wx.redirectTo({
-              url: '../index/index'
-            })
-          }, 1000);
+          });
+          wx.redirectTo({
+            url: '../index/index'
+          });
         } else {
           wx.showToast({
             title: '注册失败,请重新注册',
             icon: 'none'
-          })
+          });
         }
       });
     } else {

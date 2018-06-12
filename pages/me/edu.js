@@ -3,6 +3,7 @@
 import userService from '../../service/user.js'
 import jobService from '../../service/job.js'
 import commonService from '../../service/common.js';
+const Promise = require('../../utils/es6-promise.js');
 Page({
 
   /**
@@ -26,8 +27,16 @@ Page({
    */
   onLoad: function (options) {
     wx.hideNavigationBarLoading();
-    this.setEduList();
-    this.getProfile();
+    Promise.all([
+      this.setEduList(),
+      this.getProfile()
+    ]).then(res => {
+      let nowEduType = this.data.eduList.find(edu => edu.label === this.data.highestEdu.educationtype);
+      let nowIndex = this.data.eduList.indexOf(nowEduType);
+      this.setData({
+        eduListIndex: nowIndex
+      });
+    });
   },
   setEduList() {
     let eduObj = userService.constant.education;
@@ -47,7 +56,10 @@ Page({
     });
   },
   getEdu(profile = getApp().globalData.profile) {
-    let highestEdu = profile.educations.find(edu => edu.educationtype === profile.baseinfo.education) || profile.educations[0];
+    let educations = this.data.educations = profile.educations.sort((a, b) => {
+      return a.educationtype.replace(/\D/g, '') < b.educationtype.replace(/\D/g, '')
+    });
+    let highestEdu = educations[0];
     if (!highestEdu) {
       wx.showToast({
         title: '未设置学历信息',
@@ -90,9 +102,7 @@ Page({
     }
 
     let city = cities.find(city => city.id === originCityInfo.cityid);
-    console.log({ cities })
     let province = cities.find(city => city.id === originCityInfo.provinceid);
-    console.log({ province })
     let filtedProvince = cities.filter(res => res.pid === '0');
     let filtedCities = cities.filter(res => res.pid === originCityInfo.provinceid);
     this.setData({
@@ -129,7 +139,7 @@ Page({
     });
   },
   setFormData(profile, edu) {
-    console.log({ profile }, { edu });
+    // console.log({ profile }, { edu });
     this.data.form = {
       id: edu.id,
       educationType: edu.educationtype,
@@ -141,19 +151,32 @@ Page({
   },
   bindinput(e) {
     this.data.form[e.currentTarget.dataset.name] = e.detail.value;
-    console.log(this.data.form)
   },
   bindPickerChange(e) {
     this.data.form[e.currentTarget.dataset.name] = this.data.eduList[e.detail.value].label;
     this.setData({
       eduListIndex: e.detail.value
     })
-    console.log(this.data.form)
   },
   saveEdu() {
-    userService.saveEducation(this.data.form).then(res => wx.showToast({
-      title: res.msg
-    }));
+    let edu = this.data.form;
+    userService.saveEducation(edu).then(res => {
+      wx.showToast({
+        title: res.msg
+      });
+      if (res.code === 1) {
+        let educations = this.data.educations;
+        let he = educations[0];
+        he.educationtype = edu.educationType;
+        he.provinceid = edu.provinceId;
+        he.cityid = edu.cityId;
+        he.schoolname = edu.schoolName;
+        he.professionname = edu.professionName;
+        let profile = getApp().globalData.profile
+        profile.educations = educations;
+        getApp().globalData.profile = profile;
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -166,7 +189,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('global_edu', getApp().globalData.profile.educations)
   },
 
   /**

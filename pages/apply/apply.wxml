@@ -15,4 +15,3 @@
 <block wx:for="{{filtedJobList}}" wx:for-item="item" wx:key="index">
   <template is="list-normal" data="{{...item,apply,constant}}"></template>
 </block>
-<view class='text-center size-1 text-muted py-3'>下拉查看更多</view>
