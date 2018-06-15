@@ -24,7 +24,8 @@
     "pages/city/city",
     "pages/position/position",
     "pages/signin/phoneCheck",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/outside/outside"
   ],
   "window": {
     "backgroundTextStyle": "light",

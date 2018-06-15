@@ -310,6 +310,14 @@ Page({
       url: '../city/city'
     })
   },
+  navigateToOutside(e){console.log(e)
+    let url = e.currentTarget.dataset.url;
+    if(url.length > 0){
+      wx.navigateTo({
+        url: '../outside/outside?url=' + url
+      })
+    }
+  },
   switchToApply() {
     wx.showNavigationBarLoading();
     getApp().globalData.switchTabParams.apply = {

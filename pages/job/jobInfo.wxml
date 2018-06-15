@@ -2,8 +2,8 @@
 <view class='jobInfo'>
   <view class='container'>
     <view class='row border-top pt-3 align-items-center'>
-      <view class='col text-truncate font-weight-bold'>{{jobInfo.title}}</view>
-      <view class='col-auto size-1 text-danger'>{{jobInfo.wagebegin}} - {{jobInfo.wageend}}{{ config.wage }}</view>
+      <view class='col font-weight-bold'>{{jobInfo.title}}</view>
+      <view class='col-auto align-self-start size-1 text-danger' style="line-height:1.8">{{jobInfo.wagebegin}} - {{jobInfo.wageend}}{{ config.wage }}</view>
     </view>
     <view class='row no-gutters pt-3 pb-2 border-bottom size-1'>
       <view class='col-auto mb-2'>

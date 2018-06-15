@@ -5,7 +5,7 @@
     <view class='index-swiper'>
       <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
         <block wx:for="{{swiper.banner}}" wx:key="{{index}}">
-          <swiper-item>
+          <swiper-item bindtap="navigateToOutside" data-url="{{item.url}}">
             <image src="{{item.img}}" class="slide-image" mode='scaleToFill' />
           </swiper-item>
         </block>
