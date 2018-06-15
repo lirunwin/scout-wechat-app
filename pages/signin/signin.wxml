@@ -1,10 +1,10 @@
 <!--pages/signin/signin.wxml-->
-<view class='login'>
+<view class='login pt-4'>
   <form class='login-form' bindsubmit="formSubmit">
     <view>
-      <input name="password" type='password' placeholder="请输入密码" bindinput='bindPassInput'/>
-      <input name="password" type='password' placeholder="请确认密码" bindinput='bindRePassInput'/>
-      <input name="input" placeholder="请输入姓名" bindinput='bindNameInput'/>
+      <input name="password" maxlength='20' type='password' placeholder="请输入密码 6-20 字符" bindinput='bindPassInput'/>
+      <input name="password" maxlength='20' type='password' placeholder="请确认密码 6-20 字符" bindinput='bindRePassInput'/>
+      <input name="input" maxlength='10' placeholder="请输入真实姓名" bindinput='bindNameInput'/>
       <!-- <picker bindchange="bindGenderChange" value="{{genderIndex}}" range="{{gender}}">
         <view class="picker">
           性别：{{gender[genderIndex]}}
@@ -20,6 +20,7 @@
           身份：{{identityType[identityIndex].label}}
         </view>
       </picker>
+      
     </view>
   </form>
   <view class='login-btn'>

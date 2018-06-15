@@ -7,11 +7,7 @@ import { formatTime } from '../../utils/util.js';
 Page({
   data: {
     swiper: {
-      imgUrls: [
-        '../../images/swiper1@2x.png',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      ],
+      banner: [],
       indicatorDots: true,
       indicatorColor: 'rgba(255, 255, 255, .4)',
       indicatorActiveColor: 'rgba(255, 255, 255, 1)',
@@ -183,7 +179,8 @@ Page({
     }
   },
   setDftArea(cities) {
-    let cityInfo = getApp().globalData.cityInfo
+    let cityInfo = getApp().globalData.cityInfo;
+    getApp().globalData.cities = cities;    
     let cityId = cityInfo.adcode.substr(0, 4);
     this.data.jobFilter.cityId = cityId;
     let currentCity = this.data.currentCity;
@@ -233,13 +230,39 @@ Page({
     this.getJobList();
   },
   getCity() {
-    return locationService.getLocation()
-      .then(res => locationService.getCityInfoByLocation(res.latitude, res.longitude))
-      .then(res => {
-        let cityInfo = res.result.ad_info;
+    return locationService.getLocationAuth()
+      .then(auth => {
+        let locationAuth = auth.authSetting['scope.userLocation'];
+        if(locationAuth) {
+          return locationService.getLocation()
+            .then(res => locationService.getCityInfoByLocation(res.latitude, res.longitude))
+            .then(res => {
+              let cityInfo = res.result.ad_info;
+              
+              return cityInfo
+            })
+        } else {
+          return {
+            "nation_code": "156",
+            "adcode": "510107",
+            "city_code": "156510100",
+            "name": "中国,四川省,成都市,武侯区",
+            "location": {
+              "lat": 30.5702,
+              "lng": 104.064758
+            },
+            "nation": "中国",
+            "province": "四川省",
+            "city": "成都市",
+            "district": "武侯区"
+          }
+        }
+      })
+      .then(cityInfo => {
         getApp().globalData.cityInfo = cityInfo;
         this.data.cityInfo = cityInfo;
         this.setCurrentCity();
+        console.log({ cityInfo })
       })
   },
   setCurrentCity() {
@@ -532,10 +555,20 @@ Page({
     wx.showTabBar();
     this.setData({ isFirstTimeLoading: false });
   },
+  getBanner() {
+    commonService.getBanner().then(res => {
+      let swiper = this.data.swiper;
+      swiper.banner = res.data;
+      this.setData({
+        swiper
+      });
+    })
+  },
   onLoad: function (options) {
     wx.hideTabBar();
     let isLogedIn = commonService.checkLogin();
     if (isLogedIn) {
+      this.getBanner();
       let cities = () => Promise.resolve(wx.getStorageSync(getApp().config.citiesStorageName) || this.getCities());
       Promise.all([
         cities(),

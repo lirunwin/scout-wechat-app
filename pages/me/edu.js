@@ -32,7 +32,6 @@ Page({
       this.getProfile()
     ]).then(res => {
       let nowEduType = this.data.eduList.find(edu => edu.label === this.data.highestEdu.educationtype);
-
       if (nowEduType) {
         let nowIndex = this.data.eduList.indexOf(nowEduType);
         this.setData({
@@ -54,16 +53,18 @@ Page({
   },
   getProfile() {
     let profile = getApp().globalData.profile;
-    profile.baseinfo ? this.getEdu() : userService.getProfile().then(res => {
-      this.getEdu(res.data);
-    });
+
+    if(profile.baseinfo) {
+      this.getEdu()
+    } else {
+      userService.getProfile().then(res => {
+        this.getEdu(res.data);
+      });
+    }
   },
   getEdu(profile = getApp().globalData.profile) {
-    let educations = this.data.educations = profile.educations.sort((a, b) => {
-      return a.educationtype.replace(/\D/g, '') < b.educationtype.replace(/\D/g, '')
-    });
-    let highestEdu = educations[0];
-    if (!highestEdu) {
+    let education = profile.education;
+    if (!education || !education.cityid) {
       wx.showToast({
         title: '未设置学历信息',
         icon: 'none'
@@ -75,28 +76,23 @@ Page({
         }
       });
     } else {
-      this.setData({ highestEdu });
-      this.setFormData(profile, highestEdu);
+      this.setData({ highestEdu: education });
+      this.setFormData(profile, education);
     }
     this.getCity();
   },
   getCity() {
     let cities = getApp().globalData.cities;
-    console.log({ cities })
     if (!cities) {
       commonService.getArea().then(res => {
-        cities = res.data.filter(city => city.id.length <= 4).map(city => {
-          return {
-            id: city.id,
-            name: city.areaName,
-            pid: city.pid,
-          }
-        })
+        getApp().globalData.cities = cities;
+        cities = res.data.filter(city => city.id.length <= 4);
         this.setData({ cities });
         this.setCity(cities);
       });
     } else {
       this.setCity();
+      this.setData({ cities })
     }
   },
   setCity(cities = getApp().globalData.cities) {
@@ -104,19 +100,21 @@ Page({
       cityid: this.data.highestEdu.cityid,
       provinceid: this.data.highestEdu.provinceid
     }
-
+    console.log({ cities},{originCityInfo})
     let city = cities.find(city => city.id === originCityInfo.cityid);
     let province = cities.find(city => city.id === originCityInfo.provinceid);
     let filtedProvince = cities.filter(res => res.pid === '0');
+    let provinceIndex = filtedProvince.indexOf(province);
     let filtedCities = cities.filter(res => res.pid === originCityInfo.provinceid);
+    let cityIndex = filtedCities.indexOf(city);
     this.setData({
       objectMultiArray: [filtedProvince, filtedCities],
-      multiIndex: [filtedProvince.indexOf(province), filtedCities.indexOf(city)],
+      multiIndex: [provinceIndex, cityIndex],
       currentProvince: province,
       currentCity: city
     });
-    this.data.form.provinceId = originCityInfo.provinceid,
-      this.data.form.cityId = originCityInfo.cityid
+    this.data.form.provinceid = originCityInfo.provinceid,
+    this.data.form.cityid = originCityInfo.cityid
   },
   bindMultiPickerColumnChange(e) {
     e.detail.column === 0 ? this.changeCity(e.detail.value) : '';
@@ -134,8 +132,8 @@ Page({
     let multiIndex = e.detail.value;
     let currentProvince = this.data.objectMultiArray[0][multiIndex[0]];
     let currentCity = this.data.objectMultiArray[1][multiIndex[1]];
-    this.data.form.provinceId = currentProvince.id;
-    this.data.form.cityId = currentCity.id;
+    this.data.form.provinceid = currentProvince.id;
+    this.data.form.cityid = currentCity.id;
     this.setData({
       currentProvince,
       currentCity,
@@ -145,12 +143,11 @@ Page({
   setFormData(profile, edu) {
     // console.log({ profile }, { edu });
     this.data.form = {
-      id: edu.id,
-      educationType: edu.educationtype,
-      provinceId: edu.provinceid,
-      cityId: edu.cityid,
-      schoolName: edu.schoolname,
-      professionName: edu.professionname
+      educationtype: edu.educationtype,
+      provinceid: edu.provinceid,
+      cityid: edu.cityid,
+      schoolname: edu.schoolname,
+      professionname: edu.professionname
     }
   },
   bindinput(e) {
@@ -169,23 +166,10 @@ Page({
         title: res.msg
       });
       if (res.code === 1) {
-        let educations = this.data.educations;
-        let he = educations[0];
-        let profile = {};
-        if (!he) {
-          he = {};
-          he.educationtype = edu.educationType;
-          he.provinceid = edu.provinceId;
-          he.cityid = edu.cityId;
-          he.schoolname = edu.schoolName;
-          he.professionname = edu.professionName;
-          profile = getApp().globalData.profile
-          this.data.form.id = res.data;
-          he.id = res.data;
-          educations[0] = he
-        }
-        profile.educations = educations;
+        let profile = getApp().globalData.profile;
+        profile.education = edu;
         getApp().globalData.profile = profile;
+        let aaa = getApp().globalData.profile;
       }
     });
   },

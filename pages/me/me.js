@@ -11,7 +11,8 @@ Page({
     resumePercentage: '25%',
     profile: null,
     constent: utils.profile,
-    avatar: ''
+    avatar: '',
+    cellPhoneNumber:''
   },
   share(){
     wx.showShareMenu({
@@ -20,10 +21,11 @@ Page({
   },
   getProfile() {
     userService.getProfile().then( res => {
+      let profile = res.data;
       this.setData({
-        profile: res.data
-      })
-
+        profile,
+        cellPhoneNumber: utils.starPhoneNumber(profile.userTel)
+      });
       getApp().globalData.profile = res.data;
     });
   }, 
@@ -122,7 +124,7 @@ Page({
     return {
       title: '侦察兵兼职招聘',
       desc: '一个最方便兼职招聘的平台',
-      path: '/page/user?id=123'
+      path: '/pages/index/index'
     }
   }
 })

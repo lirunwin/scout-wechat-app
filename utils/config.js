@@ -12,6 +12,7 @@ export default {
   citiesStorageName:'cities',
   constant: { // 常量配置
     job: {
+      wage:'元/天',
       wechatStorageName: 'searchHistoryArray',
       wageClearing: {
         DAY: ['元/天', '日结'],
@@ -101,6 +102,7 @@ export default {
       getHotKeywords: 'common/getHotKeyword', // 热门关键字
       getTelCode: 'common/getTelCode', // 获取手机验证码
       checkTelCode: 'common/checkTelCode', // 验证手机验证码
+      getBanner: 'common/banner', // 获取banner
     },
     user: {
       getProfile: 'user/detaild', // 获取用户信息

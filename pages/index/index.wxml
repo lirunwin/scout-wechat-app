@@ -4,9 +4,9 @@
   <view class='index-top {{searchBoxFocusing?"activeSearchBox":""}} {{hideTop ? "active":""}}'>
     <view class='index-swiper'>
       <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-color="{{swiper.indicatorColor}}" indicator-active-color="{{swiper.indicatorActiveColor}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
-        <block wx:for="{{swiper.imgUrls}}" wx:key="{{index}}">
+        <block wx:for="{{swiper.banner}}" wx:key="{{index}}">
           <swiper-item>
-            <image src="{{item}}" class="slide-image" mode='scaleToFill' />
+            <image src="{{item.img}}" class="slide-image" mode='scaleToFill' />
           </swiper-item>
         </block>
       </swiper>

@@ -6,9 +6,11 @@ export default {
 
   getPosition: () => Api.get(common.getPosition), // 行业职位
 
-  getArea: () => Api.get(common.getArea), // 行业职位
+  getArea: () => Api.get(common.getArea), // 城市信息
 
   getHotKeywords: () => Api.get(common.getHotKeywords), // 热门关键字
+
+  getBanner: () => Api.get(common.getBanner), // 获取banner
 
   getTelCode: (data) => Api.get(common.getTelCode, data), // 获取验证码
 

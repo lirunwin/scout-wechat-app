@@ -212,11 +212,11 @@ button::after {
   .login-form {
     input,
     picker {
-      padding-top: 40rpx;
-      padding-bottom: 40rpx;
+      padding-top: 30rpx;
+      padding-bottom: 30rpx;
       @include bordered($border-color, b, 2rpx);
-      margin-bottom: 40rpx;
-
+      margin-bottom: 20rpx;
+      font-size: $size-2;
       &:last-child {
         margin-bottom: 0;
       }

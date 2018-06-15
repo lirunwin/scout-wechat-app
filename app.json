@@ -2,6 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/me/me",
+    "pages/me/edu",
+    "pages/me/contact",
+    "pages/signin/signin",
     "pages/login/login",
     "pages/apply/apply",
     "pages/posts/posts",
@@ -9,10 +12,8 @@
     "pages/me/resume",
     "pages/me/history",
     "pages/me/posts",
-    "pages/me/edu",
     "pages/me/skill",
     "pages/me/selfEvaluation",
-    "pages/me/contact",
     "pages/me/collection",
     "pages/me/exp",
     "pages/me/auth",
@@ -22,14 +23,13 @@
     "pages/job/jobInfo",
     "pages/city/city",
     "pages/position/position",
-    "pages/signin/signin",
     "pages/signin/phoneCheck",
     "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Scout",
+    "navigationBarTitleText": "懒虫动动兼职平台",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

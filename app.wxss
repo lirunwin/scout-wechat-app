@@ -4441,10 +4441,11 @@ button::after {
 
 .login .login-form input,
 .login .login-form picker {
-  padding-top: 40rpx;
-  padding-bottom: 40rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
   border-bottom: 2rpx #e4e4e4 solid;
-  margin-bottom: 40rpx;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
 }
 
 .login .login-form input:last-child,

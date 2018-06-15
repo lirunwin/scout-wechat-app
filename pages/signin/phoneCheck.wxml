@@ -10,6 +10,11 @@
     </form>
   </view>
   <view class='login-btn'>
+  
+      <view class='size-1 text-muted pb-4'>温馨提示：一个手机号只能在企业端或学生端选择一个注册哦！
+企业用户请到电脑端注册，
+注册网址：http://job.rongleedata.com/。企业小程序将在6月30日推出，敬请期待~
+      </view>
     <button type='submit' class='btn btn-primary btn-block {{disableSubmit? "disabled": ""}}' disabled='{{disableSubmit}}' bindtap='formSubmit'>提交</button>
     <view>
       <navigator url="../login/login?type=SMS" class='btn btn-light border'>短信登录</navigator>

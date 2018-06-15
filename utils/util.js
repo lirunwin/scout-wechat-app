@@ -42,11 +42,15 @@ const replaceNull = obj => {
   return obj;
 
 }
-
+const starPhoneNumber = (phoneNumber) => {
+  return !phoneNumber || phoneNumber === '' ? ''
+    : phoneNumber.substring(0, 3)+  '****' + phoneNumber.substring(7, 11);
+}
 module.exports = {
   formatTime,
   navigater,
   replaceNull,
+  starPhoneNumber,
   touches
 }
 

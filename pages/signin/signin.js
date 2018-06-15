@@ -25,8 +25,7 @@ Page({
     ],
     identityIndex: 0,
     birthday:'',
-    checkSign: "USER_REGISTER18602806230@50347557-fea0-48a9-b7be-1015aa7a2a03",
-    tel: '18602806230',
+    checkSign: "",
     disableSubmit: true,
     birthDayStartDate: config.birthDayStartDate,
     birthDayEndDate: config.birthDayEndDate,
@@ -171,20 +170,31 @@ Page({
           });
         }
       });
-    } else {
-      wx.showToast({
-        title:'输入信息有误',
-        icon:'none'
-      });
     }
   },
   vali() {
-    let data = this.data
-    return data.password.length >= config.passwordMinlength &&
-      data.password === data.repassword &&
-      data.name.length >= 2 &&
-      data.genderIndex > -1 &&
-      data.identityIndex > -1 &&
-      data.date !== ''
+    let data = this.data;
+    if (data.password.length < config.passwordMinlength) {
+      wx.showToast({
+        title: `密码不能小于${config.passwordMinlength}位数`,
+        icon: 'none'
+      })
+      return false;
+    } else if (data.password !== data.repassword) {
+      wx.showToast({
+        title: '两次密码输入不一致',
+        icon: 'none'
+      })
+      return false;
+    } else if (data.name.trim().length < 2) {
+      wx.showToast({
+        title: '请输入真实姓名',
+        icon: 'none'
+      })
+      return false;
+    } else if (!(data.genderIndex > -1 && data.identityIndex > -1 && data.date !== '')) {
+      return false;
+    }
+    return true;   
   }
 })

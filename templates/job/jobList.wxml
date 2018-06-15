@@ -1,11 +1,11 @@
 <!--templates/job/jobList.wxml-->
 <text>templates/job/jobList.wxml</text>
 <template name="list-normal">
-  <view class='job-link'>
+  <view class='job-link' wx-if="{{!!id}}">
     <navigator url='../job/jobInfo?id={{id}}' class='job-list size-2 container py-3 mt-2 bg-white'>
       <view class='row align-items-center'>
         <text class='font-weight-bold size-3 col text-truncate'>{{title}}</text>
-        <text class='col-auto pl-0 text-right text-danger size-1'>{{wageBegin}}-{{wageEnd}}{{constant.wageClearing[wageClearing][0]}}</text>
+        <text class='col-auto pl-0 text-right text-danger size-1'>{{wageBegin}}-{{wageEnd}}{{constant.wage}}</text>
       </view>
       <view class='text-muted pt-2 row size-1 align-items-center'>
         <text class='bordered-r-0 col-auto'>{{ countyName === '' ? '未知' : countyName }}</text>

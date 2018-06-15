@@ -1,7 +1,7 @@
 <!--pages/me/contact.wxml-->
 <view class='address container size-3 bg-white'>
   <view class='row mx-0 border-bottom align-items-center py-3'>
-    <view class='col-auto font-weight-bold'>联系地址</view>
+    <view class='col-auto font-weight-bold'>所在地</view>
     <view class='col text-right text-truncate'>
       <input confirm-type='next' value='{{ contact.resideAddress }}' confirm-type='next' bindinput='bindinput' data-name="resideAddress" />
     </view>
