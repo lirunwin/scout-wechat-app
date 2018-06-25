@@ -573,6 +573,12 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log({options})
+    if (options.url_redirect) {
+      wx.navigateTo({
+        url: '/pages/outside/outside?url=' + options.url_redirect,
+      })
+    }
     wx.hideTabBar();
     let isLogedIn = commonService.checkLogin();
     if (isLogedIn) {
@@ -642,7 +648,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+     return {
+      path: '/pages/index/index'
+    }
   }
 
 });

@@ -2,7 +2,7 @@ export default {
   baseUrl: 'https://sapi.s-cout.com/zcb-api/',
   // baseUrl: 'http://tapi.free.ngrok.cc/',
   imageBaseUrl: '',
-  telRegExp: /^1[34578]\d{9}$/,
+  telRegExp: /^1\d{10}$/,
   smsLength: 5,
   passwordMinlength: 6,
   birthDayStartDate: '1970-01-01',

@@ -65,6 +65,11 @@
         </view>
       </view>
     </view>
+    <view class='size-2 bg-white py-2 row'>
+      <view class='col text-danger'>
+        温馨提示：若商家收取费用或工作内容与描述不符，切勿支付！提高警惕并向客服举报!
+      </view>
+    </view>
     <view class='row py-2 size-2'>
       <view class='font-weight-bold col-12 jobInfo-title'>工作地点</view>
       <view class='col-12 px-0 py-2'>
